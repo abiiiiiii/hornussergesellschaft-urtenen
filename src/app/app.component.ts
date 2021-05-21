@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "./core/services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hornussergesellschaft-urtenen';
+
+  constructor(private authService: AuthService) {
+    this.authService.login('hornusserurtenen@gmail.com', 'shotmisti').then(res => {
+      console.log(res.user?.uid)
+    });
+  }
 }
