@@ -1,0 +1,7 @@
+export enum GameMode {
+  FEST,
+  MEISTERSCHAFT,
+  GRUPPENMEISTERSCHAFT,
+  WETTSPIEL,
+  ANDERE
+}
