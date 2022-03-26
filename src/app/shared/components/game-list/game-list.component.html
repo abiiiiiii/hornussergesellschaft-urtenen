@@ -1,0 +1,7 @@
+<div>
+  <a routerLink="/spielbetrieb">zurück</a>
+  <div class="lists">
+    <img *ngIf="homeList$" [src]="homeList$ | async" alt="">
+    <img *ngIf="awayList$" [src]="awayList$ | async" alt="">
+  </div>
+</div>

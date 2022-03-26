@@ -1,0 +1,41 @@
+@import "src/assets/styles/colors";
+
+.sponsors {
+  padding: 0 10%;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  h1 {
+    margin: 4rem 0;
+    width: 100%;
+  }
+
+  .gold, .silver, .bronze {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    h2 {
+      color: $light-green;
+      margin: 1rem 0;
+    }
+    .sponsor {
+      width: 60%;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      app-sponsor {
+        width: 100%;
+      }
+    }
+    .break-line {
+      width: 50%;
+    }
+  }
+
+}

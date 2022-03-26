@@ -1,0 +1,24 @@
+@import "src/assets/styles/colors";
+
+.spielbetrieb {
+  padding: 0 10%;
+}
+
+.break-line {
+  margin-bottom: 2rem;
+}
+
+.title {
+  margin: 4rem 0;
+
+  h1 {
+    margin-bottom: 2rem;
+    color: $dark-green;
+  }
+}
+
+h2 {
+  width: 100%;
+  color: $light-green;
+  margin-bottom: 1rem;
+}

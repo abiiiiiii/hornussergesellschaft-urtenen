@@ -1,0 +1,25 @@
+<div class="home">
+  <div class="content" #title>
+    <div class="title">
+      <h1>Home</h1>
+      <h2>Willkommen auf der offiziellen Webseite der Hornusser-Gesellschaft Urtenen.</h2>
+    </div>
+
+    <div class="news-container">
+      <div *ngIf="authService.currentUser?.role == 'admin'" class="add" (click)="addNews()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
+        <p>Neuigkeit hinzufügen</p>
+      </div>
+      <app-news *ngFor="let n of news" [news]="n"></app-news>
+      <p *ngIf="news.length == 0">Aktuell gibt es keine neuen Meldungen...</p>
+    </div>
+  </div>
+  <div class="sidebar">
+    <div class="sponsor">
+      <app-main-sponsors></app-main-sponsors>
+    </div>
+    <div class="latest-games">
+      <app-latest-games></app-latest-games>
+    </div>
+  </div>
+</div>

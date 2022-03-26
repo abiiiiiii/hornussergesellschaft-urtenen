@@ -1,0 +1,17 @@
+<div class="spielbetrieb">
+  <div class="title">
+    <h1>Spielbetrieb</h1>
+    <p>Hier finden Sie alle Resultate und Infos der aktuellen Saison</p>
+  </div>
+
+  <div *ngIf="authService.currentUser?.role == 'admin'" class="add" (click)="addResult()">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
+    <p>Resultat hinzufügen</p>
+  </div>
+
+  <div class="team" *ngFor="let team of teams">
+    <h2>{{team.name}}</h2>
+    <app-team [team]="team"></app-team>
+    <div class="break-line"></div>
+  </div>
+</div>

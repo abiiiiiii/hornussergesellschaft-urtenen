@@ -1,6 +1,11 @@
+import {Player} from "./player.model";
+import {Game} from "./game.model";
+
 export interface Team {
   id: string;
   name: string;
-  average: string;
   image: string;
+  imageUrl?: string;
+  players: Player[];
+  games: string[];
 }

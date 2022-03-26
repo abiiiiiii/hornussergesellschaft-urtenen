@@ -1,0 +1,29 @@
+<div class="add-news">
+  <form [formGroup]="newsForm">
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Titel</mat-label>
+      <input matInput type="text" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Text</mat-label>
+      <textarea matInput formControlName="text"></textarea>
+    </mat-form-field>
+
+    <mat-checkbox *ngIf="data.showEventCheckbox" formControlName="isEvent" color="primary">Vereinsanlass</mat-checkbox>
+
+    <div class="upload">
+      <label for="image-upload">Bild hochladen: </label>
+      <input id="image-upload" type="file" (change)="handleImageFileInput($event)" accept="image/jpeg,image/png,image/gif"/>
+    </div>
+
+    <div class="upload">
+      <label for="flyer-upload">Flyer hochladen: </label>
+      <input id="flyer-upload" type="file" (change)="handleFlyerFileInput($event)" accept="application/pdf"/>
+    </div>
+
+    <button (click)="add()">News hinzufügen</button>
+
+    <p class="errorMessage" *ngIf="showErrorMessage">Titel, Text und Bild sind erforderlich!</p>
+  </form>
+</div>

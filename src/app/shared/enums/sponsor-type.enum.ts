@@ -1,6 +1,5 @@
 export enum SponsorType {
-  SCHINDEL,
-  DRESS,
-  PLAKAT,
-  DONATOR
+  MAIN_SPONSOR = "MAIN_SPONSOR",
+  SPONSOR = "SPONSOR",
+  DONATOR = "DONATOR"
 }

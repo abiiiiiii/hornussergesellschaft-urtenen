@@ -1,0 +1,35 @@
+@import "src/assets/styles/colors";
+
+.news {
+  margin-bottom: 1rem;
+  h3 {
+    color: $green;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .content {
+    display: flex;
+    .image {
+      width: 25%;
+      margin-right: 5%;
+      img {
+        width: 100%;
+      }
+    }
+    .message {
+      width: 70%;
+      .text {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+      .link {
+        font-size: 1rem;
+        text-decoration: none;
+        color: $light-green;
+        &:hover {
+          color: $dark-green;
+        }
+      }
+    }
+  }
+}

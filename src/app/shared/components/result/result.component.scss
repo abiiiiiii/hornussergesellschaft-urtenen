@@ -1,0 +1,23 @@
+@import "src/assets/styles/colors";
+
+.result {
+  h4 {
+    color: $green;
+    margin: 1rem 0;
+  }
+  p {
+    margin: 0.5rem 0;
+  }
+  a {
+    text-decoration: none;
+    color: $light-green;
+    cursor: pointer;
+    width: 100%;
+    &:hover {
+      color: $dark-green;
+    }
+  }
+  .break-line {
+    margin-top: .5rem;
+  }
+}

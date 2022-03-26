@@ -1,0 +1,11 @@
+.board {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  app-board-member {
+    width: calc(50% - 1rem);
+    margin-bottom: 1rem;
+  }
+}

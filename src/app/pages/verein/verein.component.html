@@ -1,0 +1,59 @@
+<div class="verein">
+  <div class="title">
+    <h1>Verein</h1>
+
+    <p>TODO: Navigation innerhalb Verein</p>
+  </div>
+
+  <div class="events">
+    <div *ngIf="authService.currentUser" class="add" (click)="addEvent()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
+      <p>Vereinanlass hinzufügen</p>
+    </div>
+    <h2>Vereinsanlässe</h2>
+    <app-event></app-event>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2>Vorstand</h2>
+    <app-board-of-management></app-board-of-management>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2>Kontakt</h2>
+    <app-contact></app-contact>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2>Spielabmacher</h2>
+    <app-playmaker></app-playmaker>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2>Vereinsgeschichte</h2>
+    <app-history></app-history>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2>Wirtschaft</h2>
+    <app-inn></app-inn>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2>Anfahrt</h2>
+    <app-approch></app-approch>
+    <div class="break-line"></div>
+  </div>
+
+  <!-- <div>
+    <h2>Archiv</h2>
+    <app-archive></app-archive>
+  </div>
+  -->
+</div>

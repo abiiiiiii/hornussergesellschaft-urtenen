@@ -1,0 +1,21 @@
+<div class="sponsors">
+  <h1>Sponsoren</h1>
+  <div class="gold" *ngIf="mainSponsors.length > 0">
+    <h2>Hauptsponsoren</h2>
+    <div class="sponsor" *ngFor="let sponsor of mainSponsors">
+      <app-sponsor [sponsor]="sponsor"></app-sponsor>
+    </div>
+  </div>
+  <div class="silver" *ngIf="sponsors.length > 0">
+    <h2>Sponsoren</h2>
+    <div class="sponsor" *ngFor="let sponsor of sponsors">
+      <app-sponsor [sponsor]="sponsor"></app-sponsor>
+    </div>
+  </div>
+  <div class="bronze" *ngIf="donators.length > 0">
+    <h2>Donatoren</h2>
+    <div  class="sponsor" *ngFor="let sponsor of donators">
+      <app-sponsor [sponsor]="sponsor"></app-sponsor>
+    </div>
+  </div>
+</div>

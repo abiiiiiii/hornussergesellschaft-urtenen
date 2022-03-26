@@ -1,0 +1,102 @@
+<div class="add-result">
+  <form *ngIf="resultForm" [formGroup]="resultForm">
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Team</mat-label>
+      <mat-select formControlName="team">
+        <mat-option *ngFor="let team of data.teams" [value]="team">
+          {{team.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Spielmodus</mat-label>
+      <mat-select formControlName="mode">
+        <mat-option *ngFor="let mode of modes" [value]="mode.mode">
+          {{mode.displayName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input" appearance="fill" *ngIf="isFestival()">
+      <mat-label>Fest/Anlass</mat-label>
+      <input matInput type="text" formControlName="festivalName"/>
+    </mat-form-field>
+
+    <mat-form-field class="input" appearance="fill" *ngIf="isFestival()">
+      <mat-label>Rang</mat-label>
+      <input matInput type="number" formControlName="rank"/>
+    </mat-form-field>
+
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Bericht</mat-label>
+      <textarea matInput formControlName="report"></textarea>
+    </mat-form-field>
+
+    <div class="input result">
+      <p>Heim</p>
+      <form *ngIf="homeResult" [formGroup]="homeResult">
+        <mat-form-field class="name" appearance="fill">
+          <mat-label>Mannschaftsname</mat-label>
+          <input matInput type="text" formControlName="name">
+        </mat-form-field>
+        <div class="result-content">
+          <mat-form-field class="numbers" appearance="fill">
+            <mat-label>Nummero</mat-label>
+            <input matInput type="number" formControlName="numbers">
+          </mat-form-field>
+          <mat-form-field class="points" appearance="fill">
+            <mat-label>Punkte</mat-label>
+            <input matInput type="number" formControlName="points">
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="input result" *ngIf="needAwayResult()">
+      <p>Gast</p>
+      <form *ngIf="awayResult" [formGroup]="awayResult">
+        <mat-form-field class="name" appearance="fill">
+          <mat-label>Mannschaftsname</mat-label>
+          <input matInput type="text" formControlName="name">
+        </mat-form-field>
+        <div class="result-content">
+          <mat-form-field class="numbers" appearance="fill">
+            <mat-label>Nummero</mat-label>
+            <input matInput type="number" formControlName="numbers">
+          </mat-form-field>
+          <mat-form-field class="points" appearance="fill">
+            <mat-label>Punkte</mat-label>
+            <input matInput type="number" formControlName="points">
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+
+    <mat-form-field class="input datepicker" appearance="fill">
+      <mat-label>Datum</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="upload">
+      <label for="image-upload">Liste Heimmannschaft</label>
+      <input id="image-upload" type="file" (change)="handleHomeListInput($event)" accept="image/jpeg,image/png,application/pdf"/>
+    </div>
+
+    <div *ngIf="needAwayResult()" class="upload">
+      <label for="flyer-upload">Liste Auswärtsmannschaft: </label>
+      <input id="flyer-upload" type="file" (change)="handleAwayListInput($event)" accept="image/jpeg,image/png,application/pdf"/>
+    </div>
+
+    <div class="upload">
+      <label for="report-upload">Spielbericht: </label>
+      <input id="report-upload" type="file" (change)="handleReportInput($event)" accept="application/pdf"/>
+    </div>
+
+    <button (click)="add()">Resultat hinzufügen</button>
+
+  </form>
+</div>

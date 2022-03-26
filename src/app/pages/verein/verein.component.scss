@@ -1,0 +1,22 @@
+@import "src/assets/styles/colors";
+
+.verein {
+  padding: 0 10%;
+}
+
+.title {
+  margin: 4rem 0;
+
+  h1 {
+    margin-bottom: 2rem;
+    color: $dark-green;
+  }
+}
+
+div {
+  h2 {
+    width: 100%;
+    margin: 1rem 0;
+    color: $light-green
+  }
+}

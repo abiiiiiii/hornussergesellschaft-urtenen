@@ -1,0 +1,35 @@
+@import "src/assets/styles/colors";
+
+.team {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.9rem;
+
+  img {
+    margin-bottom: 2rem;
+  }
+
+  .team-info {
+    display: flex;
+    flex-direction: row;
+
+    app-team-list {
+      width: 25%;
+      margin-right: 2rem;
+    }
+    .results {
+      width: 75%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .game-mode {
+        width: 80%;
+        h3 {
+          color: $dark-green;
+        }
+      }
+    }
+  }
+}
+

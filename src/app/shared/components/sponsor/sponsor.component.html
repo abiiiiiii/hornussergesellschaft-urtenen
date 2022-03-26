@@ -1,0 +1,13 @@
+<div class="sponsor" *ngIf="sponsor" [class.column]="column">
+  <a class="image" [href]="sponsor.url" target="_blank">
+    <img [src]="imageUrl$ | async" alt="">
+  </a>
+  <div>
+    <p>{{sponsor.name}}</p>
+    <p>{{sponsor.description}}</p>
+    <p>{{sponsor.postalCode}} {{sponsor.city}}</p>
+    <a href="mailto:{{sponsor.email}}" target="_blank">{{sponsor.email}}</a>
+    <p>{{sponsor.phoneNumber}}</p>
+    <a [href]="sponsor.url" target="_blank">{{sponsor.url}}</a>
+  </div>
+</div>

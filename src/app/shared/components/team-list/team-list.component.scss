@@ -1,0 +1,21 @@
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .player {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    &:first-child {
+      border-top: 1px solid grey;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}

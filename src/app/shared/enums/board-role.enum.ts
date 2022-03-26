@@ -1,13 +1,14 @@
 export enum BoardRole {
-  PRAESIDENT,
-  VIZE_PRAESIDENT,
-  SEKRETAER,
-  KASSIER,
-  VIZE_KASSIER,
-  BEISITZER,
-  BETREUER_NACHWUCHS,
-  SPONSORING,
-  MARKETING,
-  MATERIALVERWALTER,
-  SPORTCHEF
+  PRAESIDENT = 'Präsident',
+  VIZE_PRAESIDENT = 'Vize-Präsident',
+  SEKRETAER = 'Sekretär',
+  KASSIER = 'Kassier',
+  VIZE_KASSIER = 'Vize-Kassier',
+  BEISITZER = 'Beisitzer',
+  BETREUER_NACHWUCHS = 'Betreuer Nachwuchs',
+  SPONSORING = 'Sponsoring',
+  MARKETING = 'Marketing',
+  MATERIALVERWALTER = 'Materialverwalter',
+  SPORTCHEF = 'Sportchef',
+  PLAYMAKER = 'Spielabmacher'
 }
