@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AuthService} from "../../core/services/auth.service";
-import {MatDialog} from "@angular/material/dialog";
-import {AddNewsComponent} from "../../shared/components/add-news/add-news.component";
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AuthService } from "../../core/services/auth.service";
+import { MatDialog } from "@angular/material/dialog";
+import { AddNewsComponent } from "../../shared/components/add-news/add-news.component";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-verein',
@@ -10,19 +11,25 @@ import {AddNewsComponent} from "../../shared/components/add-news/add-news.compon
 })
 export class VereinComponent implements AfterViewInit {
 
-  constructor(public authService: AuthService, private dialog: MatDialog) { }
+  constructor(public authService: AuthService, private dialog: MatDialog, private router: Router) { }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      let headerHeight = document.getElementById('header')?.getBoundingClientRect().height
-      if (headerHeight && window.scrollY == 0) {
-        window.scrollBy(0, headerHeight - 150);
+      let fragment = this.router.url.split('#')[1];
+      if (fragment) {
+        document.getElementById(fragment).scrollIntoView();
       }
     }, 100)
   }
 
   addEvent() {
-    this.dialog.open(AddNewsComponent, {data: {showEventCheckbox: false, isEvent: true}})
+    this.dialog.open(AddNewsComponent, { data: { showEventCheckbox: false, isEvent: true } })
+  }
+
+  goTo(id: string) {
+    document.getElementById(id).scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 
 }

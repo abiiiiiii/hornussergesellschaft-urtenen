@@ -73,6 +73,7 @@ button {
 a {
   text-decoration: none;
   color: $light-green;
+  cursor: pointer;
   &:hover {
     color: $dark-green;
   }

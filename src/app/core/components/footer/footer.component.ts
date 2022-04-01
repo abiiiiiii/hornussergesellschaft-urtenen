@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goTo(fragment: string) {
+    if (this.router.url.includes('gesellschaft')) {
+      document.getElementById(fragment).scrollIntoView({
+        behavior: 'smooth'
+      });
+    } else {
+      this.router.navigate(['gesellschaft'], {fragment})
+    }
   }
 
 }

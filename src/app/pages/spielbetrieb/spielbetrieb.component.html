@@ -2,6 +2,14 @@
   <div class="title">
     <h1>Spielbetrieb</h1>
     <p>Hier finden Sie alle Resultate und Infos der aktuellen Saison</p>
+
+    <div class="sub-nav">
+      <ul>
+        <li *ngFor="let team of teams">
+          <a (click)="goTo(team.name)">{{team.name}}</a>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div *ngIf="authService.currentUser?.role == 'admin'" class="add" (click)="addResult()">
@@ -10,7 +18,7 @@
   </div>
 
   <div class="team" *ngFor="let team of teams">
-    <h2>{{team.name}}</h2>
+    <h2 [id]="team.name">{{team.name}}</h2>
     <app-team [team]="team"></app-team>
     <div class="break-line"></div>
   </div>

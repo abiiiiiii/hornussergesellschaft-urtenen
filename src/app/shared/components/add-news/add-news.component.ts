@@ -1,11 +1,11 @@
-import {Component, Inject} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {NewsService} from "../../services/news.service";
-import {News} from "../../models/news.model";
-import {FileUploadService} from "../../services/file-upload.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Router} from "@angular/router";
-import {combineLatest, EMPTY, Observable, of} from "rxjs";
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NewsService } from "../../services/news.service";
+import { News } from "../../models/news.model";
+import { FileUploadService } from "../../services/file-upload.service";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { combineLatest, EMPTY, Observable, of } from "rxjs";
 
 class DialogData {
   showEventCheckbox = true;
@@ -32,10 +32,10 @@ export class AddNewsComponent {
   });
 
   constructor(public dialogRef: MatDialogRef<AddNewsComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData,
-              private formBuilder: FormBuilder,
-              private newsService: NewsService,
-              private fileUploadService: FileUploadService) {
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private formBuilder: FormBuilder,
+    private newsService: NewsService,
+    private fileUploadService: FileUploadService) {
     this.newsForm.valueChanges.subscribe(() => {
       this.showErrorMessage = false;
     })
@@ -50,7 +50,8 @@ export class AddNewsComponent {
         isEvent: this.newsForm.get('isEvent')?.value,
         description: description,
         flyer: this.newsForm.get('flyer')?.value,
-        image: this.newsForm.get('image')?.value
+        image: this.newsForm.get('image')?.value,
+        active: true
       }
 
       this.newsService.createNews(news).subscribe(res => {

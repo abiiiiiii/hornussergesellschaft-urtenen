@@ -11,6 +11,18 @@
     margin-bottom: 2rem;
     color: $dark-green;
   }
+
+  .sub-nav {
+    width: 100%;
+    ul {
+      list-style: none;
+      display: flex;
+      li {
+        width: calc(100%/6);
+        display: flex;
+      }
+    }
+  }
 }
 
 div {

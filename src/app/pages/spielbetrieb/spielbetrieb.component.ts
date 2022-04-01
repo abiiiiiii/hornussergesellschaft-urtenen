@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Team} from "../../shared/models/team.model";
-import {Player} from "../../shared/models/player.model";
-import {Game} from "../../shared/models/game.model";
-import {GameMode} from "../../shared/enums/game-mode.enum";
-import {TeamService} from "../../shared/services/team.service";
-import {GameService} from "../../shared/services/game.service";
-import {AuthService} from "../../core/services/auth.service";
-import {MatDialog} from "@angular/material/dialog";
-import {AddResultComponent} from "../../shared/components/add-result/add-result.component";
+import { Component, OnInit } from '@angular/core';
+import { Team } from "../../shared/models/team.model";
+import { Player } from "../../shared/models/player.model";
+import { Game } from "../../shared/models/game.model";
+import { GameMode } from "../../shared/enums/game-mode.enum";
+import { TeamService } from "../../shared/services/team.service";
+import { GameService } from "../../shared/services/game.service";
+import { AuthService } from "../../core/services/auth.service";
+import { MatDialog } from "@angular/material/dialog";
+import { AddResultComponent } from "../../shared/components/add-result/add-result.component";
 
 @Component({
   selector: 'app-spielbetrieb',
@@ -35,8 +35,14 @@ export class SpielbetriebComponent implements OnInit {
   }
 
   addResult() {
-    this.dialog.open(AddResultComponent, {data: { teams: this.teams, game: undefined}}).afterClosed().subscribe(() => {
+    this.dialog.open(AddResultComponent, { data: { teams: this.teams, game: undefined } }).afterClosed().subscribe(() => {
       this.getTeams();
     })
+  }
+
+  goTo(id: string) {
+    document.getElementById(id).scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 }
