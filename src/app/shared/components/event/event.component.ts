@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NewsService} from "../../services/news.service";
-import {News} from "../../models/news.model";
+import {EventService} from "../../services/event.service";
+import {ClubEvent} from "../../models/event.model";
 
 @Component({
   selector: 'app-event',
@@ -9,15 +9,11 @@ import {News} from "../../models/news.model";
 })
 export class EventComponent implements OnInit {
 
-  events: News[] = [];
+  events: ClubEvent[] = [];
 
-  constructor(private newsService: NewsService) {
-    this.newsService.getAllEvents().subscribe(events => {
-      events.forEach(doc => {
-        let event = doc.data() as News;
-        event.id = doc.id;
-        this.events.push(event);
-      })
+  constructor(private eventService: EventService) {
+    this.eventService.getAllEvents().subscribe(events => {
+      this.events = events;
     })
   }
 

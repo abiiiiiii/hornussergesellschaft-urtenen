@@ -4,6 +4,8 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import {Observable} from "rxjs";
 import {Team} from "../models/team.model";
 import {fromPromise} from "rxjs/internal-compatibility";
+import {map} from "rxjs/operators";
+import {News} from "../models/news.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +18,18 @@ export class TeamService {
     return this.storage.ref('images/team_pictures/' + fileName).getDownloadURL();
   }
 
-  getTeamAverage(fileName: string): Observable<string> {
-    return this.storage.ref('team/files/' + fileName).getDownloadURL();
-  }
-
-  getAllTeams(): Observable<QuerySnapshot<Team>> {
-    return this.firestore.collection<Team>('team', ref => ref.orderBy('name', 'asc')).get();
+  getAllTeams(): Observable<Team[]> {
+    return this.firestore.collection<Team>('team', ref => ref.orderBy('name', 'asc')).get().pipe(
+      map(res => {
+        let teams: Team[] = [];
+        res.forEach(doc => {
+          let team = doc.data() as Team;
+          team.id = doc.id;
+          teams.push(team);
+        })
+        return teams;
+      })
+    );
   }
 
   createTeam(team: Team): Promise<DocumentReference<Team>> {

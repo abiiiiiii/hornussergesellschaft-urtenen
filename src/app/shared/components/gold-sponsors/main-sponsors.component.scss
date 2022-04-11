@@ -1,7 +1,10 @@
-@import "src/assets/styles/colors";
+@import "src/assets/styles/vars";
 
 .sponsors {
-  margin-top: 40%;
+  margin-top: 10%;
+  @media screen and (min-width: $screen-l){
+    margin-top: 40%;
+  }
   h3 {
     color: $light-green;
     margin-bottom: 1rem;

@@ -1,7 +1,7 @@
-@import "src/assets/styles/colors";
+@import "src/assets/styles/vars";
 
 div {
-  padding: 5% 20%;
+  padding: 5%;
   a {
     text-decoration: none;
     color:$light-green;
@@ -14,8 +14,14 @@ div {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    &.single {
+      img {
+        width: 100%;
+      }
+    }
     img {
-      height: 80vh;
+      width: 50%;
+
     }
   }
 }

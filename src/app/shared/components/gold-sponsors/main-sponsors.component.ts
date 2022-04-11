@@ -14,11 +14,7 @@ export class MainSponsorsComponent implements OnInit {
 
   constructor(private sponsorService: SponsorService) {
     this.sponsorService.getSponsorsByType(SponsorType.MAIN_SPONSOR).subscribe(sponsors => {
-      sponsors.forEach(doc => {
-        let sponsor = doc.data() as Sponsor;
-        sponsor.id = doc.id
-        this.sponsors.push(sponsor);
-      })
+      this.sponsors = sponsors;
     })
   }
 

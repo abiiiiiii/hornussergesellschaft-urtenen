@@ -1,4 +1,4 @@
-@import "src/assets/styles/colors";
+@import "src/assets/styles/vars";
 
 .login {
   width: 100%;
@@ -13,7 +13,10 @@
     margin: 4rem 0;
   }
   form {
-    width: 25%;
+    width: 60%;
+    @media screen and (min-width: $screen-m) {
+      width: 25%;
+    }
 
     .input {
       width: 100%;

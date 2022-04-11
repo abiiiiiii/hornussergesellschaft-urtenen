@@ -10,8 +10,6 @@
       <textarea matInput formControlName="text"></textarea>
     </mat-form-field>
 
-    <mat-checkbox *ngIf="data.showEventCheckbox" formControlName="isEvent" color="primary">Vereinsanlass</mat-checkbox>
-
     <div class="upload">
       <label for="image-upload">Bild hochladen: </label>
       <input id="image-upload" type="file" (change)="handleImageFileInput($event)" accept="image/jpeg,image/png,image/gif"/>

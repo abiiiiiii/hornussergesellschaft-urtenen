@@ -1,4 +1,4 @@
-@import "src/assets/styles/colors";
+@import "src/assets/styles/vars";
 
 .sponsor {
   display: flex;
@@ -13,12 +13,9 @@
       margin-top: 1rem;
     }
   }
-  div, .image {
-    width: calc(50% - .5rem);
-    img {
-      max-height: 200px;
-      max-width: 100%;
-    }
+  .infos {
+    width: 100%;
+    overflow-x: scroll;
     a {
       text-decoration: none;
       color: $light-green;
@@ -27,10 +24,14 @@
       }
     }
   }
-
   .image {
+    width: calc(50% - .5rem);
     display: flex;
     justify-content: center;
+    margin-right: 2rem;
+    img {
+      max-height: 200px;
+      max-width: 100%;
+    }
   }
-
 }

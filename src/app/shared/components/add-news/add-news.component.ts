@@ -4,13 +4,7 @@ import { NewsService } from "../../services/news.service";
 import { News } from "../../models/news.model";
 import { FileUploadService } from "../../services/file-upload.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { Router } from "@angular/router";
-import { combineLatest, EMPTY, Observable, of } from "rxjs";
-
-class DialogData {
-  showEventCheckbox = true;
-  isEvent: boolean = true;
-}
+import { combineLatest, of } from "rxjs";
 
 @Component({
   selector: 'app-add-news',
@@ -28,11 +22,9 @@ export class AddNewsComponent {
     text: ['', Validators.required],
     image: ['', Validators.required],
     flyer: [''],
-    isEvent: [this.data.isEvent, Validators.required],
   });
 
   constructor(public dialogRef: MatDialogRef<AddNewsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private formBuilder: FormBuilder,
     private newsService: NewsService,
     private fileUploadService: FileUploadService) {
@@ -44,20 +36,18 @@ export class AddNewsComponent {
   add() {
     if (this.newsForm.valid) {
       let description: string[] = this.newsForm.get('text')?.value.split("\n");
-      let news: News = {
-        createdAt: new Date(),
-        title: this.newsForm.get('title')?.value,
-        isEvent: this.newsForm.get('isEvent')?.value,
-        description: description,
-        flyer: this.newsForm.get('flyer')?.value,
-        image: this.newsForm.get('image')?.value,
-        active: true
-      }
+        let news: News = {
+          createdAt: new Date(),
+          title: this.newsForm.get('title')?.value,
+          description: description,
+          flyer: this.newsForm.get('flyer')?.value,
+          image: this.newsForm.get('image')?.value,
+          active: true
+        }
 
-      this.newsService.createNews(news).subscribe(res => {
-        let image$ = of(null);
+      this.newsService.createNews(news).subscribe(() => {
         let flyer$ = of(null);
-        image$ = this.fileUploadService.uploadFile("images/news/", this.imageFile);
+        let image$ = this.fileUploadService.uploadFile("images/news/", this.imageFile);
         if (this.flyerFile) {
           flyer$ = this.fileUploadService.uploadFile("pdf/news/", this.flyerFile);
         }
@@ -84,5 +74,4 @@ export class AddNewsComponent {
       this.newsForm.get('flyer')?.setValue(this.flyerFile?.name);
     }
   }
-
 }

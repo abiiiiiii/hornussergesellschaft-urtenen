@@ -16,25 +16,13 @@ export class SponsorenComponent implements AfterViewInit {
 
   constructor(private sponsorService: SponsorService) {
     this.sponsorService.getSponsorsByType(SponsorType.MAIN_SPONSOR).subscribe(sponsors => {
-      sponsors.forEach(doc => {
-        let sponsor = doc.data() as Sponsor;
-        sponsor.id = doc.id
-        this.mainSponsors.push(sponsor)
-      })
+      this.mainSponsors = sponsors;
     });
     this.sponsorService.getSponsorsByType(SponsorType.SPONSOR).subscribe(sponsors => {
-      sponsors.forEach(doc => {
-        let sponsor = doc.data() as Sponsor;
-        sponsor.id = doc.id
-        this.sponsors.push(sponsor)
-      })
+      this.sponsors = sponsors;
     });
     this.sponsorService.getSponsorsByType(SponsorType.DONATOR).subscribe(sponsors => {
-      sponsors.forEach(doc => {
-        let sponsor = doc.data() as Sponsor;
-        sponsor.id = doc.id
-        this.donators.push(sponsor)
-      })
+      this.donators = sponsors;
     });
   }
 

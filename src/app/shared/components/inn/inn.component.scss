@@ -1,4 +1,4 @@
-@import "src/assets/styles/colors";
+@import "src/assets/styles/vars";
 
 h3 {
   color: $green;
@@ -8,10 +8,21 @@ h3 {
 .wirtschaft {
   display: flex;
   margin-bottom: 1rem;
+  flex-direction: column;
+  @media screen and (min-width: $screen-m) {
+    flex-direction: row;
+  }
   img {
-    width: 20%;
+    width: 50%;
+    @media screen and (min-width: $screen-m) {
+      width: 30%;
+    }
   }
   div {
-    margin-left: 1rem;
+    margin-top: 1rem;
+    @media screen and (min-width: $screen-m) {
+      margin-top: 0;
+      margin-left: 1rem;
+    }
   }
 }

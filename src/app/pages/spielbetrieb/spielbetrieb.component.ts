@@ -8,6 +8,7 @@ import { GameService } from "../../shared/services/game.service";
 import { AuthService } from "../../core/services/auth.service";
 import { MatDialog } from "@angular/material/dialog";
 import { AddResultComponent } from "../../shared/components/add-result/add-result.component";
+import {docChanges} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-spielbetrieb',
@@ -26,11 +27,7 @@ export class SpielbetriebComponent implements OnInit {
 
   getTeams(): void {
     this.teamService.getAllTeams().subscribe(teams => {
-      teams.forEach(doc => {
-        let team = doc.data() as Team;
-        team.id = doc.id;
-        this.teams.push(team);
-      });
+      this.teams = teams;
     })
   }
 

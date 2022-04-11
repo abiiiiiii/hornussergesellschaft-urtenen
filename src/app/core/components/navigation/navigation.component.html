@@ -1,4 +1,4 @@
-<div class="hamburger" [class.open]="hamOpen" [class.close]="backFromCross" [class.dark]="hamDark" (click)="handleHamburgerMenu()">
+<div class="hamburger" [class.open]="hamOpen" [class.close]="backFromCross" (click)="handleHamburgerMenu()">
   <div class="ham-wide ham-top"></div>
   <div class="ham-narrow ham-mid"></div>
   <div class="ham-wide ham-bot"></div>
@@ -27,7 +27,7 @@
     </ul>
   </nav>
   <div class="program">
-    <a href="assets/pdf/2022_Jahresprogramm.pdf" target="_blank">Download Jahresprogramm</a>
+    <a href="assets/pdf/2022_V2_Jahresprogramm.pdf" target="_blank">Download Jahresprogramm</a>
   </div>
   <div class="login">
     <a *ngIf="authService.currentUser?.role != 'admin';else loggedIn" routerLink="login" (click)="handleHamburgerMenu()">Login</a>

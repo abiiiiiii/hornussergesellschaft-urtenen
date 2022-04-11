@@ -1,11 +1,33 @@
-@import "src/assets/styles/colors";
+@import "src/assets/styles/vars";
 
 .navigation-sidebar {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -100vw;
+  background-color: white;
+  transition: all .3s;
   padding: 2rem;
   border-right: 1px solid $dark-green;
+  @media screen and (min-width: $screen-l) {
+    left: 0;
+  }
+
+  @media screen and (min-width: $screen-s) {
+    width: 300px;
+  }
+
+  &.open {
+    left: 0;
+  }
   img {
-    width: 100%;
-    cursor: pointer;
+    display: none;
+    @media screen and (min-width: $screen-m) {
+      width: 100%;
+      cursor: pointer;
+      display: block;
+    }
   }
   ul {
     list-style: none;
@@ -52,19 +74,25 @@
 }
 
 .hamburger {
-  display: none;
   position: fixed;
   height: 20px;
   width: 40px;
-  top: 4rem;
+  top: 30px;
   left: 2rem;
   cursor: pointer;
+  z-index: 1;
   transition: all .3s;
+  @media  screen and (min-width: $screen-m){
+    top: 40px;
+  }
+  @media  screen and (min-width: $screen-l){
+    display: none;
+  }
 
   .ham-wide {
     width: 40px;
     height: 3px;
-    background-color: white;
+    background-color: black;
     border-radius: 4px;
     transition: all .3s;
     transform-origin: center;
@@ -74,7 +102,7 @@
   .ham-narrow {
     width: 20px;
     height: 3px;
-    background-color: white;
+    background-color: black;
     border-radius: 4px;
     transition: all .3s;
     transform-origin: center;
@@ -92,7 +120,11 @@
   }
 
   &.open {
-    left: 332px;
+    left: calc(100vw - 72px);
+    @media  screen and (min-width: $screen-s){
+      left: 332px;
+    }
+
     .ham-top {
       animation: ham-top .5s forwards;
 
@@ -121,18 +153,6 @@
     div {
       background-color: $green;
     }
-  }
-}
-
-.navigation-sidebar {
-  width: 300px;
-  height: 100vh;
-  top: 0;
-  background-color: white;
-  transition: all .3s;
-
-  &.open {
-    left: 0;
   }
 }
 

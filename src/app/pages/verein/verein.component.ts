@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { AuthService } from "../../core/services/auth.service";
 import { MatDialog } from "@angular/material/dialog";
 import { AddNewsComponent } from "../../shared/components/add-news/add-news.component";
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-verein',

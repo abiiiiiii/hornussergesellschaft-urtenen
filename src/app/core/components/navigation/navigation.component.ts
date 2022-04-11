@@ -11,20 +11,11 @@ import {AuthService} from "../../services/auth.service";
 export class NavigationComponent implements OnInit {
 
   hamOpen = false;
-  hamDark = false;
   backFromCross = false;
 
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    fromEvent(window, 'scroll').pipe(
-      throttleTime(100)
-    ).subscribe(() => {
-      let headerHeight = document.getElementById('header')?.getBoundingClientRect().height;
-      if (headerHeight) {
-        this.hamDark = window.scrollY > headerHeight - 75;
-      }
-    })
   }
 
   handleHamburgerMenu(): void {

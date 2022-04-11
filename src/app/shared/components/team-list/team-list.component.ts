@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Player} from "../../models/player.model";
+import {pluck} from "rxjs/operators";
 
 @Component({
   selector: 'app-team-list',
@@ -13,7 +14,13 @@ export class TeamListComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.players.sort(this.sortByName)
   }
 
+  sortByName(a: Player, b: Player) {
+    if(a.name < b.name) { return -1; }
+    if(a.name > b.name) { return 1; }
+    return 0;
+  }
 }

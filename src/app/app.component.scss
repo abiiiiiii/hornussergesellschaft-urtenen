@@ -1,21 +1,79 @@
+@import "src/assets/styles/vars";
 
 app-navigation {
   z-index: 1;
 }
 
+app-header {
+  display: block;
+  width: 100%;
+  height: 80px;
+
+  @media screen and (min-width: $screen-m) {
+    height: 100px;
+  }
+  @media screen and (min-width: $screen-l) {
+    height: auto;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: row;
-
+  .scroll-up {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    background-color: black;
+    opacity: 0;
+    width: 40px;
+    height: 40px;
+    transition: opacity .3s;
+    @media screen and (min-width: $screen-l) {
+      width: 60px;
+      height: 60px;
+      right: 3rem;
+      bottom: 3rem;
+    }
+    &.visible {
+      cursor: pointer;
+      opacity: 0.4;
+    }
+  }
 }
 
 app-footer {
   margin-top: 1rem;
   width: 100%;
-  display: block;
 }
 
 .content {
   height: 100vh;
   overflow-y: scroll;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    @media screen and (min-width: $screen-l) {
+      margin-top: 0;
+    }
+
+    @media screen and (max-width: $screen-l - 1) {
+      overflow-y: scroll;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+  }
+
+  @media screen and (min-width: $screen-l) {
+    margin-left: 300px;
+  }
 }

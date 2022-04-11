@@ -1,9 +1,27 @@
+@import "src/assets/styles/vars";
+
 header {
   display: flex;
   width: 100%;
   box-sizing: border-box;
   .header-image {
+    display: none;
     transition: margin-top 1s;
     width: 100%;
+    @media screen and (min-width: $screen-l){
+      display: block;
+    }
+  }
+  div {
+    height: 80px;
+    background-color: $light-green;
+    width: 100vw;
+    @media screen and (min-width: $screen-m){
+      height: 100px;
+    }
+
+    @media screen and (min-width: $screen-l){
+      display: none;
+    }
   }
 }

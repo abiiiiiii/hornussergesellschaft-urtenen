@@ -18,7 +18,7 @@ export class GameService {
   }
 
   getGameReport(fileName: string): Observable<string> {
-    return this.storage.ref('pdf/' + fileName).getDownloadURL();
+    return this.storage.ref('pdf/report/' + fileName).getDownloadURL();
   }
 
   getLatestGames(): Observable<Game[]> {

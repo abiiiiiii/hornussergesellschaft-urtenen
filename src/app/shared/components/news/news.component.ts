@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {News} from "../../models/news.model";
 import {NewsService} from "../../services/news.service";
 import {Observable} from "rxjs";
+import {ClubEvent} from "../../models/event.model";
 
 @Component({
   selector: 'app-news',
@@ -10,7 +11,7 @@ import {Observable} from "rxjs";
 })
 export class NewsComponent implements OnInit {
 
-  @Input() news: News;
+  @Input() content: News | ClubEvent;
   flyerUrl$: Observable<string>;
   imageUrl$: Observable<string>;
 
@@ -18,9 +19,9 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.imageUrl$ = this.newsService.getNewsImage(this.news.image)
-    if (this.news.flyer) {
-      this.flyerUrl$ = this.newsService.getNewsFile(this.news.flyer);
+    this.imageUrl$ = this.newsService.getNewsImage(this.content.image)
+    if (this.content.flyer) {
+      this.flyerUrl$ = this.newsService.getNewsFile(this.content.flyer);
     }
 
   }

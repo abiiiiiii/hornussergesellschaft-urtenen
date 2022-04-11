@@ -120,7 +120,7 @@ export class AddResultComponent implements OnInit {
           awayList$ = this.fileUploadService.uploadFile('lists/', this.awayList);
         }
         if (this.reportFile) {
-          reportFile$ = this.fileUploadService.uploadFile('pdf/', this.reportFile);
+          reportFile$ = this.fileUploadService.uploadFile('pdf/report/', this.reportFile);
         }
         combineLatest([homeList$, awayList$, reportFile$]).subscribe(([homeList, awayList, reportFile]) => {
           this.dialogRef.close();

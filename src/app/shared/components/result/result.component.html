@@ -1,11 +1,11 @@
 <div *ngIf="game" class="result">
   <ng-container [ngSwitch]="game.mode">
     <h4 *ngSwitchCase="'FESTIVAL'">
-      {{game.createdAt.seconds | customDate}} | {{game.festivalName}},
+      {{game.createdAt | customDate}} | {{game.festivalName}},
       {{game.homeResult.name}} {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
     </h4>
     <h4 *ngSwitchCase="'SMALL_EVENT'">
-      {{game.createdAt.seconds | customDate}} | {{game.festivalName}},
+      {{game.createdAt | customDate}} | {{game.festivalName}},
       {{game.homeResult.name}} {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
     </h4>
     <h4 *ngSwitchCase="'GROUP_CHAMPIONSHIP'">
@@ -13,7 +13,7 @@
       {{game.awayResult?.name}},  {{game.homeResult.numbers}}/{{game.homeResult.points}}  -  {{game.awayResult?.numbers}}/{{game.awayResult?.points}}
     </h4>
     <h4 *ngSwitchCase="'CHAMPIONSHIP'">
-      {{game.createdAt.seconds | customDate}} | Meisterschaft {{game.homeResult.name}} -
+      {{game.createdAt | customDate}} | Meisterschaft {{game.homeResult.name}} -
       {{game.awayResult?.name}},  {{game.homeResult.numbers}}/{{game.homeResult.points}}  -  {{game.awayResult?.numbers}}/{{game.awayResult?.points}}
     </h4>
     <h4 *ngSwitchCase="'TEST_GAME'">
@@ -26,7 +26,7 @@
     <a href="spielbetrieb/{{game.id}}">Spielliste</a>
   </p>
   <p>
-    <a *ngIf="report$" [href]="report$">Spielbericht</a>
+    <a *ngIf="report$" [href]="report$ | async" target="_blank">Spielbericht</a>
   </p>
   <div class="break-line"></div>
 </div>

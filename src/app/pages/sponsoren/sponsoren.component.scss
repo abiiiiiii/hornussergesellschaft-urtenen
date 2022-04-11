@@ -1,4 +1,4 @@
-@import "src/assets/styles/colors";
+@import "src/assets/styles/vars";
 
 .sponsors {
   padding: 0 10%;
@@ -20,11 +20,15 @@
     align-items: center;
     margin-bottom: 2rem;
     h2 {
+      font-size: 2.5rem;
       color: $light-green;
-      margin: 1rem 0;
+      margin: 4rem 0;
     }
     .sponsor {
-      width: 60%;
+      width: 100%;
+      @media screen and (min-width: $screen-m)  {
+        width: 60%;
+      }
       margin-bottom: 1rem;
       display: flex;
       flex-direction: column;
@@ -35,6 +39,12 @@
     }
     .break-line {
       width: 50%;
+    }
+  }
+
+  .gold {
+    h2 {
+      margin: 1rem 0 4rem 0;
     }
   }
 

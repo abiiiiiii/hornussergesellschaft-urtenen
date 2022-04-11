@@ -5,6 +5,8 @@ import { Observable } from "rxjs";
 import { News } from "../models/news.model";
 import { fromPromise } from "rxjs/internal-compatibility";
 import { AuthService } from "../../core/services/auth.service";
+import {map} from "rxjs/operators";
+import {BoardMember} from "../models/board-member.model";
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +23,18 @@ export class NewsService {
     return this.storage.ref('pdf/news/' + fileName).getDownloadURL();
   }
 
-  getAllNews(): Observable<QuerySnapshot<News>> {
-    return this.firestore.collection<News>('news', ref => ref.orderBy('createdAt', 'desc').where('active', '==', true).limit(5)).get();
-  }
-
-  getAllEvents(): Observable<QuerySnapshot<News>> {
-    return this.firestore.collection<News>('news', ref => ref.where('isEvent', '==', true)).get();
+  getAllNews(): Observable<News[]> {
+    return this.firestore.collection<News>('news', ref => ref.orderBy('createdAt', 'desc').where('active', '==', true).limit(5)).get().pipe(
+      map(res => {
+        let news: News[] = [];
+        res.forEach(doc => {
+          let n = doc.data() as News;
+          n.id = doc.id;
+          news.push(n);
+        })
+        return news;
+      })
+    );
   }
 
   createNews(news: News): Observable<DocumentReference<News>> {

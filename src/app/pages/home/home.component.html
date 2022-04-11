@@ -10,7 +10,7 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
         <p>Neuigkeit hinzufügen</p>
       </div>
-      <app-news *ngFor="let n of news" [news]="n"></app-news>
+      <app-news *ngFor="let n of news" [content]="n"></app-news>
       <p *ngIf="news.length == 0">Aktuell gibt es keine neuen Meldungen...</p>
     </div>
   </div>

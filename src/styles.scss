@@ -13,7 +13,7 @@ $my-theme: mat.define-light-theme((
 
 @include mat.all-component-themes($my-theme);
 
-@import "assets/styles/colors";
+@import "src/assets/styles/vars";
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: Averta Regular;
@@ -30,7 +30,11 @@ $my-theme: mat.define-light-theme((
   margin: 0;
   padding: 0;
   font-family: 'Averta Regular', 'arial', sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  @media screen and (min-width: $screen-l){
+    font-size: 1rem;
+  }
+
 }
 
 html, body {

@@ -22,12 +22,8 @@ export class HomeComponent {
   }
 
   getNews() {
-    this.newsService.getAllNews().subscribe(docs => {
-      docs.forEach(doc => {
-        let news = doc.data() as News;
-        news.id = doc.id;
-        this.news.push(news);
-      })
+    this.newsService.getAllNews().subscribe(news => {
+      this.news = news;
     })
   }
 

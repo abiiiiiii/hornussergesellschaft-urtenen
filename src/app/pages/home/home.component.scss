@@ -1,14 +1,22 @@
-@import "src/assets/styles/colors";
+@import "src/assets/styles/vars";
 
 .home {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  @media screen and (min-width: $screen-l){
+    flex-direction: row;
+  }
 }
 
 .content {
-  width: 70%;
-  padding: 0 10%;
+  width: 100%;
+  padding: 0 5%;
+  @media screen and (min-width: $screen-l){
+    width: 70%;
+    padding: 0 10%;
+  }
+
   .title {
     margin: 4rem 0;
     h1 {
@@ -17,18 +25,34 @@
     }
   }
   .news-container {
-    margin-top: 100px;
+    margin-top: 50px;
+    @media  screen and (min-width: $screen-m){
+      margin-top: 100px;
+    }
   }
 }
 
 .sidebar {
-  width: 30%;
+  width: 100%;
+  padding: 0 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (min-width: $screen-l){
+    width: 30%;
+  }
   .sponsor {
-    width: 100%;
+    width: 75%;
     padding-right: 5%;
+    @media screen and (min-width: $screen-l){
+      width: 100%;
+    }
   }
   .latest-games {
-    width: 100%;
+    width: 75%;
     padding-right: 5%;
+    @media screen and (min-width: $screen-l){
+      width: 100%;
+    }
   }
 }

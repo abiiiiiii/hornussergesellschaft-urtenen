@@ -51,6 +51,7 @@ import { MatNativeDateModule, MatOptionModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BoardMemberComponent } from './shared/components/board-member/board-member.component';
+import { AddClubEventComponent } from './shared/components/add-club-event/add-club-event.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { BoardMemberComponent } from './shared/components/board-member/board-mem
     LatestGamesComponent,
     AddNewsComponent,
     AddResultComponent,
-    BoardMemberComponent
+    BoardMemberComponent,
+    AddClubEventComponent
   ],
   imports: [
     BrowserModule,

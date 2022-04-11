@@ -1,4 +1,4 @@
-@import "src/assets/styles/colors";
+@import "src/assets/styles/vars";
 
 .team {
   display: flex;
@@ -8,22 +8,35 @@
 
   img {
     margin-bottom: 2rem;
+    width: 100%;
   }
 
   .team-info {
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
+    @media screen and (min-width: $screen-s) {
+      flex-direction: row;
+    }
 
     app-team-list {
-      width: 25%;
-      margin-right: 2rem;
+      width: 100%;
+      margin-top: 2rem;
+      @media screen and (min-width: $screen-s) {
+        width: 25%;
+        margin-right: 2rem;
+      }
     }
     .results {
-      width: 75%;
+      width: 100%;
       display: flex;
       align-items: center;
       flex-direction: column;
+
+      @media screen and (min-width: $screen-s) {
+        width: 75%;
+      }
       .game-mode {
+        margin-top: 1rem;
         width: 80%;
         h3 {
           color: $dark-green;
