@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, DocumentReference, DocumentSnapshot, QuerySnapshot} from "@angular/fire/firestore";
 import {AngularFireStorage} from "@angular/fire/storage";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Team} from "../models/team.model";
 import {fromPromise} from "rxjs/internal-compatibility";
 import {map} from "rxjs/operators";
@@ -11,6 +11,8 @@ import {News} from "../models/news.model";
   providedIn: 'root'
 })
 export class TeamService {
+
+  load$ = new BehaviorSubject(undefined);
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 

@@ -7,60 +7,26 @@ import {Game} from "../../../../shared/models/game.model";
 import {GameService} from "../../../../shared/services/game.service";
 import {TeamService} from "../../../../shared/services/team.service";
 import {FileUploadService} from "../../../../shared/services/file-upload.service";
-import {combineLatest, EMPTY, of} from "rxjs";
-
-class SpielModus {
-  mode: GameMode = GameMode.CHAMPIONSHIP;
-  displayName: string = "";
-}
-
-class DialogData {
-  teams: Team[] = [];
-  game: Game;
-}
+import {combineLatest, of} from "rxjs";
 
 @Component({
   selector: 'app-add-result',
-  templateUrl: './add-result.component.html',
-  styleUrls: ['./add-result.component.scss']
+  templateUrl: './edit-result.component.html',
+  styleUrls: ['./edit-result.component.scss']
 })
-export class AddResultComponent implements OnInit {
-
-  modes: SpielModus[] = [
-    {
-      mode: GameMode.CHAMPIONSHIP,
-      displayName: "Meisterschaft"
-    },
-    {
-      mode: GameMode.TEST_GAME,
-      displayName: "Wettspiel"
-    },
-    {
-      mode: GameMode.FESTIVAL,
-      displayName: "Fest"
-    },
-    {
-      mode: GameMode.SMALL_EVENT,
-      displayName: "Kleinanlass"
-    },
-    {
-      mode: GameMode.GROUP_CHAMPIONSHIP,
-      displayName: "Gruppenmeisterschaft"
-    },
-  ]
-
+export class EditResultComponent implements OnInit {
   homeList: File;
   awayList?: File;
   reportFile?: File;
   homeResult: FormGroup;
   awayResult: FormGroup;
   resultForm: FormGroup
-  isCreating = false;
+  isUpdating = false;
   showValidationErrorMessage = false;
-  showCreationErrorMessage = false;
+  showUpdateErrorMessage = false;
 
-  constructor(public dialogRef: MatDialogRef<AddResultComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  constructor(public dialogRef: MatDialogRef<EditResultComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Game,
               private formBuilder: FormBuilder,
               private gameService: GameService,
               private teamService: TeamService,
@@ -69,78 +35,78 @@ export class AddResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.homeResult = this.formBuilder.group({
-      name: ['', Validators.required],
-      points: ['', Validators.required],
-      numbers: ['', Validators.required]
+      name: [this.data.homeResult.name, Validators.required],
+      points: [this.data.homeResult.points, Validators.required],
+      numbers: [this.data.homeResult.numbers, Validators.required]
     })
 
-    this.awayResult = this.formBuilder.group({
-      name: ['', Validators.required],
-      points: ['', Validators.required],
-      numbers: ['', Validators.required]
-    })
+    if (this.data.awayResult.name != '') {
+      this.awayResult = this.formBuilder.group({
+        name: [this.data.awayResult.name, Validators.required],
+        points: [this.data.awayResult.points, Validators.required],
+        numbers: [this.data.awayResult.numbers, Validators.required]
+      })
+    }
 
     this.resultForm = this.formBuilder.group({
-      homeList: ['', Validators.required],
+      homeList: [''],
       awayList: [''],
-      report: [''],
+      report: [this.data.report],
       reportFile: [''],
-      mode: [GameMode.CHAMPIONSHIP, Validators.required],
-      date: [new Date(), Validators.required],
-      team: [this.data.teams[0], Validators.required],
-      festivalName: [''],
-      rank: [''],
+      date: [new Date(this.data.createdAt.seconds * 1000), Validators.required],
+      festivalName: [this.data.festivalName],
+      rank: [this.data.rank],
       homeResult: [this.homeResult, Validators.required],
       awayResult: this.awayResult
     });
 
     this.resultForm.valueChanges.subscribe(() => {
-      this.showCreationErrorMessage = false;
       this.showValidationErrorMessage = false;
+      this.showUpdateErrorMessage = false;
     })
   }
 
-  add() {
+  edit() {
     if (this.resultForm && this.validateResult()) {
-      this.isCreating = true;
+      this.isUpdating = true;
+      let homeList$ = of(null);
+      let awayList$ = of(null);
+      let reportFile$ = of(null);
       let result = this.resultForm.value;
-      let game: Game = {
-        createdAt: result.date,
-        awayResult: this.awayResult?.value,
-        homeResult: this.homeResult?.value,
-        homeList: result.homeList,
-        awayList: result.awayList,
-        mode: result.mode,
-        rank: result.rank,
-        festivalName: result.festivalName,
-        report: result.report,
-        reportFile: result.reportFile,
+      this.data.report = result.report;
+      this.data.createdAt = result.date;
+      this.data.festivalName = result.festivalName;
+      this.data.rank = result.rank;
+      this.data.homeResult = this.homeResult.value;
+      if (this.needAwayResult()) {
+        this.data.awayResult = result.awayResult
+      } else {
+        this.data.awayResult = {id: '', name: '', numbers: null, points: null}
       }
-
-      this.gameService.createGame(game).subscribe(ref => {
-        this.updateTeam(ref.id)
-        let homeList$ = this.fileUploadService.uploadFile('lists/', this.homeList);
-        let awayList$;
-        let reportFile$;
-        if (this.awayList) {
-          awayList$ = this.fileUploadService.uploadFile('lists/', this.awayList);
-        }
-        if (this.reportFile) {
-          reportFile$ = this.fileUploadService.uploadFile('pdf/report/', this.reportFile);
-        }
-        combineLatest([homeList$, awayList$, reportFile$]).subscribe(() => {
-          this.dialogRef.close();
-          this.isCreating = false;
-        }, error => {
-          this.gameService.deleteGame(ref.id).subscribe();
-          console.log(error);
-          this.showCreationErrorMessage = true;
-        })
+      if (this.homeList) {
+        this.data.homeList = result.homeList;
+        homeList$ = this.fileUploadService.uploadFile('lists/', this.homeList);
+      }
+      if (this.awayList) {
+        this.data.awayList = result.awayList;
+        awayList$ = this.fileUploadService.uploadFile('lists/', this.awayList);
+      }
+      if (this.reportFile) {
+        this.data.reportFile = result.reportFile;
+        reportFile$ = this.fileUploadService.uploadFile('pdf/report/', this.reportFile);
+      }
+      let update$ = this.gameService.updateGame(this.data);
+      combineLatest([homeList$, awayList$, reportFile$, update$]).subscribe(() => {
+        this.isUpdating = false;
+        this.teamService.load$.next(undefined);
+        this.dialogRef.close();
       }, error => {
-        console.log(error)
-        this.showCreationErrorMessage = true;
-        this.isCreating = false
+        console.log(error);
+        this.showUpdateErrorMessage = true;
+        this.isUpdating = false;
       })
+    } else {
+      this.showValidationErrorMessage = true;
     }
   }
 
@@ -175,21 +141,16 @@ export class AddResultComponent implements OnInit {
   }
 
   needAwayResult(): boolean {
-    let mode: GameMode = this.resultForm?.get('mode')?.value;
+    let mode: GameMode = this.data.mode;
     if (mode == GameMode.CHAMPIONSHIP || mode == GameMode.TEST_GAME || mode == GameMode.GROUP_CHAMPIONSHIP) {
       return true;
     } else {
-      this.awayResult = this.formBuilder.group({
-        name: ['', Validators.required],
-        points: ['', Validators.required],
-        numbers: ['', Validators.required]
-      });
       return false;
     }
   }
 
   isFestival(): boolean {
-    let mode: GameMode = this.resultForm?.get('mode')?.value;
+    let mode: GameMode = this.data.mode;
     return mode == GameMode.FESTIVAL || mode == GameMode.SMALL_EVENT;
   }
 
@@ -203,8 +164,7 @@ export class AddResultComponent implements OnInit {
         return false;
       }
     }
-
-    return this.resultForm?.get('homeList')?.value != '';
+    return true;
   }
 
   private updateTeam(id: string) {

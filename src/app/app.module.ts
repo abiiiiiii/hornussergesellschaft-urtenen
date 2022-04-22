@@ -54,6 +54,7 @@ import { AddClubEventComponent } from './pages/verein/components/add-club-event/
 import {EventComponent} from "./pages/verein/components/event/event.component";
 import { EditNewsComponent } from './pages/home/components/edit-news/edit-news.component';
 import {EditClubEventComponent} from "./pages/verein/components/edit-club-event/edit-club-event.component";
+import {EditResultComponent} from "./pages/spielbetrieb/components/edit-result/edit-result.component";
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import {EditClubEventComponent} from "./pages/verein/components/edit-club-event/
     AddClubEventComponent,
     EventComponent,
     EditNewsComponent,
-    EditClubEventComponent
+    EditClubEventComponent,
+    EditResultComponent
   ],
   imports: [
     BrowserModule,

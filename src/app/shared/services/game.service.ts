@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference, QuerySnapshot } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
-import { Observable } from "rxjs";
+import {BehaviorSubject, from, Observable} from "rxjs";
 import { Game } from "../models/game.model";
 import { map } from "rxjs/operators";
 import { fromPromise } from "rxjs/internal-compatibility";
@@ -46,11 +46,11 @@ export class GameService {
     return fromPromise(this.firestore.collection<Game>('game').add(game));
   }
 
-  updateGame(game: Game): Promise<void> {
-    return this.firestore.collection('game').doc<Game>(game.id).set(game, { merge: true });
+  updateGame(game: Game): Observable<void> {
+    return fromPromise(this.firestore.collection('game').doc<Game>(game.id).set(game, { merge: true }));
   }
 
-  deleteGame(id: string): Promise<void> {
-    return this.firestore.collection('game').doc(id).delete();
+  deleteGame(id: string): Observable<void> {
+    return fromPromise(this.firestore.collection('game').doc(id).delete());
   }
 }

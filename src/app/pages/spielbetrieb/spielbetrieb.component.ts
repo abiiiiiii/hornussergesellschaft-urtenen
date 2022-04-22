@@ -22,7 +22,9 @@ export class SpielbetriebComponent implements OnInit {
   constructor(private teamService: TeamService, public authService: AuthService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getTeams();
+    this.teamService.load$.subscribe(() => {
+      this.getTeams();
+    })
   }
 
   getTeams(): void {
