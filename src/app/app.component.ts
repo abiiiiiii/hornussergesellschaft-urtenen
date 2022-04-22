@@ -1,9 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {AuthService} from "./core/services/auth.service";
 import {FileService} from "./shared/services/file.service";
-import {NewsService} from "./shared/services/news.service";
 import {fromEvent} from "rxjs";
-import {throttleTime} from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -24,14 +22,10 @@ export class AppComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    fromEvent(this.content.nativeElement, 'scroll').pipe(
-      throttleTime(100)
-    ).subscribe(() => {
+    fromEvent(this.content.nativeElement, 'scroll').subscribe(() => {
       this.showScrollUpButton = this.content.nativeElement.scrollTop > 400;
     })
-    fromEvent(this.page.nativeElement, 'scroll').pipe(
-      throttleTime(100)
-    ).subscribe(() => {
+    fromEvent(this.page.nativeElement, 'scroll').subscribe(() => {
       this.showScrollUpButton = this.page.nativeElement.scrollTop > 200;
     })
   }

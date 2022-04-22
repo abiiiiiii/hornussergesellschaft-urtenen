@@ -7,4 +7,5 @@ export interface News extends CreatedAt {
   flyer?: string;
   image: string;
   active: boolean;
+  date?: any;
 }

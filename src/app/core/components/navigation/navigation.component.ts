@@ -2,6 +2,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {fromEvent} from "rxjs";
 import {throttle, throttleTime} from "rxjs/operators";
 import {AuthService} from "../../services/auth.service";
+import {NavigationService} from "../../../shared/services/navigation.service";
 
 @Component({
   selector: 'app-navigation',
@@ -10,22 +11,9 @@ import {AuthService} from "../../services/auth.service";
 })
 export class NavigationComponent implements OnInit {
 
-  hamOpen = false;
-  backFromCross = false;
-
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, public navigationService: NavigationService) { }
 
   ngOnInit(): void {
-  }
-
-  handleHamburgerMenu(): void {
-    if (this.hamOpen) {
-      this.backFromCross = true;
-      this.hamOpen = false
-    }  else {
-      this.hamOpen = true;
-      this.backFromCross = false;
-    }
   }
 
   logout(): void {

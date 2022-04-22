@@ -30,6 +30,11 @@
       margin-top: 100px;
     }
   }
+  .break-line {
+    @media screen and (min-width: $screen-l) {
+      display: none;
+    }
+  }
 }
 
 .sidebar {

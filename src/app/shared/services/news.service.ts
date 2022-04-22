@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference, QuerySnapshot } from "@angular/fire/firestore";
+import { AngularFirestore, DocumentReference } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
-import { Observable } from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import { News } from "../models/news.model";
 import { fromPromise } from "rxjs/internal-compatibility";
-import { AuthService } from "../../core/services/auth.service";
 import {map} from "rxjs/operators";
-import {BoardMember} from "../models/board-member.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
+
+  public load$ = new BehaviorSubject(undefined);
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 
@@ -41,11 +41,11 @@ export class NewsService {
     return fromPromise(this.firestore.collection<News>('news').add(news));
   }
 
-  updateNews(news: News): Promise<void> {
-    return this.firestore.collection('news').doc<News>(news.id).set(news, { merge: true });
+  updateNews(news: News): Observable<void> {
+    return fromPromise(this.firestore.collection('news').doc<News>(news.id).set(news, { merge: true }));
   }
 
-  deleteNews(id: string): Promise<void> {
-    return this.firestore.collection('news').doc(id).delete();
+  deleteNews(id: string): Observable<void> {
+    return fromPromise(this.firestore.collection('news').doc(id).delete());
   }
 }

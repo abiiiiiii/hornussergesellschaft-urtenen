@@ -10,6 +10,7 @@
   transition: all .3s;
   padding: 2rem;
   border-right: 1px solid $dark-green;
+  overflow-y: auto;
   @media screen and (min-width: $screen-l) {
     left: 0;
   }
@@ -48,7 +49,7 @@
       }
     }
   }
-  .program, .login {
+  .program, .login, .program-moosseesharks {
     a {
       font-size: 1rem;
       text-decoration: none;
@@ -70,7 +71,9 @@
     margin-top: 2rem;
   }
 
-
+  .program-moosseesharks {
+    margin: .25rem 0;
+  }
 }
 
 .hamburger {
@@ -146,12 +149,6 @@
     }
     .ham-bot {
       animation: ham-bot-close .5s;
-    }
-  }
-
-  &.dark {
-    div {
-      background-color: $green;
     }
   }
 }

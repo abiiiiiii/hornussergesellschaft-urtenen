@@ -6,8 +6,8 @@
     <p>{{sponsor.name}}</p>
     <p>{{sponsor.description}}</p>
     <p>{{sponsor.postalCode}} {{sponsor.city}}</p>
-    <a href="mailto:{{sponsor.email}}" target="_blank">{{sponsor.email}}</a>
+    <a *ngIf="sponsor.email" href="mailto:{{sponsor.email}}" target="_blank">{{sponsor.email}}</a>
     <p>{{sponsor.phoneNumber}}</p>
-    <a [href]="sponsor.url" target="_blank">{{sponsor.url}}</a>
+    <a *ngIf="sponsor.url" [href]="sponsor.url" target="_blank">...zur Webseite</a>
   </div>
 </div>

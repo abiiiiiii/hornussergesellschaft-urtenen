@@ -9,8 +9,7 @@
     margin: 0.5rem 0;
   }
   a {
-    text-decoration: none;
-    color: $light-green;
+    text-decoration: underline;
     cursor: pointer;
     width: 100%;
     &:hover {

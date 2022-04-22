@@ -1,0 +1,39 @@
+@import "src/assets/styles/vars";
+
+.add-event {
+  padding: 10%;
+  max-height: 90vh;
+  width: 50vw;
+  form {
+    width: 100%;
+    overflow-y: auto;
+    .input {
+      width: 100%;
+    }
+    .datepicker {
+      width: calc(50% - .5rem);
+    }
+    .upload {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      margin-top: .5rem;
+      label {
+        width: 100%;
+      }
+    }
+    .errorMessage {
+      color: red;
+      margin-top: .5rem;
+    }
+    input[type=file]::file-selector-button {
+      cursor: pointer;
+      padding: 0.2rem;
+      box-shadow: none;
+      border: none;
+    }
+    button {
+      margin-top: .5rem;
+    }
+  }
+}

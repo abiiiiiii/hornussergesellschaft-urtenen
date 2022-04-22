@@ -4,7 +4,7 @@ import { NewsService } from "../../shared/services/news.service";
 import { News } from "../../shared/models/news.model";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
-import { AddNewsComponent } from "../../shared/components/add-news/add-news.component";
+import { AddNewsComponent } from "./components/add-news/add-news.component";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,9 @@ export class HomeComponent {
   news: News[] = [];
 
   constructor(private newsService: NewsService, public authService: AuthService, private dialog: MatDialog, private router: Router) {
-    this.getNews();
+    this.newsService.load$.subscribe(() => {
+      this.getNews();
+    })
   }
 
   getNews() {
@@ -28,9 +30,6 @@ export class HomeComponent {
   }
 
   addNews() {
-    this.dialog.open(AddNewsComponent, { data: { showEventCheckbox: true, isEvent: false } }).afterClosed().subscribe(() => {
-      this.news = [];
-      this.getNews();
-    })
+    this.dialog.open(AddNewsComponent);
   }
 }

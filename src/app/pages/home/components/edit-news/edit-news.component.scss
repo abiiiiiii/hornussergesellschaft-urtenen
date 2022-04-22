@@ -1,0 +1,36 @@
+@import "src/assets/styles/vars";
+
+.add-news {
+  padding: 10%;
+  max-height: 90vh;
+  width: 70vw;
+  form {
+    width: 100%;
+    overflow-y: auto;
+    .input {
+      width: 100%;
+    }
+    .upload {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      margin-top: .5rem;
+      label {
+        width: 100%;
+      }
+    }
+    input[type=file]::file-selector-button {
+      cursor: pointer;
+      padding: 0.2rem;
+      box-shadow: none;
+      border: none;
+    }
+    .errorMessage {
+      color: red;
+      margin-top: .5rem;
+    }
+    button {
+      margin-top: .5rem;
+    }
+  }
+}

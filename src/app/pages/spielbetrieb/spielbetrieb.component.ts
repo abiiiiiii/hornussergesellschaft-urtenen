@@ -7,7 +7,7 @@ import { TeamService } from "../../shared/services/team.service";
 import { GameService } from "../../shared/services/game.service";
 import { AuthService } from "../../core/services/auth.service";
 import { MatDialog } from "@angular/material/dialog";
-import { AddResultComponent } from "../../shared/components/add-result/add-result.component";
+import { AddResultComponent } from "./components/add-result/add-result.component";
 import {docChanges} from "@angular/fire/firestore";
 
 @Component({

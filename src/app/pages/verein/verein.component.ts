@@ -1,8 +1,10 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AuthService } from "../../core/services/auth.service";
 import { MatDialog } from "@angular/material/dialog";
-import { AddNewsComponent } from "../../shared/components/add-news/add-news.component";
+import { AddNewsComponent } from "../home/components/add-news/add-news.component";
 import { Router } from '@angular/router';
+import {AddClubEventComponent} from "./components/add-club-event/add-club-event.component";
+import {EventService} from "../../shared/services/event.service";
 
 @Component({
   selector: 'app-verein',
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class VereinComponent implements AfterViewInit {
 
-  constructor(public authService: AuthService, private dialog: MatDialog, private router: Router) { }
+  constructor(public authService: AuthService, private dialog: MatDialog, private router: Router, private eventService: EventService) { }
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -19,11 +21,11 @@ export class VereinComponent implements AfterViewInit {
       if (fragment) {
         document.getElementById(fragment).scrollIntoView();
       }
-    }, 100)
+    }, 200)
   }
 
   addEvent() {
-    this.dialog.open(AddNewsComponent, { data: { showEventCheckbox: false, isEvent: true } })
+    this.dialog.open(AddClubEventComponent, { data: { showEventCheckbox: false, isEvent: true } });
   }
 
   goTo(id: string) {
