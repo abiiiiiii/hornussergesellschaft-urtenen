@@ -12,7 +12,7 @@ import {GameService} from "../../../../shared/services/game.service";
 })
 export class TeamComponent implements OnInit {
 
-  @Input() team?: Team ;
+  @Input() team?: Team;
 
   championship: Game[] = [];
   festivals: Game[] = [];
@@ -21,7 +21,8 @@ export class TeamComponent implements OnInit {
   testGame: Game[] = [];
   imageUrl = "";
 
-  constructor(private teamService: TeamService, private gameService: GameService) { }
+  constructor(private teamService: TeamService, private gameService: GameService) {
+  }
 
   ngOnInit(): void {
     if (this.team) {
@@ -41,6 +42,7 @@ export class TeamComponent implements OnInit {
               this.festivals.push(game);
             }
           }
+          this.sortResults();
         });
       });
       this.teamService.getTeamImage(this.team.image).subscribe(res => {
@@ -49,4 +51,15 @@ export class TeamComponent implements OnInit {
     }
   }
 
+  sortResults() {
+    this.championship.sort(TeamComponent.sort)
+    this.groupChampionship.sort(TeamComponent.sort)
+    this.festivals.sort(TeamComponent.sort)
+    this.smallEvent.sort(TeamComponent.sort)
+    this.testGame.sort(TeamComponent.sort)
+  }
+
+  private static sort(a: Game, b: Game) {
+    return new Date(b.createdAt.seconds).getTime() - new Date(a.createdAt.seconds).getTime();
+  }
 }
