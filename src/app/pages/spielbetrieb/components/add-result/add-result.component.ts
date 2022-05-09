@@ -120,8 +120,8 @@ export class AddResultComponent implements OnInit {
       this.gameService.createGame(game).subscribe(ref => {
         this.updateTeam(ref.id)
         let homeList$ = this.fileUploadService.uploadFile('lists/', this.homeList);
-        let awayList$;
-        let reportFile$;
+        let awayList$ = of(null);
+        let reportFile$ = of(null);
         if (this.awayList) {
           awayList$ = this.fileUploadService.uploadFile('lists/', this.awayList);
         }
@@ -167,7 +167,7 @@ export class AddResultComponent implements OnInit {
   handleReportInput(event: any) {
     if (event.target.files.length > 0) {
       this.reportFile = event.target.files[0];
-      this.resultForm?.get('reportFile')?.setValue(this.awayList?.name);
+      this.resultForm?.get('reportFile')?.setValue(this.reportFile?.name);
     } else {
       this.reportFile = undefined;
       this.resultForm?.get('reportFile')?.setValue('');
