@@ -7,7 +7,7 @@ import {Game} from "../../../../shared/models/game.model";
 import {GameService} from "../../../../shared/services/game.service";
 import {TeamService} from "../../../../shared/services/team.service";
 import {FileUploadService} from "../../../../shared/services/file-upload.service";
-import {combineLatest, EMPTY, of} from "rxjs";
+import {combineLatest, of} from "rxjs";
 
 class SpielModus {
   mode: GameMode = GameMode.CHAMPIONSHIP;
