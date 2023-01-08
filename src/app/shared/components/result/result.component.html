@@ -2,12 +2,12 @@
   <div class="title">
     <ng-container [ngSwitch]="game.mode">
       <h4 *ngSwitchCase="'FESTIVAL'">
-        {{game.createdAt | customDate}} | {{game.festivalName}},
-        {{game.homeResult.name}} {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
+        {{game.homeResult.name}} | {{game.createdAt | customDate}} | {{game.festivalName}},
+        {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
       </h4>
       <h4 *ngSwitchCase="'SMALL_EVENT'">
-        {{game.createdAt | customDate}} | {{game.festivalName}},
-        {{game.homeResult.name}} {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
+        {{game.homeResult.name}} | {{game.createdAt | customDate}} | {{game.festivalName}},
+        {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
       </h4>
       <h4 *ngSwitchCase="'GROUP_CHAMPIONSHIP'">
         {{game.createdAt | customDate}} | Gruppenmeisterschaft {{game.homeResult.name}} -
