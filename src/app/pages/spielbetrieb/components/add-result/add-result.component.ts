@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {Team} from "../../../../shared/models/team.model";
 import {GameMode} from "../../../../shared/enums/game-mode.enum";
 import {Game} from "../../../../shared/models/game.model";
@@ -52,16 +52,16 @@ export class AddResultComponent implements OnInit {
   homeList: File;
   awayList?: File;
   reportFile?: File;
-  homeResult: FormGroup;
-  awayResult: FormGroup;
-  resultForm: FormGroup
+  homeResult: UntypedFormGroup;
+  awayResult: UntypedFormGroup;
+  resultForm: UntypedFormGroup
   isCreating = false;
   showValidationErrorMessage = false;
   showCreationErrorMessage = false;
 
   constructor(public dialogRef: MatDialogRef<AddResultComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
-              private formBuilder: FormBuilder,
+              private formBuilder: UntypedFormBuilder,
               private gameService: GameService,
               private teamService: TeamService,
               private fileUploadService: FileUploadService) {

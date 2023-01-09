@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, DocumentReference, QuerySnapshot} from "@angular/fire/firestore";
-import {AngularFireStorage} from "@angular/fire/storage";
 import {Observable} from "rxjs";
 import {Sponsor} from "../models/sponsor.model";
 import {SponsorType} from "../enums/sponsor-type.enum";
 import {map} from "rxjs/operators";
 import {News} from "../models/news.model";
+import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 @Injectable({
   providedIn: 'root'

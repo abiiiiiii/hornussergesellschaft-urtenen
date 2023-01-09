@@ -3,7 +3,7 @@ import { AuthService } from "../../core/services/auth.service";
 import { NewsService } from "../../shared/services/news.service";
 import { News } from "../../shared/models/news.model";
 import { Router } from "@angular/router";
-import { MatDialog } from "@angular/material/dialog";
+import { MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
 import { AddNewsComponent } from "./components/add-news/add-news.component";
 
 @Component({

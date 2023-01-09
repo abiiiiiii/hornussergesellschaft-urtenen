@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../../shared/models/user.model";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AngularFireStorage } from "@angular/fire/storage";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { News } from "../../../shared/models/news.model";
 import { NewsService } from "../../../shared/services/news.service";
 
 @Component({
@@ -17,12 +13,12 @@ export class LoginComponent implements OnInit {
 
   loginError = false;
   isLoggingIn = false;
-  loginForm: FormGroup = this.formBuilder.group({
+  loginForm: UntypedFormGroup = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required]
   });
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private newsService: NewsService) {
+  constructor(private authService: AuthService, private formBuilder: UntypedFormBuilder, private router: Router, private newsService: NewsService) {
     this.loginForm.valueChanges.subscribe(() => this.loginError = false)
   }
 

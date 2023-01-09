@@ -3,11 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AngularFireModule } from "@angular/fire";
 import { environment } from "../environments/environment";
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFireStorageModule } from "@angular/fire/storage";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { LoginComponent } from './core/components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NavigationComponent } from './core/components/navigation/navigation.component';
@@ -31,30 +27,35 @@ import { TeamComponent } from './pages/spielbetrieb/components/team/team.compone
 import { TeamListComponent } from './pages/spielbetrieb/components/team-list/team-list.component';
 import { ResultComponent } from './shared/components/result/result.component';
 import { SponsorComponent } from './shared/components/sponsor/sponsor.component';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatSliderModule } from "@angular/material/slider";
-import { MatButtonModule } from "@angular/material/button";
+import { MatLegacyFormFieldModule as MatFormFieldModule } from "@angular/material/legacy-form-field";
+import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
+import { MatLegacySliderModule as MatSliderModule } from "@angular/material/legacy-slider";
+import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
 import { GameListComponent } from './pages/spielbetrieb/components/game-list/game-list.component';
 import { CustomDatePipe } from './shared/pipes/custom-date.pipe';
 import { DatePipe } from "@angular/common";
 import { MainSponsorsComponent } from './pages/home/components/gold-sponsors/main-sponsors.component';
 import { LatestGamesComponent } from './pages/home/components/latest-games/latest-games.component';
 import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
-import { MatDialogModule } from "@angular/material/dialog";
+import { MatLegacyDialogModule as MatDialogModule } from "@angular/material/legacy-dialog";
 import { AddNewsComponent } from './pages/home/components/add-news/add-news.component';
-import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatLegacyCheckboxModule as MatCheckboxModule } from "@angular/material/legacy-checkbox";
 import { AddResultComponent } from './pages/spielbetrieb/components/add-result/add-result.component';
-import { MatSelectModule } from "@angular/material/select";
-import { MatNativeDateModule, MatOptionModule } from "@angular/material/core";
+import { MatLegacySelectModule as MatSelectModule } from "@angular/material/legacy-select";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatLegacyOptionModule as MatOptionModule } from "@angular/material/legacy-core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
 import { BoardMemberComponent } from './pages/verein/components/board-member/board-member.component';
 import { AddClubEventComponent } from './pages/verein/components/add-club-event/add-club-event.component';
 import {EventComponent} from "./pages/verein/components/event/event.component";
 import { EditNewsComponent } from './pages/home/components/edit-news/edit-news.component';
 import {EditClubEventComponent} from "./pages/verein/components/edit-club-event/edit-club-event.component";
 import {EditResultComponent} from "./pages/spielbetrieb/components/edit-result/edit-result.component";
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 
 @NgModule({
   declarations: [

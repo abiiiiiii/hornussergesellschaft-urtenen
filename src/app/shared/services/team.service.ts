@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, DocumentReference, DocumentSnapshot, QuerySnapshot} from "@angular/fire/firestore";
-import {AngularFireStorage} from "@angular/fire/storage";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Team} from "../models/team.model";
-import {fromPromise} from "rxjs/internal-compatibility";
 import {map} from "rxjs/operators";
 import {News} from "../models/news.model";
+import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Injectable({
   providedIn: 'root'

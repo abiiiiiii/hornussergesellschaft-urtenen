@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AuthService } from "../../core/services/auth.service";
-import { MatDialog } from "@angular/material/dialog";
+import { MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
 import { AddNewsComponent } from "../home/components/add-news/add-news.component";
 import { Router } from '@angular/router';
 import {AddClubEventComponent} from "./components/add-club-event/add-club-event.component";

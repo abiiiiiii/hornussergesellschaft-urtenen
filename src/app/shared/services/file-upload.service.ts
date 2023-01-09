@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/storage";
 import {Observable, Subject} from "rxjs";
-import {fromPromise} from "rxjs/internal-compatibility";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Injectable({
   providedIn: 'root'

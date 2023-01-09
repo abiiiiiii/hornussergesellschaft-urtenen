@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDialogRef} from "@angular/material/dialog";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
 import {FileUploadService} from "../../../../shared/services/file-upload.service";
 import {EventService} from "../../../../shared/services/event.service";
 import {combineLatest, of} from "rxjs";
@@ -19,7 +19,7 @@ export class AddClubEventComponent {
   showCreationErrorMessage = false;
   isCreating = false;
 
-  eventForm: FormGroup = this.formBuilder.group({
+  eventForm: UntypedFormGroup = this.formBuilder.group({
     title: ['', Validators.required],
     text: ['', Validators.required],
     date: [new Date(), Validators.required],
@@ -28,7 +28,7 @@ export class AddClubEventComponent {
   });
 
   constructor(public dialogRef: MatDialogRef<AddClubEventComponent>,
-              private formBuilder: FormBuilder,
+              private formBuilder: UntypedFormBuilder,
               private eventService: EventService,
               private fileUploadService: FileUploadService) {
     this.eventForm.valueChanges.subscribe(() => {

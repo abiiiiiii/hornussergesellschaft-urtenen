@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, DocumentReference} from "@angular/fire/firestore";
-import {AngularFireStorage} from "@angular/fire/storage";
 import {BoardMember} from "../models/board-member.model";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
 import {ClubEvent} from "../../../../shared/models/event.model";
 import {EventService} from "../../../../shared/services/event.service";
 import {combineLatest, of} from "rxjs";
@@ -17,10 +17,10 @@ export class EditClubEventComponent implements OnInit {
   flyerFile?: File;
   showValidationErrorMessage = false;
   showUpdateErrorMessage = false;
-  eventForm: FormGroup;
+  eventForm: UntypedFormGroup;
   isUpdating = false;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               public dialogRef: MatDialogRef<EditClubEventComponent>,
               @Inject(MAT_DIALOG_DATA) private data: ClubEvent,
               private eventService: EventService,

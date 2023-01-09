@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {ClubEvent} from "../../../../shared/models/event.model";
 import {EventService} from "../../../../shared/services/event.service";
 import {AuthService} from "../../../../core/services/auth.service";
-import {MatDialog} from "@angular/material/dialog";
+import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
 import {EditClubEventComponent} from "../edit-club-event/edit-club-event.component";
 
 @Component({

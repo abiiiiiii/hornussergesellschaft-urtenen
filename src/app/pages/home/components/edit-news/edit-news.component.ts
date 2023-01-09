@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
 import {News} from "../../../../shared/models/news.model";
 import {NewsService} from "../../../../shared/services/news.service";
 import {combineLatest, Observable, of} from "rxjs";
@@ -17,10 +17,10 @@ export class EditNewsComponent implements OnInit {
   flyerFile?: File;
   showValidationErrorMessage = false;
   showUpdateErrorMessage = false;
-  newsForm: FormGroup;
+  newsForm: UntypedFormGroup;
   isUpdating = false;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               public dialogRef: MatDialogRef<EditNewsComponent>,
               @Inject(MAT_DIALOG_DATA) private data: News,
               private newsService: NewsService,

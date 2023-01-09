@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { NewsService } from "../../../../shared/services/news.service";
 import { News } from "../../../../shared/models/news.model";
 import { FileUploadService } from "../../../../shared/services/file-upload.service";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MatLegacyDialogRef as MatDialogRef } from "@angular/material/legacy-dialog";
 import { combineLatest, of } from "rxjs";
 
 @Component({
@@ -19,7 +19,7 @@ export class AddNewsComponent {
   showCreationErrorMessage = false;
   isCreating = false;
 
-  newsForm: FormGroup = this.formBuilder.group({
+  newsForm: UntypedFormGroup = this.formBuilder.group({
     title: ['', Validators.required],
     text: ['', Validators.required],
     image: ['', Validators.required],
@@ -27,7 +27,7 @@ export class AddNewsComponent {
   });
 
   constructor(public dialogRef: MatDialogRef<AddNewsComponent>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private newsService: NewsService,
     private fileUploadService: FileUploadService) {
     this.newsForm.valueChanges.subscribe(() => {

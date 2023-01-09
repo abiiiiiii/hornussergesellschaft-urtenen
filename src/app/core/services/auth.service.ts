@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {AngularFireAuth} from "@angular/fire/auth";
-import {AngularFirestore} from "@angular/fire/firestore";
 import {EMPTY, Observable} from "rxjs";
 import {User} from "../../shared/models/user.model";
-import {fromPromise} from "rxjs/internal-compatibility";
 import {map, switchMap} from "rxjs/operators";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Injectable({
   providedIn: 'root'
