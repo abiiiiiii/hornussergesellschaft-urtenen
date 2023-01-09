@@ -32,6 +32,10 @@
       align-items: center;
       flex-direction: column;
 
+      .no-results {
+        margin-top: 2rem;
+      }
+
       @media screen and (min-width: $screen-s) {
         width: 75%;
       }

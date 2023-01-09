@@ -3,7 +3,9 @@
   <div class="team-info">
     <app-team-list [players]="team.players"></app-team-list>
     <div class="results" [ngSwitch]="team.games">
-
+      <p *ngIf="hasNoResults()" class="no-results">
+        In diesem Jahr wurden noch keine Resultate der {{team.name}} erfasst.
+      </p>
       <div class="championship game-mode" *ngIf="championship.length > 0">
         <h3>Meisterschaft</h3>
         <div *ngFor="let game of championship">

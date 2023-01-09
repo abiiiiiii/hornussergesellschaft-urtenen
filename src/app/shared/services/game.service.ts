@@ -3,7 +3,7 @@ import { AngularFirestore, DocumentReference, QuerySnapshot } from "@angular/fir
 import { AngularFireStorage } from "@angular/fire/storage";
 import {BehaviorSubject, from, Observable} from "rxjs";
 import { Game } from "../models/game.model";
-import { map } from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 import { fromPromise } from "rxjs/internal-compatibility";
 
 @Injectable({
@@ -37,7 +37,10 @@ export class GameService {
 
   getGame(documentId: string): Observable<Game | undefined> {
     let currentYearDate = new Date(new Date().getFullYear(), 0, 1);
-    return this.firestore.collection<Game>('game', ref => ref.where('createdAt', '>=', currentYearDate)).doc(documentId).get().pipe(
+    return this.firestore.collection<Game>('game').doc(documentId).get().pipe(
+      filter(res => {
+        return new Date(res.data().createdAt.seconds * 1000) > currentYearDate
+      }),
       map(res => res.data())
     );
   }

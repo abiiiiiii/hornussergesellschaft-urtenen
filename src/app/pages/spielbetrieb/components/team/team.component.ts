@@ -59,6 +59,14 @@ export class TeamComponent implements OnInit {
     this.testGame.sort(TeamComponent.sort)
   }
 
+  hasNoResults(): boolean {
+    return this.championship.length == 0 &&
+      this.groupChampionship.length == 0 &&
+      this.festivals.length == 0 &&
+      this.smallEvent.length == 0 &&
+      this.testGame.length == 0
+  }
+
   private static sort(a: Game, b: Game) {
     return new Date(b.createdAt.seconds).getTime() - new Date(a.createdAt.seconds).getTime();
   }
