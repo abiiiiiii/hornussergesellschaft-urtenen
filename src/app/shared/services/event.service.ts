@@ -13,15 +13,7 @@ export class EventService {
 
   load$ = new BehaviorSubject(undefined);
 
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
-
-  getEventImage(imageName: string): Observable<string> {
-    return this.storage.ref('images/news/' + imageName).getDownloadURL();
-  }
-
-  getEventFile(fileName: string): Observable<string> {
-    return this.storage.ref('pdf/news/' + fileName).getDownloadURL();
-  }
+  constructor(private firestore: AngularFirestore) { }
 
   getAllEvents(): Observable<ClubEvent[]> {
     return this.firestore.collection<ClubEvent>('event', ref => ref.orderBy('date', 'asc').where('active', '==', true).limit(5)).get().pipe(
@@ -29,6 +21,7 @@ export class EventService {
         let events: ClubEvent[] = [];
         res.forEach(doc => {
           let event = doc.data() as ClubEvent;
+          event.date = doc.data().date.toDate();
           event.id = doc.id;
           events.push(event);
         })

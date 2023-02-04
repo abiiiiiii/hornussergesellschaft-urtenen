@@ -11,6 +11,7 @@ import {SponsorService} from "../../shared/services/sponsor.service";
 export class SponsorenComponent implements AfterViewInit {
 
   donators: Sponsor[] = [];
+  privateDonators: Sponsor[] = [];
   sponsors: Sponsor[] = [];
   mainSponsors: Sponsor[] = [];
 
@@ -23,6 +24,9 @@ export class SponsorenComponent implements AfterViewInit {
     });
     this.sponsorService.getSponsorsByType(SponsorType.DONATOR).subscribe(sponsors => {
       this.donators = sponsors;
+    });
+    this.sponsorService.getSponsorsByType(SponsorType.PRIVATE_DONATOR).subscribe(sponsors => {
+      this.privateDonators = sponsors;
     });
   }
 

@@ -14,8 +14,10 @@
   </div>
   <div class="bronze" *ngIf="donators.length > 0">
     <h2>Donatoren</h2>
-    <div  class="sponsor" *ngFor="let sponsor of donators">
+    <div class="sponsor" *ngFor="let sponsor of donators">
+      <app-sponsor [sponsor]="sponsor"></app-sponsor>
+    </div>
+    <div class="sponsor" *ngFor="let sponsor of privateDonators">
       <app-sponsor [sponsor]="sponsor"></app-sponsor>
     </div>
   </div>
-</div>

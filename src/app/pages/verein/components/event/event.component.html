@@ -1,6 +1,6 @@
 <div class="event" *ngIf="event">
   <div class="title">
-    <h3>{{event.date | customDate}} | {{event.title}}</h3>
+    <h3>{{event.date | date:'dd.MM.yyyy'}} | {{event.title}}</h3>
     <mat-icon *ngIf="authService.currentUser?.role == 'admin'" (click)="edit()">edit</mat-icon>
     <mat-icon *ngIf="authService.currentUser?.role == 'admin'" (click)="delete()">delete</mat-icon>
   </div>

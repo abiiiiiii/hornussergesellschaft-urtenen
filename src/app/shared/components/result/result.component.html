@@ -2,23 +2,23 @@
   <div class="title">
     <ng-container [ngSwitch]="game.mode">
       <h4 *ngSwitchCase="'FESTIVAL'">
-        {{game.homeResult.name}} | {{game.createdAt | customDate}} | {{game.festivalName}},
+        {{game.homeResult.name}} | {{game.createdAt | date:'dd.MM.yyyy'}} | {{game.festivalName}},
         {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
       </h4>
       <h4 *ngSwitchCase="'SMALL_EVENT'">
-        {{game.homeResult.name}} | {{game.createdAt | customDate}} | {{game.festivalName}},
+        {{game.homeResult.name}} | {{game.createdAt | date:'dd.MM.yyyy'}} | {{game.festivalName}},
         {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
       </h4>
       <h4 *ngSwitchCase="'GROUP_CHAMPIONSHIP'">
-        {{game.createdAt | customDate}} | Gruppenmeisterschaft {{game.homeResult.name}} -
+        {{game.createdAt | date:'dd.MM.yyyy'}} | Gruppenmeisterschaft {{game.homeResult.name}} -
         {{game.awayResult?.name}},  {{game.homeResult.numbers}}/{{game.homeResult.points}}  -  {{game.awayResult?.numbers}}/{{game.awayResult?.points}}
       </h4>
       <h4 *ngSwitchCase="'CHAMPIONSHIP'">
-        {{game.createdAt | customDate}} | Meisterschaft {{game.homeResult.name}} -
+        {{game.createdAt | date:'dd.MM.yyyy'}} | Meisterschaft {{game.homeResult.name}} -
         {{game.awayResult?.name}},  {{game.homeResult.numbers}}/{{game.homeResult.points}}  -  {{game.awayResult?.numbers}}/{{game.awayResult?.points}}
       </h4>
       <h4 *ngSwitchCase="'TEST_GAME'">
-        {{game.createdAt | customDate}} | Wettspiel {{game.homeResult.name}} -
+        {{game.createdAt | date:'dd.MM.yyyy'}} | Wettspiel {{game.homeResult.name}} -
         {{game.awayResult?.name}},  {{game.homeResult.numbers}}/{{game.homeResult.points}}  -  {{game.awayResult?.numbers}}/{{game.awayResult?.points}}
       </h4>
     </ng-container>

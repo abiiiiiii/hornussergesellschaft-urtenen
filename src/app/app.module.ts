@@ -32,7 +32,6 @@ import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy
 import { MatLegacySliderModule as MatSliderModule } from "@angular/material/legacy-slider";
 import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
 import { GameListComponent } from './pages/spielbetrieb/components/game-list/game-list.component';
-import { CustomDatePipe } from './shared/pipes/custom-date.pipe';
 import { DatePipe } from "@angular/common";
 import { MainSponsorsComponent } from './pages/home/components/gold-sponsors/main-sponsors.component';
 import { LatestGamesComponent } from './pages/home/components/latest-games/latest-games.component';
@@ -82,7 +81,6 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
     ResultComponent,
     SponsorComponent,
     GameListComponent,
-    CustomDatePipe,
     MainSponsorsComponent,
     LatestGamesComponent,
     AddNewsComponent,
