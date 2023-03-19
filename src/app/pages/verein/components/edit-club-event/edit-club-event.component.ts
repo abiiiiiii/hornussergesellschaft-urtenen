@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
 import {ClubEvent} from "../../../../shared/models/event.model";
 import {EventService} from "../../../../shared/services/event.service";
 import {combineLatest, of} from "rxjs";
 import {FileUploadService} from "../../../../shared/services/file-upload.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-club-event',

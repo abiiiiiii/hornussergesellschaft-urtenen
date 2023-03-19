@@ -1,10 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AuthService } from "../../core/services/auth.service";
-import { MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
-import { AddNewsComponent } from "../home/components/add-news/add-news.component";
 import { Router } from '@angular/router';
 import {AddClubEventComponent} from "./components/add-club-event/add-club-event.component";
-import {EventService} from "../../shared/services/event.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-verein',
@@ -13,7 +11,7 @@ import {EventService} from "../../shared/services/event.service";
 })
 export class VereinComponent implements AfterViewInit {
 
-  constructor(public authService: AuthService, private dialog: MatDialog, private router: Router, private eventService: EventService) { }
+  constructor(public authService: AuthService, private dialog: MatDialog, private router: Router) { }
 
   ngAfterViewInit() {
     setTimeout(() => {

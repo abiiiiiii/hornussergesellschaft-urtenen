@@ -11,7 +11,7 @@ $my-theme: mat.define-light-theme((
   )
 ));
 
-@include mat.all-legacy-component-themes($my-theme);
+@include mat.all-component-themes($my-theme);
 
 @import "src/assets/styles/vars";
 /* You can add global styles to this file, and also import other style files */

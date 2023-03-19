@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from "../../shared/models/team.model";
 import { TeamService } from "../../shared/services/team.service";
 import { AuthService } from "../../core/services/auth.service";
-import { MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
 import { AddResultComponent } from "./components/add-result/add-result.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-spielbetrieb',

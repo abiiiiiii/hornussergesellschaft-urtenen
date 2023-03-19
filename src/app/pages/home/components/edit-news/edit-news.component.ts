@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
 import {News} from "../../../../shared/models/news.model";
 import {NewsService} from "../../../../shared/services/news.service";
-import {combineLatest, Observable, of} from "rxjs";
+import {combineLatest, of} from "rxjs";
 import {FileUploadService} from "../../../../shared/services/file-upload.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-news',

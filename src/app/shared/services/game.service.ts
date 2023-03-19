@@ -42,7 +42,11 @@ export class GameService {
   getGame(documentId: string): Observable<Game | undefined> {
     return this.firestore.collection<Game>('game').doc(documentId).get().pipe(
       filter(res => {
-        return res.data().createdAt.toDate() > this.CURRENT_YEAR;
+        var data = res.data();
+        if (data) {
+          return data.createdAt.toDate() > this.CURRENT_YEAR;
+        }
+        return false;
       }),
       map(res => {
         return this.mapToGame(res);

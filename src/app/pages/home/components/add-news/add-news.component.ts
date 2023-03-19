@@ -3,8 +3,8 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms
 import { NewsService } from "../../../../shared/services/news.service";
 import { News } from "../../../../shared/models/news.model";
 import { FileUploadService } from "../../../../shared/services/file-upload.service";
-import { MatLegacyDialogRef as MatDialogRef } from "@angular/material/legacy-dialog";
 import { combineLatest, of } from "rxjs";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-news',

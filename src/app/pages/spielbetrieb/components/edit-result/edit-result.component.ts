@@ -1,5 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {Team} from "../../../../shared/models/team.model";
 import {GameMode} from "../../../../shared/enums/game-mode.enum";
@@ -8,6 +7,7 @@ import {GameService} from "../../../../shared/services/game.service";
 import {TeamService} from "../../../../shared/services/team.service";
 import {FileUploadService} from "../../../../shared/services/file-upload.service";
 import {combineLatest, of} from "rxjs";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-result',

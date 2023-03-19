@@ -3,9 +3,9 @@ import {Game} from "../../models/game.model";
 import {Observable} from "rxjs";
 import {GameService} from "../../services/game.service";
 import {AuthService} from "../../../core/services/auth.service";
-import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
 import {EditResultComponent} from "../../../pages/spielbetrieb/components/edit-result/edit-result.component";
 import {TeamService} from "../../services/team.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-result',
