@@ -50,6 +50,9 @@ import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDialogModule} from "@angular/material/dialog";
+import { MemberComponent } from './pages/member/member.component';
+import { AddDocumentComponent } from './pages/member/add-document/add-document.component';
+import { EditDocumentComponent } from './pages/member/edit-document/edit-document.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +88,10 @@ import {MatDialogModule} from "@angular/material/dialog";
     EventComponent,
     EditNewsComponent,
     EditClubEventComponent,
-    EditResultComponent
+    EditResultComponent,
+    MemberComponent,
+    AddDocumentComponent,
+    EditDocumentComponent
   ],
   imports: [
     BrowserModule,

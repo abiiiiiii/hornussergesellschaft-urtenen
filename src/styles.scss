@@ -97,4 +97,7 @@ a {
   align-items: center;
   color: $light-green;
   margin-bottom: .5rem;
+  &:hover {
+    color: $dark-green;
+  }
 }

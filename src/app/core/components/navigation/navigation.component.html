@@ -17,6 +17,9 @@
       <li>
         <a routerLinkActive="active" routerLink="sponsoren" (click)="navigationService.handleHamburgerMenu()" >Sponsoren</a>
       </li>
+      <li *ngIf="authService.currentUser != null">
+        <a routerLinkActive="active" routerLink="member" (click)="navigationService.handleHamburgerMenu()" >Mitgliederbereich</a>
+      </li>
     </ul>
   </nav>
   <div class="program">
@@ -26,9 +29,9 @@
     <a href="assets/pdf/JahresplanSharks_2023.pdf" target="_blank">Download Jahresprogramm Moosseesharks</a>
   </div>
   <div class="login">
-    <a *ngIf="authService.currentUser?.role != 'admin';else loggedIn" routerLink="login" (click)="navigationService.handleHamburgerMenu()">Login</a>
+    <a *ngIf="authService.currentUser == null;else loggedIn" routerLink="login" (click)="navigationService.handleHamburgerMenu()">Login</a>
     <ng-template #loggedIn>
-      <p>Admin | <a (click)="logout()">Logout</a></p>
+      <p>{{authService.currentUser?.role}} | <a (click)="logout()">Logout</a></p>
     </ng-template>
   </div>
 </div>

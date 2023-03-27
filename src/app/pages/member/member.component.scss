@@ -1,0 +1,24 @@
+@import "src/assets/styles/vars";
+
+
+.member {
+  padding: 0 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    margin: 4rem 0;
+
+    h1 {
+      color: $dark-green;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .documents {
+    ul {
+      list-style: none;
+    }
+  }
+}
