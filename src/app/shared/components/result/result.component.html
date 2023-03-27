@@ -1,0 +1,36 @@
+<div *ngIf="game" class="result">
+  <div class="title">
+    <ng-container [ngSwitch]="game.mode">
+      <h4 *ngSwitchCase="'FESTIVAL'">
+        {{game.homeResult.name}} | {{game.createdAt | date:'dd.MM.yyyy'}} | {{game.festivalName}},
+        {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
+      </h4>
+      <h4 *ngSwitchCase="'SMALL_EVENT'">
+        {{game.homeResult.name}} | {{game.createdAt | date:'dd.MM.yyyy'}} | {{game.festivalName}},
+        {{game.rank}}. Rang {{game.homeResult.numbers}}/{{game.homeResult.points}}
+      </h4>
+      <h4 *ngSwitchCase="'GROUP_CHAMPIONSHIP'">
+        {{game.createdAt | date:'dd.MM.yyyy'}} | Gruppenmeisterschaft {{game.homeResult.name}} -
+        {{game.awayResult?.name}},  {{game.homeResult.numbers}}/{{game.homeResult.points}}  -  {{game.awayResult?.numbers}}/{{game.awayResult?.points}}
+      </h4>
+      <h4 *ngSwitchCase="'CHAMPIONSHIP'">
+        {{game.createdAt | date:'dd.MM.yyyy'}} | Meisterschaft {{game.homeResult.name}} -
+        {{game.awayResult?.name}},  {{game.homeResult.numbers}}/{{game.homeResult.points}}  -  {{game.awayResult?.numbers}}/{{game.awayResult?.points}}
+      </h4>
+      <h4 *ngSwitchCase="'TEST_GAME'">
+        {{game.createdAt | date:'dd.MM.yyyy'}} | Wettspiel {{game.homeResult.name}} -
+        {{game.awayResult?.name}},  {{game.homeResult.numbers}}/{{game.homeResult.points}}  -  {{game.awayResult?.numbers}}/{{game.awayResult?.points}}
+      </h4>
+    </ng-container>
+    <mat-icon *ngIf="authService.currentUser?.role == 'admin'" (click)="edit()">edit</mat-icon>
+    <mat-icon *ngIf="authService.currentUser?.role == 'admin'" (click)="delete()">delete</mat-icon>
+  </div>
+  <p *ngIf="showReport">{{game.report}}</p>
+  <p>
+    <a href="spielbetrieb/{{game.id}}">Spielliste</a>
+  </p>
+  <p>
+    <a *ngIf="report$" [href]="report$ | async" target="_blank">Spielbericht</a>
+  </p>
+  <div class="break-line"></div>
+</div>

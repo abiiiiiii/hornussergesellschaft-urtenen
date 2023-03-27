@@ -1,0 +1,4 @@
+<div class="sponsors" *ngIf="sponsors.length > 0">
+  <h3>Hauptsponsoren</h3>
+  <app-sponsor *ngFor="let sponsor of sponsors" [sponsor]="sponsor" [column]="true"></app-sponsor>
+</div>

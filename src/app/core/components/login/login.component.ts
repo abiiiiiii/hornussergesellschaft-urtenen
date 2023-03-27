@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../services/auth.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {User} from "../../../shared/models/user.model";
+import { AuthService } from "../../services/auth.service";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { NewsService } from "../../../shared/services/news.service";
 
 @Component({
   selector: 'app-login',
@@ -9,24 +10,38 @@ import {User} from "../../../shared/models/user.model";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup = this.formBuilder.group({
+
+  loginError = false;
+  isLoggingIn = false;
+  loginForm: UntypedFormGroup = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required]
   });
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private formBuilder: UntypedFormBuilder, private router: Router, private newsService: NewsService) {
+    this.loginForm.valueChanges.subscribe(() => this.loginError = false)
+  }
 
   ngOnInit(): void {
   }
 
   login() {
-    this.authService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value).then((res) => {
-      this.authService.currentUser = {
-        userId: res.user.uid
-      };
-    }).catch((err) => {
-      console.log('login failed', err);
-    })
+    this.isLoggingIn = true;
+    this.authService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value).subscribe((res) => {
+      this.authService.getUserRole(res.user.uid).subscribe(role => {
+        if (role.exists) {
+          this.authService.currentUser = {
+            userId: res.user.uid,
+            role: role.data().role
+          }
+        }
+      });
+      this.isLoggingIn = false;
+      this.router.navigate(['home']);
+    }, error => {
+      this.isLoggingIn = false;
+      this.loginError = true;
+    });
   }
 
 }

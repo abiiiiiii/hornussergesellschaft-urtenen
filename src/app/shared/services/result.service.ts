@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, DocumentReference} from "@angular/fire/firestore";
 import {Observable} from "rxjs";
 import {Result} from "../models/result.model";
+import {map} from "rxjs/operators";
+import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,18 @@ export class ResultService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  getAllResults(): Observable<Result[] | undefined> {
-    return this.firestore.collection<Result>('result').valueChanges();
+  getAllResults(): Observable<Result[]> {
+    return this.firestore.collection<Result>('result').get().pipe(
+      map(res => {
+        let results: Result[] = [];
+        res.forEach(doc => {
+          let result = doc.data() as Result;
+          result.id = doc.id;
+          results.push(result);
+        })
+        return results;
+      })
+    );
   }
 
   createResult(result: Result): Promise<DocumentReference<Result>> {

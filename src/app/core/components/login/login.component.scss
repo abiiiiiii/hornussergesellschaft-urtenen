@@ -1,0 +1,39 @@
+@import "src/assets/styles/vars";
+
+.login {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .spinner {
+    margin-bottom: 1rem;
+  }
+  h1 {
+    width: 25%;
+    margin: 4rem 0;
+  }
+  form {
+    width: 60%;
+    @media screen and (min-width: $screen-m) {
+      width: 25%;
+    }
+
+    .input {
+      width: 100%;
+    }
+
+    .error {
+      color: red;
+      margin: .5rem 0;
+    }
+
+    .login-button {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      .spinner {
+        height: 20px;
+      }
+    }
+  }
+}

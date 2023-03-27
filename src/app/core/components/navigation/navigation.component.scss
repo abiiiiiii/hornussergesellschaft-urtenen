@@ -1,16 +1,232 @@
-.hamburger {
-  position: absolute;
-  top: 60px;
-  left: 60px;
-  color: white;
-}
+@import "src/assets/styles/vars";
 
 .navigation-sidebar {
-  width: 15%;
+  width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
-  left: -15%;
-  padding: 10px;
+  left: -100vw;
   background-color: white;
+  transition: all .3s;
+  padding: 2rem;
+  border-right: 1px solid $dark-green;
+  overflow-y: auto;
+  @media screen and (min-width: $screen-l) {
+    left: 0;
+  }
+
+  @media screen and (min-width: $screen-s) {
+    width: 300px;
+  }
+
+  &.open {
+    left: 0;
+  }
+  img {
+    display: none;
+    @media screen and (min-width: $screen-m) {
+      width: 100%;
+      cursor: pointer;
+      display: block;
+    }
+  }
+  ul {
+    list-style: none;
+    li {
+      margin: 1rem 0;
+      a {
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: black;
+
+        &.active {
+          color: $green;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .program, .login, .program-moosseesharks {
+    a {
+      font-size: 1rem;
+      text-decoration: none;
+      color: black;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .login {
+    margin: 0;
+    a {
+      cursor: pointer;
+    }
+  }
+
+  .program {
+    margin-top: 2rem;
+  }
+
+  .program-moosseesharks {
+    margin: .25rem 0;
+  }
+}
+
+.hamburger {
+  position: fixed;
+  height: 20px;
+  width: 40px;
+  top: 30px;
+  left: 2rem;
+  cursor: pointer;
+  z-index: 1;
+  transition: all .3s;
+  @media  screen and (min-width: $screen-m){
+    top: 40px;
+  }
+  @media  screen and (min-width: $screen-l){
+    display: none;
+  }
+
+  .ham-wide {
+    width: 40px;
+    height: 3px;
+    background-color: black;
+    border-radius: 4px;
+    transition: all .3s;
+    transform-origin: center;
+    position: absolute;
+  }
+
+  .ham-narrow {
+    width: 20px;
+    height: 3px;
+    background-color: black;
+    border-radius: 4px;
+    transition: all .3s;
+    transform-origin: center;
+    position: absolute;
+  }
+
+  .ham-top {
+    top: 0px;
+  }
+  .ham-mid {
+    top: 8px;
+  }
+  .ham-bot {
+    top: 16px;
+  }
+
+  &.open {
+    left: calc(100vw - 72px);
+    @media  screen and (min-width: $screen-s){
+      left: 332px;
+    }
+
+    .ham-top {
+      animation: ham-top .5s forwards;
+
+    }
+    .ham-mid {
+      animation: ham-mid .5s forwards;
+    }
+    .ham-bot {
+      animation: ham-bot .5s forwards;
+    }
+  }
+
+  &.close {
+    .ham-top {
+      animation: ham-top-close .5s;
+    }
+    .ham-mid {
+      animation: ham-mid-close .5s;
+    }
+    .ham-bot {
+      animation: ham-bot-close .5s;
+    }
+  }
+}
+
+@keyframes ham-top {
+  0% {
+    top: 0px;
+  }
+  50% {
+    top: 8px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 8px;
+    transform: rotate(45deg);
+  }
+}
+@keyframes ham-bot {
+  0% {
+    top: 16px;
+  }
+  50% {
+    top: 8px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 8px;
+    transform: rotate(-45deg);
+  }
+}
+@keyframes ham-mid {
+  50% {
+    width: 20px;
+  }
+  51% {
+    width: 0px;
+  }
+  100% {
+    width: 0px;
+  }
+}
+
+@keyframes ham-top-close {
+  0% {
+    top: 8px;
+    transform: rotate(45deg);
+  }
+  50% {
+    top: 8px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes ham-bot-close {
+  0% {
+    top: 8px;
+    transform: rotate(-45deg);
+  }
+  50% {
+    top: 8px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 16px;
+  }
+}
+
+@keyframes ham-mid-close {
+  0% {
+    width: 0px;
+  }
+  50% {
+    width: 0px;
+  }
+  51% {
+    width: 20px;
+  }
 }

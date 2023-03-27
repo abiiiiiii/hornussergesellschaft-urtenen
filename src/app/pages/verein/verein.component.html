@@ -1,0 +1,77 @@
+<div class="verein">
+  <div class="title">
+    <h1>Verein</h1>
+    <div class="sub-nav">
+        <div>
+          <a (click)="goTo('events')">Vereinsanlässe</a>
+        </div>
+        <div (click)="goTo('board')">
+          <a>Vorstand</a>
+        </div>
+        <div (click)="goTo('playmaker')">
+          <a>Spielabmacher</a>
+        </div>
+        <div (click)="goTo('history')">
+          <a>Vereinsgeschichte</a>
+        </div>
+        <div (click)="goTo('inn')">
+          <a>Wirtschaft</a>
+        </div>
+        <div (click)="goTo('approch')">
+          <a>Anfahrt</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="events">
+    <div *ngIf="authService.currentUser" class="add" (click)="addEvent()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
+      <p>Vereinanlass hinzufügen</p>
+    </div>
+    <h2 id="events">Vereinsanlässe</h2>
+    <app-events></app-events>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2 id="board">Vorstand</h2>
+    <app-board-of-management></app-board-of-management>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2 id="contact">Kontakt</h2>
+    <app-contact></app-contact>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2 id="playmaker">Spielabmacher</h2>
+    <app-playmaker></app-playmaker>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2 id="history">Vereinsgeschichte</h2>
+    <app-history></app-history>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2 id="inn">Wirtschaft</h2>
+    <app-inn></app-inn>
+    <div class="break-line"></div>
+  </div>
+
+  <div>
+    <h2 id="approch">Anfahrt</h2>
+    <app-approch></app-approch>
+    <div class="break-line"></div>
+  </div>
+
+  <!-- <div>
+    <h2>Archiv</h2>
+    <app-archive></app-archive>
+  </div>
+  -->
+</div>

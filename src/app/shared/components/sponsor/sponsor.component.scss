@@ -1,0 +1,50 @@
+@import "src/assets/styles/vars";
+
+.sponsor {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  &.column {
+    flex-direction: column;
+    align-items: flex-start;
+    div {
+      margin-top: 1rem;
+    }
+  }
+  .infos {
+    width: 100%;
+    a {
+      text-decoration: none;
+      color: $light-green;
+      &:hover {
+        color: $dark-green;
+      }
+    }
+  }
+  .image {
+    width: calc(50% - .5rem);
+    display: flex;
+    justify-content: center;
+    margin-right: 2rem;
+    img {
+      max-height: 200px;
+      max-width: 100%;
+    }
+  }
+  .private-donator {
+    width: 100%;
+    .infos {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      border: 1px solid #2b3028;
+      p {
+        margin: 0 auto;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

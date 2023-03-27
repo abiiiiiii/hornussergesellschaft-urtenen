@@ -1,0 +1,45 @@
+<div *ngIf="team" class="team">
+  <img [src]="imageUrl" alt="">
+  <div class="team-info">
+    <app-team-list [players]="team.players"></app-team-list>
+    <div class="results" [ngSwitch]="team.games">
+      <p *ngIf="hasNoResults()" class="no-results">
+        In diesem Jahr wurden noch keine Resultate der {{team.name}} erfasst.
+      </p>
+      <div class="championship game-mode" *ngIf="championship.length > 0">
+        <h3>Meisterschaft</h3>
+        <div *ngFor="let game of championship">
+          <app-result [game]="game"></app-result>
+        </div>
+      </div>
+
+      <div class="festivals game-mode" *ngIf="festivals.length > 0">
+        <h3>Feste</h3>
+        <div *ngFor="let game of festivals">
+          <app-result [game]="game"></app-result>
+        </div>
+      </div>
+
+      <div class="small-events game-mode" *ngIf="smallEvent.length > 0">
+        <h3>Kleinanlässe</h3>
+        <div *ngFor="let game of smallEvent">
+          <app-result [game]="game"></app-result>
+        </div>
+      </div>
+
+      <div class="group-championship game-mode" *ngIf="groupChampionship.length > 0">
+        <h3>Gruppenmeisterschaft</h3>
+        <div *ngFor="let game of groupChampionship">
+          <app-result [game]="game"></app-result>
+        </div>
+      </div>
+
+      <div class="group-championship game-mode" *ngIf="testGame.length > 0">
+        <h3>Wettspiele</h3>
+        <div *ngFor="let game of testGame">
+          <app-result [game]="game"></app-result>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

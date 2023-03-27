@@ -1,0 +1,36 @@
+<div class="add-event">
+  <form [formGroup]="eventForm">
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Titel</mat-label>
+      <input matInput type="text" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Text</mat-label>
+      <textarea matInput formControlName="text"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="input datepicker" appearance="fill">
+      <mat-label>Datum</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="upload">
+      <label for="image-upload">Bild hochladen: </label>
+      <input id="image-upload" type="file" (change)="handleImageFileInput($event)" accept="image/jpeg,image/png,image/gif"/>
+    </div>
+
+    <div class="upload">
+      <label for="flyer-upload">Flyer hochladen: </label>
+      <input id="flyer-upload" type="file" (change)="handleFlyerFileInput($event)" accept="application/pdf"/>
+    </div>
+
+    <button (click)="add()" *ngIf="!isCreating">Vereinsanlass hinzufügen</button>
+    <mat-spinner class="spinner" *ngIf="isCreating"></mat-spinner>
+
+    <p class="errorMessage" *ngIf="showValidationErrorMessage">Titel, Text und Bild sind erforderlich!</p>
+    <p class="errorMessage" *ngIf="showCreationErrorMessage">Vereinsanlass konnte nicht hinzugefügt werden! Versuche es erneut.</p>
+  </form>
+</div>

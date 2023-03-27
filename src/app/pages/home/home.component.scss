@@ -1,0 +1,63 @@
+@import "src/assets/styles/vars";
+
+.home {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: $screen-l){
+    flex-direction: row;
+  }
+}
+
+.content {
+  width: 100%;
+  padding: 0 5%;
+  @media screen and (min-width: $screen-l){
+    width: 70%;
+    padding: 0 10%;
+  }
+
+  .title {
+    margin: 4rem 0;
+    h1 {
+      margin-bottom: 2rem;
+      color: $dark-green;
+    }
+  }
+  .news-container {
+    margin-top: 50px;
+    @media  screen and (min-width: $screen-m){
+      margin-top: 100px;
+    }
+  }
+  .break-line {
+    @media screen and (min-width: $screen-l) {
+      display: none;
+    }
+  }
+}
+
+.sidebar {
+  width: 100%;
+  padding: 0 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (min-width: $screen-l){
+    width: 30%;
+  }
+  .sponsor {
+    width: 75%;
+    padding-right: 5%;
+    @media screen and (min-width: $screen-l){
+      width: 100%;
+    }
+  }
+  .latest-games {
+    width: 75%;
+    padding-right: 5%;
+    @media screen and (min-width: $screen-l){
+      width: 100%;
+    }
+  }
+}

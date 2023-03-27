@@ -1,4 +1,100 @@
+@use "@angular/material" as mat;
+
+$my-primary: mat.define-palette(mat.$green-palette);
+$my-accent: mat.define-palette(mat.$grey-palette);
+$my-warn: mat.define-palette(mat.$red-palette);
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  )
+));
+
+@include mat.all-legacy-component-themes($my-theme);
+
+@import "src/assets/styles/vars";
 /* You can add global styles to this file, and also import other style files */
-body {
+@font-face {
+  font-family: Averta Regular;
+  src: url('assets/fonts/AvertaDemoPECuttedDemo-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: Averta ExtraBold;
+  src: url('assets/fonts/AvertaDemoPE-ExtraBold.otf') format('opentype');
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+  font-family: 'Averta Regular', 'arial', sans-serif;
+  font-size: 0.9rem;
+  @media screen and (min-width: $screen-l){
+    font-size: 1rem;
+  }
+
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  max-width: 100vw;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+h1 {
+  font-size: 2.5rem;
+  color: $dark-green;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.0rem;
+}
+
+button {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  background-color: $light-green;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: $green;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $light-green;
+  cursor: pointer;
+  &:hover {
+    color: $dark-green;
+  }
+}
+
+.break-line {
+  width: 100%;
+  height: 1px;
+  background-color: $dark-green;
+  margin-top: 2rem;
+}
+
+.add {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: $light-green;
+  margin-bottom: .5rem;
 }

@@ -1,7 +1,9 @@
-export interface Event {
-  id: string;
+export interface ClubEvent  {
+  id?: string;
   title: string;
-  text: string;
-  file: string;
+  description: string[];
+  flyer?: string;
   image: string;
+  active: boolean;
+  date: any;
 }

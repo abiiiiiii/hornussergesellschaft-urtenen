@@ -1,22 +1,34 @@
-<div class="hamburger">
-  here hamburger menu
-</div>
-
-<div class="navigation-sidebar">
+<div class="navigation-sidebar" [class.open]="navigationService.hamOpen">
+  <img routerLink="/home" src="assets/images/logo.jpg" alt="logo">
   <nav>
     <ul>
       <li>
-        <a routerLink="verein">Verein</a>
+        <a routerLinkActive="active" routerLink="home" (click)="navigationService.handleHamburgerMenu()">Home</a>
       </li>
       <li>
-        <a routerLink="spielbetrieb">Spielbetrieb</a>
+        <a routerLinkActive="active" routerLink="gesellschaft" (click)="navigationService.handleHamburgerMenu()">Verein</a>
       </li>
       <li>
-        <a routerLink="medien">Medien</a>
+        <a routerLinkActive="active" routerLink="spielbetrieb" (click)="navigationService.handleHamburgerMenu()">Spielbetrieb</a>
       </li>
       <li>
-        <a routerLink="sponsoren">Sponsoren</a>
+        <a routerLinkActive="active" routerLink="medien" (click)="navigationService.handleHamburgerMenu()">Medien</a>
+      </li>
+      <li>
+        <a routerLinkActive="active" routerLink="sponsoren" (click)="navigationService.handleHamburgerMenu()" >Sponsoren</a>
       </li>
     </ul>
   </nav>
+  <div class="program">
+    <a href="assets/pdf/2023_Jahresprogramm.pdf" target="_blank">Download Jahresprogramm</a>
+  </div>
+  <div class="program-moosseesharks">
+    <a href="assets/pdf/JahresplanSharks_2022.pdf" target="_blank">Download Jahresprogramm Moosseesharks</a>
+  </div>
+  <div class="login">
+    <a *ngIf="authService.currentUser?.role != 'admin';else loggedIn" routerLink="login" (click)="navigationService.handleHamburgerMenu()">Login</a>
+    <ng-template #loggedIn>
+      <p>Admin | <a (click)="logout()">Logout</a></p>
+    </ng-template>
+  </div>
 </div>

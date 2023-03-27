@@ -1,0 +1,7 @@
+<div>
+  <a (click)="back()">zurück</a>
+  <div class="lists" [class.single]="awayList$ == undefined">
+    <img *ngIf="homeList$" [src]="homeList$ | async" alt="">
+    <img *ngIf="awayList$" [src]="awayList$ | async" alt="">
+  </div>
+</div>

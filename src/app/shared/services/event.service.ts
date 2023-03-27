@@ -1,37 +1,44 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, DocumentReference} from "@angular/fire/firestore";
-import {AngularFireStorage} from "@angular/fire/storage";
-import {Observable} from "rxjs";
-import {Event} from "../models/event.model";
+import {BehaviorSubject, Observable} from "rxjs";
+import {ClubEvent} from "../models/event.model";
+import {map} from "rxjs/operators";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
+  load$ = new BehaviorSubject(undefined);
 
-  getEventImage(imageName: string): Observable<string> {
-    return this.storage.ref('event/images/' + imageName).getDownloadURL();
+  constructor(private firestore: AngularFirestore) { }
+
+  getAllEvents(): Observable<ClubEvent[]> {
+    return this.firestore.collection<ClubEvent>('event', ref => ref.orderBy('date', 'asc').where('active', '==', true).limit(5)).get().pipe(
+      map(res => {
+        let events: ClubEvent[] = [];
+        res.forEach(doc => {
+          let event = doc.data() as ClubEvent;
+          event.date = doc.data().date.toDate();
+          event.id = doc.id;
+          events.push(event);
+        })
+        return events;
+      })
+    );
   }
 
-  getEventFile(fileName: string): Observable<string> {
-    return this.storage.ref('event/files/' + fileName).getDownloadURL();
+  createEvent(event: ClubEvent): Observable<DocumentReference<ClubEvent>> {
+    return fromPromise(this.firestore.collection<ClubEvent>('event').add(event));
   }
 
-  getAllEvents(): Observable<Event[] | undefined> {
-    return this.firestore.collection<Event>('event').valueChanges();
+  updateEvent(event: ClubEvent): Observable<void> {
+    return fromPromise(this.firestore.collection('event').doc<ClubEvent>(event.id).set(event, { merge: true }));
   }
 
-  createEvent(event: Event): Promise<DocumentReference<Event>> {
-    return this.firestore.collection<Event>('event').add(event)
-  }
-
-  updateEvent(event: Event): Promise<void> {
-    return this.firestore.collection('event').doc<Event>(event.id).set(event, { merge: true});
-  }
-
-  deleteEvent(id: string): Promise<void> {
-    return this.firestore.collection('event').doc(id).delete();
+  deleteEvent(id: string): Observable<void> {
+    return fromPromise(this.firestore.collection('event').doc(id).delete());
   }
 }

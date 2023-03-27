@@ -1,0 +1,49 @@
+@import "src/assets/styles/vars";
+
+img {
+  width: 100%;
+}
+
+footer {
+  padding: 4rem 4rem;
+  width: 100%;
+  background-color: $dark-green;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .links {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    @media screen and (min-width: $screen-s){
+      flex-wrap: nowrap;
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+      width: calc(50% - .5rem);
+      margin-bottom: 2rem;
+      @media screen and (min-width: $screen-s){
+        width: calc(100% / 3);
+        margin-left: 2rem;
+        margin-bottom: 0;
+      }
+      h2 {
+        margin-bottom: .5rem;
+      }
+      ul {
+        li {
+          list-style: none;
+          margin-bottom: 0.5rem;
+          a {
+            text-decoration: none;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

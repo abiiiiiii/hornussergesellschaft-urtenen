@@ -1,0 +1,22 @@
+.member {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 auto;
+  img {
+    width: 30%;
+    align-self: center;
+  }
+  div {
+    margin-left: 1rem;
+    .roles {
+      margin-bottom: .5rem;
+      span {
+        &:last-child {
+          .separator {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

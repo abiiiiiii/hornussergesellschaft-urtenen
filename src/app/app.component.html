@@ -1,2 +1,13 @@
-<app-navigation></app-navigation>
-<app-header></app-header>
+<div class="container">
+  <app-navigation></app-navigation>
+  <div #content class="content">
+    <app-header></app-header>
+    <div #page>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+    </div>
+    <button (click)="scrollToTop()" [class.visible]="showScrollUpButton" class="scroll-up" aria-hidden="false"><mat-icon>expand_less</mat-icon></button>
+  </div>
+</div>

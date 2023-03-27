@@ -1,0 +1,39 @@
+@import "src/assets/styles/vars";
+
+.verein {
+  padding: 0 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 4rem 0;
+
+  h1 {
+    margin-bottom: 2rem;
+    color: $dark-green;
+  }
+
+  .sub-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    div {
+      width: calc(100%/2);
+      margin: .5rem 0;
+      @media screen and (min-width: $screen-xl) {
+        width: calc(100%/6);
+      }
+    }
+  }
+}
+
+div {
+  h2 {
+    width: 100%;
+    margin: 1rem 0;
+    color: $light-green
+  }
+}

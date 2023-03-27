@@ -1,0 +1,4 @@
+<div class="latest-games" *ngIf="games.length > 0">
+  <h3>Letzte Resultate</h3>
+  <app-result *ngFor="let game of games" [game]="game" [showReport]="false"></app-result>
+</div>
