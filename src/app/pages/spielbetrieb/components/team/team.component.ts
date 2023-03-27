@@ -41,10 +41,11 @@ export class TeamComponent implements OnInit {
             } else if (game.mode === GameMode.FESTIVAL) {
               this.festivals.push(game);
             }
+            this.sortResults();
           }
-          this.sortResults();
         });
       });
+
       this.teamService.getTeamImage(this.team.image).subscribe(res => {
         this.imageUrl = res;
       });
@@ -68,6 +69,6 @@ export class TeamComponent implements OnInit {
   }
 
   private static sort(a: Game, b: Game) {
-    return new Date(b.createdAt.seconds).getTime() - new Date(a.createdAt.seconds).getTime();
+    return b.createdAt - a.createdAt;
   }
 }
