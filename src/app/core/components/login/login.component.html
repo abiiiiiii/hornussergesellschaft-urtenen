@@ -2,11 +2,11 @@
   <h1>Login</h1>
   <mat-spinner class="spinner" *ngIf="isLoggingIn"></mat-spinner>
   <form *ngIf="!isLoggingIn" [formGroup]="loginForm">
-    <mat-form-field class="input" appearance="fill">
+    <mat-form-field class="input">
       <mat-label>Benutzername</mat-label>
       <input matInput type="text" formControlName="username">
     </mat-form-field>
-    <mat-form-field class="input" appearance="fill">
+    <mat-form-field class="input">
       <mat-label>Passwort</mat-label>
       <input matInput type="password" formControlName="password">
     </mat-form-field>

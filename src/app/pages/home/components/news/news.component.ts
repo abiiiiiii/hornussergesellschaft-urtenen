@@ -2,11 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {News} from "../../../../shared/models/news.model";
 import {NewsService} from "../../../../shared/services/news.service";
 import {Observable} from "rxjs";
-import {ClubEvent} from "../../../../shared/models/event.model";
-import {EventService} from "../../../../shared/services/event.service";
-import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
 import {EditNewsComponent} from "../edit-news/edit-news.component";
 import {AuthService} from "../../../../core/services/auth.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-news',

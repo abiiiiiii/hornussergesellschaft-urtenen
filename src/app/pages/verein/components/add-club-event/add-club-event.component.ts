@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
 import {FileUploadService} from "../../../../shared/services/file-upload.service";
 import {EventService} from "../../../../shared/services/event.service";
 import {combineLatest, of} from "rxjs";
 import {ClubEvent} from "../../../../shared/models/event.model";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-club-event',
