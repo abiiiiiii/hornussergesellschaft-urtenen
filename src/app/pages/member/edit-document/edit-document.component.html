@@ -1,1 +1,19 @@
-<p>edit-document works!</p>
+<div class="edit-document" xmlns="http://www.w3.org/1999/html">
+  <form [formGroup]="form">
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput formControlName="name"/>
+    </mat-form-field>
+
+    <div class="upload">
+      <label for="flyer-upload">Dokument hochladen: </label>
+      <input id="flyer-upload" type="file" (change)="uploadDocument($event)" accept="application/pdf"/>
+    </div>
+
+    <button (click)="update()" *ngIf="!isUpdating">Dokument updaten</button>
+    <mat-spinner class="spinner" *ngIf="isUpdating"></mat-spinner>
+
+    <p class="errorMessage" *ngIf="showValidationErrorMessage">Name und Dokument sind erforderlich!</p>
+    <p class="errorMessage" *ngIf="showCreationErrorMessage">Dokument konnte nicht hinzugefügt werden! Versuche es erneut.</p>
+  </form>
+</div>

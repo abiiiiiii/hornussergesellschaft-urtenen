@@ -17,7 +17,7 @@ export class InternalDocumentService {
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 
   getAllInternalDocuments(): Observable<InternalDocument[]> {
-    return this.firestore.collection<InternalDocument>('internal-document', ref => ref.where('active', '==', true)).get().pipe(
+    return this.firestore.collection<InternalDocument>('internal-document').get().pipe(
       map(res => {
         let internalDocuments: InternalDocument[] = [];
         res.forEach(doc => {
@@ -43,6 +43,6 @@ export class InternalDocumentService {
   }
 
   deleteInternalDocument(id: string): Observable<void> {
-    return fromPromise(this.firestore.collection('sponsor').doc(id).delete());
+    return fromPromise(this.firestore.collection('internal-document').doc(id).delete());
   }
 }

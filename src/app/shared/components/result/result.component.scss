@@ -12,6 +12,9 @@
     mat-icon {
       color: $green;
       cursor: pointer;
+      &:hover {
+        color: $dark-green;
+      }
     }
   }
   p {

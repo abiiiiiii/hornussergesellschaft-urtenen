@@ -40,8 +40,7 @@ export class AddDocumentComponent {
       this.isCreating = true;
       let document: InternalDocument = {
         name: this.form.get('name')?.value,
-        fileName: this.form.get('file').value,
-        active: true
+        fileName: this.form.get('file').value
       }
 
       this.internalDocumentService.createInternalDocument(document).subscribe({

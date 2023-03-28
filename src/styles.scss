@@ -92,7 +92,7 @@ a {
 
 .add {
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   color: $light-green;

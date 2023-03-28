@@ -13,6 +13,8 @@
     <ul>
       <li *ngFor="let document of internalDocuments">
         <a [href]="document.fileLink$ | async" target="_blank">{{document.name}}</a>
+        <mat-icon *ngIf="authService.currentUser?.role == 'admin'" (click)="editDocument(document)">edit</mat-icon>
+        <mat-icon *ngIf="authService.currentUser?.role == 'admin'" (click)="deleteDocument(document.id)">delete</mat-icon>
       </li>
     </ul>
   </div>

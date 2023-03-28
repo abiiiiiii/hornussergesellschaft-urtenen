@@ -5,6 +5,7 @@ import {InternalDocumentService} from "../../shared/services/internal-document.s
 import {InternalDocument} from "../../shared/models/internal-document.model";
 import {MatDialog} from "@angular/material/dialog";
 import {AddDocumentComponent} from "./add-document/add-document.component";
+import {EditDocumentComponent} from "./edit-document/edit-document.component";
 
 @Component({
   selector: 'app-member',
@@ -25,18 +26,35 @@ export class MemberComponent implements OnInit {
     if (this.authService.currentUser == null) {
       this.router.navigate(['']);
     } else {
-      this.internalDocumentService.getAllInternalDocuments().subscribe(documents => {
-        this.internalDocuments = documents.map(internalDocument => {
-          internalDocument.fileLink$ = this.internalDocumentService.getInternalDocumentFile(internalDocument.fileName);
-          return internalDocument;
-        });
-      })
+      this.loadDocuments();
     }
+  }
+
+  private loadDocuments() {
+    this.internalDocumentService.getAllInternalDocuments().subscribe(documents => {
+      console.log(documents);
+      this.internalDocuments = documents.map(internalDocument => {
+        internalDocument.fileLink$ = this.internalDocumentService.getInternalDocumentFile(internalDocument.fileName);
+        return internalDocument;
+      }).sort((a, b) => a.name.localeCompare(b.name));
+    })
   }
 
   addDocument() {
     this.dialog.open(AddDocumentComponent).afterClosed().subscribe(() => {
-      // RELOAD DOCUMENTS
-    })
+      this.loadDocuments();
+    });
+  }
+
+  editDocument(document: InternalDocument) {
+    this.dialog.open(EditDocumentComponent, {data: document}).afterClosed().subscribe(() => {
+      this.loadDocuments();
+    });
+  }
+
+  deleteDocument(id: string) {
+    this.internalDocumentService.deleteInternalDocument(id).subscribe(() => {
+      this.loadDocuments();
+    });
   }
 }
