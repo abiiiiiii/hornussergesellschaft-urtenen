@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from "../../shared/models/team.model";
 import { TeamService } from "../../shared/services/team.service";
 import { AuthService } from "../../core/services/auth.service";
-import { AddResultComponent } from "./components/add-result/add-result.component";
+import { AddResultComponent } from "../../shared/components/result/add-result/add-result.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
