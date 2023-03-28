@@ -1,0 +1,21 @@
+<div class="member">
+  <div class="title">
+    <h1>Mitgliederbereich</h1>
+    <p>Hier findest du beispielsweise Dokumente für zukünftige Sitzungen...</p>
+  </div>
+
+  <div *ngIf="authService.currentUser?.role == 'admin'" class="add" (click)="addDocument()">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
+    <p>Dokument hinzufügen</p>
+  </div>
+
+  <div class="documents">
+    <ul>
+      <li *ngFor="let document of internalDocuments">
+        <a [href]="document.fileLink$ | async" target="_blank">{{document.name}}</a>
+        <mat-icon *ngIf="authService.currentUser?.role == 'admin'" (click)="editDocument(document)">edit</mat-icon>
+        <mat-icon *ngIf="authService.currentUser?.role == 'admin'" (click)="deleteDocument(document.id)">delete</mat-icon>
+      </li>
+    </ul>
+  </div>
+</div>

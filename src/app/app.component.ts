@@ -17,7 +17,7 @@ export class AppComponent implements AfterViewInit {
   showScrollUpButton = false;
 
 
-  constructor(public authService: AuthService, private imageService: FileService) {
+  constructor(public authService: AuthService) {
     this.authService.checkIfUserIsLoggedIn();
   }
 

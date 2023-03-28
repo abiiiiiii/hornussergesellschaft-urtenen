@@ -1,0 +1,37 @@
+@import "src/assets/styles/vars";
+
+
+.member {
+  padding: 0 10%;
+  display: inline-block;
+
+  .title {
+    margin: 4rem 0;
+
+    h1 {
+      color: $dark-green;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .documents {
+    ul {
+      list-style: none;
+      li {
+        display: flex;
+        align-items: center;
+        margin: .5rem 0;
+        a {
+          margin-right: .5rem;
+        }
+        mat-icon {
+          color: $green;
+          cursor: pointer;
+          &:hover {
+            color: $dark-green;
+          }
+        }
+      }
+    }
+  }
+}

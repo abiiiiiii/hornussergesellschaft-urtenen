@@ -72,7 +72,7 @@ export class AddNewsComponent {
         this.showCreationErrorMessage = true;
       })
     } else {
-      this.showCreationErrorMessage = true;
+      this.showValidationErrorMessage = true;
     }
   }
 

@@ -7,6 +7,7 @@ import {SponsorenComponent} from "./pages/sponsoren/sponsoren.component";
 import {SpielbetriebComponent} from "./pages/spielbetrieb/spielbetrieb.component";
 import {LoginComponent} from "./core/components/login/login.component";
 import {GameListComponent} from "./pages/spielbetrieb/components/game-list/game-list.component";
+import {MemberComponent} from "./pages/member/member.component";
 
 const routes: Routes = [
   {
@@ -42,6 +43,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'member',
+    component: MemberComponent,
     pathMatch: 'full'
   },
   {
