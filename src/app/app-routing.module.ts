@@ -6,7 +6,7 @@ import {MedienComponent} from "./pages/medien/medien.component";
 import {SponsorenComponent} from "./pages/sponsoren/sponsoren.component";
 import {SpielbetriebComponent} from "./pages/spielbetrieb/spielbetrieb.component";
 import {LoginComponent} from "./core/components/login/login.component";
-import {GameListComponent} from "./pages/spielbetrieb/components/game-list/game-list.component";
+import {GameListComponent} from "./pages/spielbetrieb/game-list/game-list.component";
 import {MemberComponent} from "./pages/member/member.component";
 
 const routes: Routes = [

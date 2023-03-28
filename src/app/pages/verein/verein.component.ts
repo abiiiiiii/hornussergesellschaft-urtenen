@@ -1,8 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AuthService } from "../../core/services/auth.service";
 import { Router } from '@angular/router';
-import {AddClubEventComponent} from "./components/add-club-event/add-club-event.component";
 import {MatDialog} from "@angular/material/dialog";
+import {AddClubEventComponent} from "./events/event/add-club-event/add-club-event.component";
 
 @Component({
   selector: 'app-verein',

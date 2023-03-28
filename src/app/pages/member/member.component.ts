@@ -36,7 +36,7 @@ export class MemberComponent implements OnInit {
       this.internalDocuments = documents.map(internalDocument => {
         internalDocument.fileLink$ = this.internalDocumentService.getInternalDocumentFile(internalDocument.fileName);
         return internalDocument;
-      }).sort((a, b) => a.name.localeCompare(b.name));
+      }).sort((a, b) => a.name.localeCompare(b.name, undefined, {numeric: true, sensitivity: 'base'}));
     })
   }
 
