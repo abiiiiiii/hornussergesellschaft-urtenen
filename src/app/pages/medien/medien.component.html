@@ -1,4 +1,17 @@
-<div class="media">
-  <h1>Medien</h1>
-  <p>Hier werden bald Bilder zu betrachten sein</p>
+<div class="photo">
+  <h1>Fotos</h1>
+
+  <div class="years" *ngFor="let year of years">
+    <h2>{{year}}</h2>
+
+    <div class="album" *ngFor="let album of getAlbumsByYear(year);">
+      <div class="album-cover" [routerLink]="'/photos/' + album.id" >
+        <img [src]="album.cover" alt="cover" width="100%" style="cursor: pointer;">
+        <div class="overlay">
+          <p>{{album.name}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -1,0 +1,19 @@
+<div class="album" *ngIf="album">
+  <h2>{{album.name}}</h2>
+
+  <ngx-masonry [ordered]="true">
+    <div ngxMasonryItem *ngFor="let image of masonryImages;" style="width: calc(100% / 3);" (click)="openLightbox(image)">
+      <img [src]="image.url" width="100%" style="cursor: pointer;">
+    </div>
+  </ngx-masonry>
+
+  <app-photo-lightbox class="lightbox" *ngIf="lightboxImage" [image]="lightboxImage"
+                      (previous)="previousImage()"
+                      (next)="nextImage()"
+                      (close)="closeLightbox()"></app-photo-lightbox>
+
+  <div>
+    <div class="break-line"></div>
+    <p *ngIf="album.author">Fotos von {{album.author}}</p>
+  </div>
+</div>

@@ -8,6 +8,7 @@ import {SpielbetriebComponent} from "./pages/spielbetrieb/spielbetrieb.component
 import {LoginComponent} from "./core/components/login/login.component";
 import {GameListComponent} from "./pages/spielbetrieb/game-list/game-list.component";
 import {MemberComponent} from "./pages/member/member.component";
+import {PhotoAlbumComponent} from "./pages/medien/photo-album/photo-album.component";
 
 const routes: Routes = [
   {
@@ -21,9 +22,14 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'medien',
+    path: 'photos',
     component: MedienComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+  },
+  {
+    path: 'photos/:id',
+    component: PhotoAlbumComponent,
+    pathMatch: 'full',
   },
   {
     path: 'sponsoren',
