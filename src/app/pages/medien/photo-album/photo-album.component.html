@@ -2,7 +2,7 @@
   <h2>{{album.name}}</h2>
 
   <ngx-masonry [ordered]="true">
-    <div ngxMasonryItem *ngFor="let image of masonryImages;" style="width: calc(100% / 3);" (click)="openLightbox(image)">
+    <div class="image" ngxMasonryItem *ngFor="let image of masonryImages;" (click)="openLightbox(image)">
       <img [src]="image.url" width="100%" style="cursor: pointer;">
     </div>
   </ngx-masonry>

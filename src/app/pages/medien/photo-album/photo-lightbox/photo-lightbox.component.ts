@@ -1,5 +1,6 @@
 import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {MasonryImage} from "../masonry-image";
+import * as Hammer from 'hammerjs';
 
 @Component({
   selector: 'app-photo-lightbox',
@@ -29,8 +30,14 @@ export class PhotoLightboxComponent {
     this.close.emit();
   }
 
+  constructor() {
+    const hammer = new Hammer(document.documentElement);
+    hammer.on('swipeleft', () => this.next.emit());
+    hammer.on('swiperight', () => this.previous.emit());
+  }
+
   closeLightbox(event: Event) {
-    if (event.target["localName"] !== "mat-icon") {
+    if (event.target["localName"] !== "mat-icon" && event.target["localName"] !== "img") {
       this.close.emit();
     }
   }

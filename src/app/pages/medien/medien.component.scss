@@ -22,7 +22,17 @@
     }
 
     .album {
-      width: calc(100% / 3);
+      width: 100%;
+
+      @media screen and (min-width: $screen-m) {
+        width: calc(100% / 2);
+      }
+
+      @media screen and (min-width: $screen-l) {
+        width: calc(100% / 3);
+      }
+
+
 
       .album-cover {
         position: relative;
