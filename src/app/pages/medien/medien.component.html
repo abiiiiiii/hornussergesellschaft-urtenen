@@ -1,14 +1,22 @@
 <div class="photo">
   <h1>Fotos</h1>
+  <div *ngIf="authService.currentUser?.role == 'admin'" class="add" (click)="addAlbum()">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
+    <p>Fotoalbum hinzufügen</p>
+  </div>
 
   <div class="years" *ngFor="let year of years">
     <h2>{{year}}</h2>
 
     <div class="album" *ngFor="let album of getAlbumsByYear(year);">
-      <div class="album-cover" [routerLink]="'/photos/' + album.id" >
+      <div class="album-cover" (click)="openAlbum($event, '/photos/' + album.id)">
         <img [src]="album.cover" alt="cover" width="100%" style="cursor: pointer;">
         <div class="overlay">
           <p>{{album.name}}</p>
+          <div class="actions" *ngIf="authService.currentUser?.role == 'admin'">
+            <mat-icon (click)="edit(album)">edit</mat-icon>
+            <mat-icon (click)="delete(album)">delete</mat-icon>
+          </div>
         </div>
       </div>
     </div>

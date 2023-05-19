@@ -61,6 +61,13 @@
           &:hover {
             opacity: 1;
           }
+
+          .actions {
+            padding: .5rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
         }
       }
     }

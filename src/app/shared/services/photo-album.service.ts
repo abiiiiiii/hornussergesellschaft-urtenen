@@ -4,6 +4,7 @@ import {Album} from "../models/album.model";
 import {filter, map} from "rxjs/operators";
 import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
 import {Game} from "../models/game.model";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Injectable({
   providedIn: 'root'
@@ -36,15 +37,15 @@ export class PhotoAlbumService {
     )
   }
 
-  createAlbum(gallery: Album): Promise<DocumentReference<Album>> {
-    return this.firestore.collection<Album>('album').add(gallery)
+  createAlbum(album: Album): Observable<DocumentReference<Album>> {
+    return fromPromise(this.firestore.collection<Album>('album').add(album));
   }
 
-  updateAlbum(gallery: Album): Promise<void> {
-    return this.firestore.collection('album').doc<Album>(gallery.id).set(gallery, { merge: true});
+  updateAlbum(album: Album): Observable<void> {
+    return fromPromise(this.firestore.collection('album').doc<Album>(album.id).set(album, { merge: true}));
   }
 
-  deleteAlbum(id: string): Promise<void> {
-    return this.firestore.collection('album').doc(id).delete();
+  deleteAlbum(id: string): Observable<void> {
+    return fromPromise(this.firestore.collection('album').doc(id).delete());
   }
 }

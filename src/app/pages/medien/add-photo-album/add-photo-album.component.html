@@ -1,0 +1,31 @@
+<div class="add-album">
+  <form *ngIf="albumForm" [formGroup]="albumForm">
+
+
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name"/>
+    </mat-form-field>
+
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Jahr</mat-label>
+      <input matInput type="number" minlength="4" maxlength="4" formControlName="year"/>
+    </mat-form-field>
+
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Autor</mat-label>
+      <input matInput type="text" formControlName="author"/>
+    </mat-form-field>
+
+    <div class="upload">
+      <label for="image-upload">Bilder</label>
+      <input id="image-upload" type="file" accept="image/jpeg,image/png" (change)="handleImagesInput($event)" multiple/>
+    </div>
+
+    <button (click)="add()">Fotoalbum hinzufügen</button>
+    <mat-spinner class="spinner" *ngIf="isCreating"></mat-spinner>
+
+    <p class="errorMessage" *ngIf="showValidationErrorMessage">Die ausgefüllte Form ist invalid!</p>
+    <p class="errorMessage" *ngIf="showCreationErrorMessage">Resultat konnte nicht erstellt werden! Versuche es erneut.</p>
+  </form>
+</div>

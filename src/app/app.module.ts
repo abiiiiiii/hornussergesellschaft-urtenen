@@ -57,6 +57,8 @@ import {EditClubEventComponent} from "./pages/verein/events/event/edit-club-even
 import { PhotoAlbumComponent } from './pages/medien/photo-album/photo-album.component';
 import {NgxMasonryModule} from "ngx-masonry";
 import { PhotoLightboxComponent } from './pages/medien/photo-album/photo-lightbox/photo-lightbox.component';
+import { AddPhotoAlbumComponent } from './pages/medien/add-photo-album/add-photo-album.component';
+import {EditPhotoAlbumComponent} from "./pages/medien/edit-photo-album/edit-photo-album.component";
 
 @NgModule({
   declarations: [
@@ -97,7 +99,9 @@ import { PhotoLightboxComponent } from './pages/medien/photo-album/photo-lightbo
     AddDocumentComponent,
     EditDocumentComponent,
     PhotoAlbumComponent,
-    PhotoLightboxComponent
+    PhotoLightboxComponent,
+    AddPhotoAlbumComponent,
+    EditPhotoAlbumComponent
   ],
   imports: [
     BrowserModule,
