@@ -12,7 +12,7 @@
         <a routerLinkActive="active" routerLink="spielbetrieb" (click)="navigationService.handleHamburgerMenu()">Spielbetrieb</a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="medien" (click)="navigationService.handleHamburgerMenu()">Medien</a>
+        <a routerLinkActive="active" routerLink="photos" (click)="navigationService.handleHamburgerMenu()">Fotos</a>
       </li>
       <li>
         <a routerLinkActive="active" routerLink="sponsoren" (click)="navigationService.handleHamburgerMenu()" >Sponsoren</a>
@@ -23,10 +23,10 @@
     </ul>
   </nav>
   <div class="program">
-    <a href="assets/pdf/2023_Jahresprogramm.pdf" target="_blank">Download Jahresprogramm</a>
+    <a href="assets/pdf/2024_V2_Jahresprogramm.pdf" target="_blank">Download Jahresprogramm</a>
   </div>
   <div class="program-moosseesharks">
-    <a href="assets/pdf/JahresplanSharks_2023.pdf" target="_blank">Download Jahresprogramm Moosseesharks</a>
+    <a href="assets/pdf/JahresplanSharks_2023.pdf" target="_blank">Download Jahresprogramm Nachwuchs Urtenen/Utzigen</a>
   </div>
   <div class="login">
     <a *ngIf="authService.currentUser == null;else loggedIn" routerLink="login" (click)="navigationService.handleHamburgerMenu()">Login</a>

@@ -54,6 +54,11 @@ import {BoardMemberComponent} from "./pages/verein/board-member/board-member.com
 import {AddClubEventComponent} from "./pages/verein/events/event/add-club-event/add-club-event.component";
 import {EventComponent} from "./pages/verein/events/event/event.component";
 import {EditClubEventComponent} from "./pages/verein/events/event/edit-club-event/edit-club-event.component";
+import { PhotoAlbumComponent } from './pages/medien/photo-album/photo-album.component';
+import {NgxMasonryModule} from "ngx-masonry";
+import { PhotoLightboxComponent } from './pages/medien/photo-album/photo-lightbox/photo-lightbox.component';
+import { AddPhotoAlbumComponent } from './pages/medien/add-photo-album/add-photo-album.component';
+import {EditPhotoAlbumComponent} from "./pages/medien/edit-photo-album/edit-photo-album.component";
 
 @NgModule({
   declarations: [
@@ -92,7 +97,11 @@ import {EditClubEventComponent} from "./pages/verein/events/event/edit-club-even
     EditResultComponent,
     MemberComponent,
     AddDocumentComponent,
-    EditDocumentComponent
+    EditDocumentComponent,
+    PhotoAlbumComponent,
+    PhotoLightboxComponent,
+    AddPhotoAlbumComponent,
+    EditPhotoAlbumComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +119,8 @@ import {EditClubEventComponent} from "./pages/verein/events/event/edit-club-even
     MatInputModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxMasonryModule
   ],
   providers: [DatePipe, MatIconRegistry],
   bootstrap: [AppComponent]
