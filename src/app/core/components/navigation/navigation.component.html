@@ -20,6 +20,9 @@
       <li *ngIf="authService.currentUser != null">
         <a routerLinkActive="active" routerLink="member" (click)="navigationService.handleHamburgerMenu()" >Mitgliederbereich</a>
       </li>
+      <li>
+        <a href="https://arena.asport.tv/club/4908/hg-urtenen" target="_blank" (click)="navigationService.handleHamburgerMenu()" >Liveübertragung Spiele</a>
+      </li>
     </ul>
   </nav>
   <div class="program">
