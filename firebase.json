@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/hornussergesellschaft-urtenen",
+    "public": "/dist/hornussergesellschaft-urtenen/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
