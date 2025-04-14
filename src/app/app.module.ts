@@ -39,9 +39,9 @@ import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDialogModule} from "@angular/material/dialog";
-import { MemberComponent } from './pages/member/member.component';
-import { AddDocumentComponent } from './pages/member/add-document/add-document.component';
-import { EditDocumentComponent } from './pages/member/edit-document/edit-document.component';
+import {MemberComponent} from './pages/member/member.component';
+import {AddDocumentComponent} from './pages/member/add-document/add-document.component';
+import {EditDocumentComponent} from './pages/member/edit-document/edit-document.component';
 import {TeamComponent} from "./pages/spielbetrieb/team/team.component";
 import {ContactComponent} from "./pages/verein/contact/contact.component";
 import {EventsComponent} from "./pages/verein/events/events.component";
@@ -54,11 +54,12 @@ import {BoardMemberComponent} from "./pages/verein/board-member/board-member.com
 import {AddClubEventComponent} from "./pages/verein/events/event/add-club-event/add-club-event.component";
 import {EventComponent} from "./pages/verein/events/event/event.component";
 import {EditClubEventComponent} from "./pages/verein/events/event/edit-club-event/edit-club-event.component";
-import { PhotoAlbumComponent } from './pages/medien/photo-album/photo-album.component';
+import {PhotoAlbumComponent} from './pages/medien/photo-album/photo-album.component';
 import {NgxMasonryModule} from "ngx-masonry";
-import { PhotoLightboxComponent } from './pages/medien/photo-album/photo-lightbox/photo-lightbox.component';
-import { AddPhotoAlbumComponent } from './pages/medien/add-photo-album/add-photo-album.component';
+import {PhotoLightboxComponent} from './pages/medien/photo-album/photo-lightbox/photo-lightbox.component';
+import {AddPhotoAlbumComponent} from './pages/medien/add-photo-album/add-photo-album.component';
 import {EditPhotoAlbumComponent} from "./pages/medien/edit-photo-album/edit-photo-album.component";
+import {NachwuchsComponent} from "./pages/nachwuchs/nachwuchs.component";
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import {EditPhotoAlbumComponent} from "./pages/medien/edit-photo-album/edit-phot
     HomeComponent,
     VereinComponent,
     SpielbetriebComponent,
+    NachwuchsComponent,
     MedienComponent,
     SponsorenComponent,
     FooterComponent,
@@ -123,6 +125,9 @@ import {EditPhotoAlbumComponent} from "./pages/medien/edit-photo-album/edit-phot
     NgxMasonryModule
   ],
   providers: [DatePipe, MatIconRegistry],
+  exports: [
+    TeamComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

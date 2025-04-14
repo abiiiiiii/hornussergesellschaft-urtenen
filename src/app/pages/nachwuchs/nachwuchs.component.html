@@ -1,0 +1,18 @@
+@if (youthTeam) {
+  <div class="nachwuchs">
+    <div class="title">
+      <h1>Nachwuchs</h1>
+      <p>Hier finden Sie alle Resultate und Infos der Nachwuchshornusser</p>
+    </div>
+
+    <div class="content">
+      <div *ngIf="authService.currentUser?.role == 'admin'" class="add" (click)="addResult()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
+        <p>Resultat hinzufügen</p>
+      </div>
+
+      <h2>{{youthTeam.name}}</h2>
+      <app-team [team]="youthTeam"></app-team>
+    </div>
+  </div>
+}

@@ -9,6 +9,7 @@ import {LoginComponent} from "./core/components/login/login.component";
 import {GameListComponent} from "./pages/spielbetrieb/game-list/game-list.component";
 import {MemberComponent} from "./pages/member/member.component";
 import {PhotoAlbumComponent} from "./pages/medien/photo-album/photo-album.component";
+import {NachwuchsComponent} from "./pages/nachwuchs/nachwuchs.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,16 @@ const routes: Routes = [
   },
   {
     path: 'spielbetrieb/:id',
+    component: GameListComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'nachwuchs',
+    component: NachwuchsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'nachwuchs/:id',
     component: GameListComponent,
     pathMatch: 'full'
   },

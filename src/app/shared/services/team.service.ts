@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {Team} from "../models/team.model";
 import {map} from "rxjs/operators";
-import {News} from "../models/news.model";
 import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import {YOUTH_TEAM_NAME} from "../../core/constants";
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,9 @@ export class TeamService {
     return this.storage.ref('images/team_pictures/' + fileName).getDownloadURL();
   }
 
-  getAllTeams(): Observable<Team[]> {
-    return this.firestore.collection<Team>('team', ref => ref.orderBy('name', 'asc')).get().pipe(
+  getSeniorTeams(): Observable<Team[]> {
+    return this.firestore.collection<Team>('team', ref =>
+      ref.where('name', '!=', YOUTH_TEAM_NAME).orderBy('name', 'asc')).get().pipe(
       map(res => {
         let teams: Team[] = [];
         res.forEach(doc => {
@@ -30,6 +31,20 @@ export class TeamService {
           teams.push(team);
         })
         return teams;
+      })
+    );
+  }
+
+  getTeamByName(name: string): Observable<Team> {
+    return this.firestore.collection<Team>('team', ref => ref.where('name', '==', name)).get().pipe(
+      map(res => {
+        let teams: Team[] = [];
+        res.forEach(doc => {
+          let team = doc.data() as Team;
+          team.id = doc.id;
+          teams.push(team);
+        })
+        return teams[0];
       })
     );
   }
