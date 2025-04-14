@@ -21,10 +21,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: List dist directory
-        run: |
-          echo "Contents of build directory:"
-          ls -la dist/hornussergesellschaft-urtenen
+      - name: Show contents before deploy
+        run: ls -la dist/hornussergesellschaft-urtenen/browser
 
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
