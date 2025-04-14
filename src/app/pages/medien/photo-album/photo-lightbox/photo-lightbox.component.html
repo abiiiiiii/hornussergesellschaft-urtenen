@@ -1,5 +1,5 @@
 <div (click)="closeLightbox($event)">
-  <mat-icon (click)="previousImage()">arrow_back</mat-icon>
+  <mat-icon (click)="previousImage()" (swiperight)="previousImage()">arrow_back</mat-icon>
   <img [src]="image.url">
-  <mat-icon (click)="nextImage()">arrow_forward</mat-icon>
+  <mat-icon (click)="nextImage()" (swipeleft)="nextImage()">arrow_forward</mat-icon>
 </div>
