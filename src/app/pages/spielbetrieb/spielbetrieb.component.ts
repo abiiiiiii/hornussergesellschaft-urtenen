@@ -23,7 +23,7 @@ export class SpielbetriebComponent implements OnInit {
   }
 
   getTeams(): void {
-    this.teamService.getAllTeams().subscribe(teams => {
+    this.teamService.getSeniorTeams().subscribe(teams => {
       this.teams = teams;
     })
   }
