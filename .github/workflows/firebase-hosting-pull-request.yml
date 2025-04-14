@@ -24,7 +24,7 @@ jobs:
       - name: List dist directory
         run: |
           echo "Contents of build directory:"
-          ls -la dist/
+          ls -la dist/hornussergesellschaft-urtenen
 
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
