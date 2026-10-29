@@ -2,32 +2,34 @@
   <div class="title">
     <h1>Verein</h1>
     <div class="sub-nav">
-        <div>
-          <a (click)="goTo('events')">Vereinsanlässe</a>
-        </div>
-        <div (click)="goTo('board')">
-          <a>Vorstand</a>
-        </div>
-        <div (click)="goTo('playmaker')">
-          <a>Spielabmacher</a>
-        </div>
-        <div (click)="goTo('history')">
-          <a>Vereinsgeschichte</a>
-        </div>
-        <div (click)="goTo('inn')">
-          <a>Wirtschaft</a>
-        </div>
-        <div (click)="goTo('approch')">
-          <a>Anfahrt</a>
-        </div>
+      <div>
+        <a (click)="goTo('events')">Vereinsanlässe</a>
+      </div>
+      <div (click)="goTo('board')">
+        <a>Vorstand</a>
+      </div>
+      <div (click)="goTo('playmaker')">
+        <a>Spielabmacher</a>
+      </div>
+      <div (click)="goTo('history')">
+        <a>Vereinsgeschichte</a>
+      </div>
+      <div (click)="goTo('inn')">
+        <a>Wirtschaft</a>
+      </div>
+      <div (click)="goTo('approch')">
+        <a>Anfahrt</a>
+      </div>
     </div>
   </div>
 
   <div class="events">
-    <div *ngIf="authService.currentUser" class="add" (click)="addEvent()">
-      <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
-      <p>Vereinanlass hinzufügen</p>
-    </div>
+    @if (authService.currentUser) {
+      <div class="add" (click)="addEvent()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
+        <p>Vereinanlass hinzufügen</p>
+      </div>
+    }
     <h2 id="events">Vereinsanlässe</h2>
     <app-events></app-events>
     <div class="break-line"></div>
@@ -70,8 +72,8 @@
   </div>
 
   <!-- <div>
-    <h2>Archiv</h2>
-    <app-archive></app-archive>
-  </div>
-  -->
+  <h2>Archiv</h2>
+  <app-archive></app-archive>
+</div>
+-->
 </div>

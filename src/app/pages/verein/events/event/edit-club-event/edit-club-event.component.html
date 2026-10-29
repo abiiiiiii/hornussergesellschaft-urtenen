@@ -27,11 +27,19 @@
       <input id="flyer-upload" type="file" (change)="handleFlyerFileInput($event)" accept="application/pdf"/>
     </div>
 
-    <button (click)="update()" *ngIf="!isUpdating">Vereinsanlass updaten</button>
-    <mat-spinner class="spinner" *ngIf="isUpdating"></mat-spinner>
+    @if (!isUpdating) {
+      <button (click)="update()">Vereinsanlass updaten</button>
+    }
+    @if (isUpdating) {
+      <mat-spinner class="spinner"></mat-spinner>
+    }
 
 
-    <p class="errorMessage" *ngIf="showValidationErrorMessage">Titel und Text sind erforderlich!</p>
-    <p class="errorMessage" *ngIf="showUpdateErrorMessage">Vereinsanlass konnte nicht bearbeitet werden! Versuche es erneut.</p>
+    @if (showValidationErrorMessage) {
+      <p class="errorMessage">Titel und Text sind erforderlich!</p>
+    }
+    @if (showUpdateErrorMessage) {
+      <p class="errorMessage">Vereinsanlass konnte nicht bearbeitet werden! Versuche es erneut.</p>
+    }
   </form>
 </div>

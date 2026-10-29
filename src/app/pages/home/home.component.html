@@ -6,12 +6,18 @@
     </div>
 
     <div class="news-container">
-      <div *ngIf="authService.currentUser?.role == 'admin'" class="add" (click)="addNews()">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
-        <p>Neuigkeit hinzufügen</p>
-      </div>
-      <app-news *ngFor="let n of news" [news]="n"></app-news>
-      <p *ngIf="news.length == 0">Aktuell gibt es keine neuen Meldungen...</p>
+      @if (authService.currentUser?.role == 'admin') {
+        <div class="add" (click)="addNews()">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
+          <p>Neuigkeit hinzufügen</p>
+        </div>
+      }
+      @for (n of news; track n) {
+        <app-news [news]="n"></app-news>
+      }
+      @if (news.length == 0) {
+        <p>Aktuell gibt es keine neuen Meldungen...</p>
+      }
     </div>
     <div class="break-line"></div>
   </div>

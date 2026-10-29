@@ -1,4 +1,8 @@
-<div class="sponsors" *ngIf="sponsors.length > 0">
-  <h3>Hauptsponsoren</h3>
-  <app-sponsor *ngFor="let sponsor of sponsors" [sponsor]="sponsor" [column]="true"></app-sponsor>
-</div>
+@if (sponsors.length > 0) {
+  <div class="sponsors">
+    <h3>Hauptsponsoren</h3>
+    @for (sponsor of sponsors; track sponsor) {
+      <app-sponsor [sponsor]="sponsor" [column]="true"></app-sponsor>
+    }
+  </div>
+}

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
-import {NgIf} from "@angular/common";
+
 import {AuthService} from "../../core/services/auth.service";
 import {AddResultComponent} from "../../shared/components/result/add-result/add-result.component";
 import {TeamService} from "../../shared/services/team.service";

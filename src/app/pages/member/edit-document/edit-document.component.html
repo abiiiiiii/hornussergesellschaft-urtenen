@@ -10,10 +10,18 @@
       <input id="flyer-upload" type="file" (change)="uploadDocument($event)" accept="application/pdf"/>
     </div>
 
-    <button (click)="update()" *ngIf="!isUpdating">Dokument updaten</button>
-    <mat-spinner class="spinner" *ngIf="isUpdating"></mat-spinner>
+    @if (!isUpdating) {
+      <button (click)="update()">Dokument updaten</button>
+    }
+    @if (isUpdating) {
+      <mat-spinner class="spinner"></mat-spinner>
+    }
 
-    <p class="errorMessage" *ngIf="showValidationErrorMessage">Name und Dokument sind erforderlich!</p>
-    <p class="errorMessage" *ngIf="showCreationErrorMessage">Dokument konnte nicht hinzugefügt werden! Versuche es erneut.</p>
+    @if (showValidationErrorMessage) {
+      <p class="errorMessage">Name und Dokument sind erforderlich!</p>
+    }
+    @if (showCreationErrorMessage) {
+      <p class="errorMessage">Dokument konnte nicht hinzugefügt werden! Versuche es erneut.</p>
+    }
   </form>
 </div>

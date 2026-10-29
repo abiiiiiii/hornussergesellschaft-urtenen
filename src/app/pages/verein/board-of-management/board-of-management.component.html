@@ -1,3 +1,5 @@
 <div class="board">
-  <app-board-member *ngFor="let member of boardMembers" [member]="member"></app-board-member>
+  @for (member of boardMembers; track member) {
+    <app-board-member [member]="member"></app-board-member>
+  }
 </div>
