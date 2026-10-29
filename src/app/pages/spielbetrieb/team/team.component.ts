@@ -6,9 +6,10 @@ import {GameService} from "../../../shared/services/game.service";
 import {GameMode} from "../../../shared/enums/game-mode.enum";
 
 @Component({
-  selector: 'app-team',
-  templateUrl: './team.component.html',
-  styleUrls: ['./team.component.scss']
+    selector: 'app-team',
+    templateUrl: './team.component.html',
+    styleUrls: ['./team.component.scss'],
+    standalone: false
 })
 export class TeamComponent implements OnInit {
 

@@ -10,9 +10,10 @@ import {AppModule} from "../../app.module";
 import {YOUTH_TEAM_NAME} from "../../core/constants";
 
 @Component({
-  selector: 'app-nachwuchs',
-  templateUrl: './nachwuchs.component.html',
-  styleUrl: './nachwuchs.component.scss'
+    selector: 'app-nachwuchs',
+    templateUrl: './nachwuchs.component.html',
+    styleUrl: './nachwuchs.component.scss',
+    standalone: false
 })
 export class NachwuchsComponent {
 

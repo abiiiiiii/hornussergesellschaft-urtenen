@@ -6,9 +6,10 @@ import {FileService} from "../../../shared/services/file.service";
 import {MasonryImage} from "./masonry-image";
 
 @Component({
-  selector: 'app-photo-album',
-  templateUrl: './photo-album.component.html',
-  styleUrls: ['./photo-album.component.scss']
+    selector: 'app-photo-album',
+    templateUrl: './photo-album.component.html',
+    styleUrls: ['./photo-album.component.scss'],
+    standalone: false
 })
 export class PhotoAlbumComponent {
 

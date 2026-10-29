@@ -8,9 +8,10 @@ import {combineLatest, Observable} from "rxjs";
 import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-add-photo-album',
-  templateUrl: './add-photo-album.component.html',
-  styleUrls: ['./add-photo-album.component.scss']
+    selector: 'app-add-photo-album',
+    templateUrl: './add-photo-album.component.html',
+    styleUrls: ['./add-photo-album.component.scss'],
+    standalone: false
 })
 export class AddPhotoAlbumComponent {
 

@@ -5,9 +5,10 @@ import {Observable} from "rxjs";
 import {Location} from "@angular/common";
 
 @Component({
-  selector: 'app-game-list',
-  templateUrl: './game-list.component.html',
-  styleUrls: ['./game-list.component.scss']
+    selector: 'app-game-list',
+    templateUrl: './game-list.component.html',
+    styleUrls: ['./game-list.component.scss'],
+    standalone: false
 })
 export class GameListComponent {
 

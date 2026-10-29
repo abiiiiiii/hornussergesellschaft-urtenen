@@ -20,9 +20,10 @@ class DialogData {
 }
 
 @Component({
-  selector: 'app-add-result',
-  templateUrl: './add-result.component.html',
-  styleUrls: ['./add-result.component.scss']
+    selector: 'app-add-result',
+    templateUrl: './add-result.component.html',
+    styleUrls: ['./add-result.component.scss'],
+    standalone: false
 })
 export class AddResultComponent implements OnInit {
 

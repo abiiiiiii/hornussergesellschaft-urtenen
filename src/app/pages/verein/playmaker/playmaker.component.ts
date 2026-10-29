@@ -3,9 +3,10 @@ import { BoardService } from 'src/app/shared/services/board.service';
 import {BoardMember} from "../../../shared/models/board-member.model";
 
 @Component({
-  selector: 'app-playmaker',
-  templateUrl: './playmaker.component.html',
-  styleUrls: ['./playmaker.component.scss']
+    selector: 'app-playmaker',
+    templateUrl: './playmaker.component.html',
+    styleUrls: ['./playmaker.component.scss'],
+    standalone: false
 })
 export class PlaymakerComponent implements OnInit {
 

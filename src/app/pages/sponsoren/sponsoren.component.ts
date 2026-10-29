@@ -4,9 +4,10 @@ import {SponsorType} from "../../shared/enums/sponsor-type.enum";
 import {SponsorService} from "../../shared/services/sponsor.service";
 
 @Component({
-  selector: 'app-sponsoren',
-  templateUrl: './sponsoren.component.html',
-  styleUrls: ['./sponsoren.component.scss']
+    selector: 'app-sponsoren',
+    templateUrl: './sponsoren.component.html',
+    styleUrls: ['./sponsoren.component.scss'],
+    standalone: false
 })
 export class SponsorenComponent implements AfterViewInit {
 

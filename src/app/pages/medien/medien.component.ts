@@ -11,9 +11,10 @@ import {combineLatest} from "rxjs";
 import {EditPhotoAlbumComponent} from "./edit-photo-album/edit-photo-album.component";
 
 @Component({
-  selector: 'app-medien',
-  templateUrl: './medien.component.html',
-  styleUrls: ['./medien.component.scss']
+    selector: 'app-medien',
+    templateUrl: './medien.component.html',
+    styleUrls: ['./medien.component.scss'],
+    standalone: false
 })
 export class MedienComponent implements OnInit {
 

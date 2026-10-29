@@ -7,9 +7,10 @@ import {EventService} from "../../../../../shared/services/event.service";
 import {FileUploadService} from "../../../../../shared/services/file-upload.service";
 
 @Component({
-  selector: 'app-edit-club-event',
-  templateUrl: './edit-club-event.component.html',
-  styleUrls: ['./edit-club-event.component.scss']
+    selector: 'app-edit-club-event',
+    templateUrl: './edit-club-event.component.html',
+    styleUrls: ['./edit-club-event.component.scss'],
+    standalone: false
 })
 export class EditClubEventComponent implements OnInit {
 

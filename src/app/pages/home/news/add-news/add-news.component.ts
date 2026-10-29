@@ -7,9 +7,10 @@ import { combineLatest, of } from "rxjs";
 import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-add-news',
-  templateUrl: './add-news.component.html',
-  styleUrls: ['./add-news.component.scss']
+    selector: 'app-add-news',
+    templateUrl: './add-news.component.html',
+    styleUrls: ['./add-news.component.scss'],
+    standalone: false
 })
 export class AddNewsComponent {
 

@@ -4,9 +4,10 @@ import {SponsorType} from "../../../shared/enums/sponsor-type.enum";
 import {Sponsor} from "../../../shared/models/sponsor.model";
 
 @Component({
-  selector: 'app-main-sponsors',
-  templateUrl: './main-sponsors.component.html',
-  styleUrls: ['./main-sponsors.component.scss']
+    selector: 'app-main-sponsors',
+    templateUrl: './main-sponsors.component.html',
+    styleUrls: ['./main-sponsors.component.scss'],
+    standalone: false
 })
 export class MainSponsorsComponent implements OnInit {
 

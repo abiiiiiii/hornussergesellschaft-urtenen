@@ -7,9 +7,10 @@ import {AuthService} from "../../../core/services/auth.service";
 import {EditNewsComponent} from "./edit-news/edit-news.component";
 
 @Component({
-  selector: 'app-news',
-  templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+    selector: 'app-news',
+    templateUrl: './news.component.html',
+    styleUrls: ['./news.component.scss'],
+    standalone: false
 })
 export class NewsComponent implements OnInit {
 

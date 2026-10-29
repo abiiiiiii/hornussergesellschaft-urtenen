@@ -7,9 +7,10 @@ import {FileUploadService} from "../../../../../shared/services/file-upload.serv
 import { ClubEvent } from 'src/app/shared/models/event.model';
 
 @Component({
-  selector: 'app-add-club-event',
-  templateUrl: './add-club-event.component.html',
-  styleUrls: ['./add-club-event.component.scss']
+    selector: 'app-add-club-event',
+    templateUrl: './add-club-event.component.html',
+    styleUrls: ['./add-club-event.component.scss'],
+    standalone: false
 })
 export class AddClubEventComponent {
 

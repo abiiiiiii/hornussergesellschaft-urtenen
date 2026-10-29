@@ -3,9 +3,10 @@ import {Observable} from "rxjs";
 import {FileService} from "../../../shared/services/file.service";
 
 @Component({
-  selector: 'app-inn',
-  templateUrl: './inn.component.html',
-  styleUrls: ['./inn.component.scss']
+    selector: 'app-inn',
+    templateUrl: './inn.component.html',
+    styleUrls: ['./inn.component.scss'],
+    standalone: false
 })
 export class InnComponent implements OnInit {
 

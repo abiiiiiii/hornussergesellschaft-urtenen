@@ -9,9 +9,10 @@ import {combineLatest, of} from "rxjs";
 import {InternalDocument} from "../../../shared/models/internal-document.model";
 
 @Component({
-  selector: 'app-add-document',
-  templateUrl: './add-document.component.html',
-  styleUrls: ['./add-document.component.scss']
+    selector: 'app-add-document',
+    templateUrl: './add-document.component.html',
+    styleUrls: ['./add-document.component.scss'],
+    standalone: false
 })
 export class AddDocumentComponent {
 

@@ -3,9 +3,10 @@ import { Game } from "../../../shared/models/game.model";
 import { GameService } from "../../../shared/services/game.service";
 
 @Component({
-  selector: 'app-latest-games',
-  templateUrl: './latest-games.component.html',
-  styleUrls: ['./latest-games.component.scss']
+    selector: 'app-latest-games',
+    templateUrl: './latest-games.component.html',
+    styleUrls: ['./latest-games.component.scss'],
+    standalone: false
 })
 export class LatestGamesComponent implements OnInit {
 

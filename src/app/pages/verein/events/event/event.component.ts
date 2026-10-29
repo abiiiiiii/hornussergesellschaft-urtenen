@@ -8,9 +8,10 @@ import {MatDialog} from "@angular/material/dialog";
 import {EditClubEventComponent} from "./edit-club-event/edit-club-event.component";
 
 @Component({
-  selector: 'app-event',
-  templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss']
+    selector: 'app-event',
+    templateUrl: './event.component.html',
+    styleUrls: ['./event.component.scss'],
+    standalone: false
 })
 export class EventComponent implements OnInit {
 

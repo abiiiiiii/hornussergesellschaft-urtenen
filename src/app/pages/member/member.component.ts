@@ -8,9 +8,10 @@ import {AddDocumentComponent} from "./add-document/add-document.component";
 import {EditDocumentComponent} from "./edit-document/edit-document.component";
 
 @Component({
-  selector: 'app-member',
-  templateUrl: './member.component.html',
-  styleUrls: ['./member.component.scss']
+    selector: 'app-member',
+    templateUrl: './member.component.html',
+    styleUrls: ['./member.component.scss'],
+    standalone: false
 })
 export class MemberComponent implements OnInit {
 

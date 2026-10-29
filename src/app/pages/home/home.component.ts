@@ -7,9 +7,10 @@ import { AddNewsComponent } from "./news/add-news/add-news.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: false
 })
 export class HomeComponent {
 

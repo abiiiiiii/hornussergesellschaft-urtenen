@@ -8,9 +8,10 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Game} from "../../../shared/models/game.model";
 
 @Component({
-  selector: 'app-edit-photo-album',
-  templateUrl: './edit-photo-album.component.html',
-  styleUrls: ['./edit-photo-album.component.scss']
+    selector: 'app-edit-photo-album',
+    templateUrl: './edit-photo-album.component.html',
+    styleUrls: ['./edit-photo-album.component.scss'],
+    standalone: false
 })
 export class EditPhotoAlbumComponent {
 

@@ -3,9 +3,10 @@ import {Observable} from "rxjs";
 import {FileService} from "../../../shared/services/file.service";
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.scss']
+    selector: 'app-history',
+    templateUrl: './timeline.component.html',
+    styleUrls: ['./timeline.component.scss'],
+    standalone: false
 })
 export class TimelineComponent implements OnInit {
 

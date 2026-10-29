@@ -10,9 +10,10 @@ import {combineLatest, of} from "rxjs";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-add-result',
-  templateUrl: './edit-result.component.html',
-  styleUrls: ['./edit-result.component.scss']
+    selector: 'app-add-result',
+    templateUrl: './edit-result.component.html',
+    styleUrls: ['./edit-result.component.scss'],
+    standalone: false
 })
 export class EditResultComponent implements OnInit {
   homeList: File;

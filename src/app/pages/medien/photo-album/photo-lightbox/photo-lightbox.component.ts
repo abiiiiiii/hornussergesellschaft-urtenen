@@ -2,9 +2,10 @@ import {Component, EventEmitter, HostListener, Input, Output} from '@angular/cor
 import {MasonryImage} from "../masonry-image";
 
 @Component({
-  selector: 'app-photo-lightbox',
-  templateUrl: './photo-lightbox.component.html',
-  styleUrls: ['./photo-lightbox.component.scss']
+    selector: 'app-photo-lightbox',
+    templateUrl: './photo-lightbox.component.html',
+    styleUrls: ['./photo-lightbox.component.scss'],
+    standalone: false
 })
 export class PhotoLightboxComponent {
 

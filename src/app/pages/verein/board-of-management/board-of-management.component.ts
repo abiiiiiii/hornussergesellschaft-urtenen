@@ -4,9 +4,10 @@ import {BoardService} from "../../../shared/services/board.service";
 import {BoardRole} from "../../../shared/enums/board-role.enum";
 
 @Component({
-  selector: 'app-board-of-management',
-  templateUrl: './board-of-management.component.html',
-  styleUrls: ['./board-of-management.component.scss']
+    selector: 'app-board-of-management',
+    templateUrl: './board-of-management.component.html',
+    styleUrls: ['./board-of-management.component.scss'],
+    standalone: false
 })
 export class BoardOfManagementComponent implements OnInit {
 

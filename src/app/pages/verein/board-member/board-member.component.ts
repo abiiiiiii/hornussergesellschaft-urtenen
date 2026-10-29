@@ -4,9 +4,10 @@ import {BoardMember} from "../../../shared/models/board-member.model";
 import {BoardService} from "../../../shared/services/board.service";
 
 @Component({
-  selector: 'app-board-member',
-  templateUrl: './board-member.component.html',
-  styleUrls: ['./board-member.component.scss']
+    selector: 'app-board-member',
+    templateUrl: './board-member.component.html',
+    styleUrls: ['./board-member.component.scss'],
+    standalone: false
 })
 export class BoardMemberComponent implements OnInit {
 

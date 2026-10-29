@@ -5,9 +5,10 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddClubEventComponent} from "./events/event/add-club-event/add-club-event.component";
 
 @Component({
-  selector: 'app-verein',
-  templateUrl: './verein.component.html',
-  styleUrls: ['./verein.component.scss']
+    selector: 'app-verein',
+    templateUrl: './verein.component.html',
+    styleUrls: ['./verein.component.scss'],
+    standalone: false
 })
 export class VereinComponent implements AfterViewInit {
 

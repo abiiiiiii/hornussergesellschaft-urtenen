@@ -8,9 +8,10 @@ import {TeamService} from "../../services/team.service";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-result',
-  templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+    selector: 'app-result',
+    templateUrl: './result.component.html',
+    styleUrls: ['./result.component.scss'],
+    standalone: false
 })
 export class ResultComponent implements OnInit{
 

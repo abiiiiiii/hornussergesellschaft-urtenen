@@ -7,9 +7,10 @@ import {FileUploadService} from "../../../../shared/services/file-upload.service
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-edit-news',
-  templateUrl: './edit-news.component.html',
-  styleUrls: ['./edit-news.component.scss']
+    selector: 'app-edit-news',
+    templateUrl: './edit-news.component.html',
+    styleUrls: ['./edit-news.component.scss'],
+    standalone: false
 })
 export class EditNewsComponent implements OnInit {
 

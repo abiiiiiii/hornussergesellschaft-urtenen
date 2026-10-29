@@ -8,9 +8,10 @@ import {FileUploadService} from "../../../shared/services/file-upload.service";
 import {News} from "../../../shared/models/news.model";
 
 @Component({
-  selector: 'app-edit-document',
-  templateUrl: './edit-document.component.html',
-  styleUrls: ['./edit-document.component.scss']
+    selector: 'app-edit-document',
+    templateUrl: './edit-document.component.html',
+    styleUrls: ['./edit-document.component.scss'],
+    standalone: false
 })
 export class EditDocumentComponent implements OnInit {
   isUpdating = false;

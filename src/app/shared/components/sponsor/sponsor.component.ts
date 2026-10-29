@@ -4,9 +4,10 @@ import {SponsorService} from "../../services/sponsor.service";
 import {of} from "rxjs";
 
 @Component({
-  selector: 'app-sponsor',
-  templateUrl: './sponsor.component.html',
-  styleUrls: ['./sponsor.component.scss']
+    selector: 'app-sponsor',
+    templateUrl: './sponsor.component.html',
+    styleUrls: ['./sponsor.component.scss'],
+    standalone: false
 })
 export class SponsorComponent implements OnInit {
 

@@ -6,9 +6,10 @@ import { AddResultComponent } from "../../shared/components/result/add-result/ad
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-spielbetrieb',
-  templateUrl: './spielbetrieb.component.html',
-  styleUrls: ['./spielbetrieb.component.scss']
+    selector: 'app-spielbetrieb',
+    templateUrl: './spielbetrieb.component.html',
+    styleUrls: ['./spielbetrieb.component.scss'],
+    standalone: false
 })
 export class SpielbetriebComponent implements OnInit {
 
