@@ -1,51 +1,61 @@
-import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {Album} from "../models/album.model";
-import {filter, map} from "rxjs/operators";
-import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
-import {Game} from "../models/game.model";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from "rxjs";
+import { Album } from "../models/album.model";
+import { map } from "rxjs/operators";
+import {
+  Firestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  setDoc,
+  deleteDoc,
+  DocumentReference,
+  CollectionReference
+} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PhotoAlbumService {
 
-  constructor(private firestore: AngularFirestore) { }
+  private readonly firestore = inject(Firestore);
 
   getAllAlbums(): Observable<Album[]> {
-    return this.firestore.collection<Album>('album').get().pipe(
+    return from(getDocs(collection(this.firestore, 'album'))).pipe(
       map(res => {
-        let galleries: Album[] = [];
-        res.forEach(doc => {
-          let gallery = doc.data() as Album;
-          gallery.id = doc.id;
+        const galleries: Album[] = [];
+        res.forEach(docSnap => {
+          const gallery = docSnap.data() as Album;
+          gallery.id = docSnap.id;
           galleries.push(gallery);
-        })
+        });
         return galleries;
       })
     );
   }
 
   getAlbumById(documentId: string): Observable<Album> {
-    return this.firestore.collection<Album>('album').doc(documentId).get().pipe(
+    return from(getDoc(doc(this.firestore, 'album', documentId))).pipe(
       map(res => {
-        let album = res.data() as Album;
+        const album = res.data() as Album;
         album.id = res.id;
         return album;
       })
-    )
+    );
   }
 
   createAlbum(album: Album): Observable<DocumentReference<Album>> {
-    return fromPromise(this.firestore.collection<Album>('album').add(album));
+    const col = collection(this.firestore, 'album') as CollectionReference<Album>;
+    return from(addDoc(col, album));
   }
 
   updateAlbum(album: Album): Observable<void> {
-    return fromPromise(this.firestore.collection('album').doc<Album>(album.id).set(album, { merge: true}));
+    return from(setDoc(doc(this.firestore, 'album', album.id), album, { merge: true }));
   }
 
   deleteAlbum(id: string): Observable<void> {
-    return fromPromise(this.firestore.collection('album').doc(id).delete());
+    return from(deleteDoc(doc(this.firestore, 'album', id)));
   }
 }

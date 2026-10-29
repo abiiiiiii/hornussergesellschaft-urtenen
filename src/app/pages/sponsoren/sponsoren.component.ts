@@ -2,13 +2,14 @@ import {AfterViewInit, Component, OnInit, ChangeDetectionStrategy} from '@angula
 import {Sponsor} from "../../shared/models/sponsor.model";
 import {SponsorType} from "../../shared/enums/sponsor-type.enum";
 import {SponsorService} from "../../shared/services/sponsor.service";
+import { SponsorComponent } from '../../shared/components/sponsor/sponsor.component';
 
 @Component({
     selector: 'app-sponsoren',
     templateUrl: './sponsoren.component.html',
     styleUrls: ['./sponsoren.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SponsorComponent]
 })
 export class SponsorenComponent implements AfterViewInit {
 

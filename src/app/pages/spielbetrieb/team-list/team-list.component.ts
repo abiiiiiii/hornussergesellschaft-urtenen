@@ -6,8 +6,7 @@ import {pluck} from "rxjs/operators";
     selector: 'app-team-list',
     templateUrl: './team-list.component.html',
     styleUrls: ['./team-list.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class TeamListComponent implements OnInit {
 

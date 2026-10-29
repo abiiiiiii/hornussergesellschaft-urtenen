@@ -1,51 +1,72 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, Observable, from } from "rxjs";
 import { News } from "../models/news.model";
-import {map} from "rxjs/operators";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
+import { map } from "rxjs/operators";
+import {
+  Firestore,
+  collection,
+  doc,
+  getDocs,
+  addDoc,
+  setDoc,
+  deleteDoc,
+  query,
+  orderBy,
+  where,
+  limit,
+  DocumentReference,
+  CollectionReference
+} from "@angular/fire/firestore";
+import { Storage, ref, getDownloadURL } from "@angular/fire/storage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
 
-  public load$ = new BehaviorSubject(undefined);
+  private readonly firestore = inject(Firestore);
+  private readonly storage = inject(Storage);
 
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
+  readonly load$ = new BehaviorSubject(undefined);
 
   getNewsImage(imageName: string): Observable<string> {
-    return this.storage.ref('images/news/' + imageName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'images/news/' + imageName)));
   }
 
   getNewsFile(fileName: string): Observable<string> {
-    return this.storage.ref('pdf/news/' + fileName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'pdf/news/' + fileName)));
   }
 
   getAllNews(): Observable<News[]> {
-    return this.firestore.collection<News>('news', ref => ref.orderBy('createdAt', 'desc').where('active', '==', true).limit(5)).get().pipe(
+    const q = query(
+      collection(this.firestore, 'news'),
+      orderBy('createdAt', 'desc'),
+      where('active', '==', true),
+      limit(5)
+    );
+    return from(getDocs(q)).pipe(
       map(res => {
-        let news: News[] = [];
-        res.forEach(doc => {
-          let n = doc.data() as News;
-          n.id = doc.id;
+        const news: News[] = [];
+        res.forEach(docSnap => {
+          const n = docSnap.data() as News;
+          n.id = docSnap.id;
           news.push(n);
-        })
+        });
         return news;
       })
     );
   }
 
   createNews(news: News): Observable<DocumentReference<News>> {
-    return fromPromise(this.firestore.collection<News>('news').add(news));
+    const col = collection(this.firestore, 'news') as CollectionReference<News>;
+    return from(addDoc(col, news));
   }
 
   updateNews(news: News): Observable<void> {
-    return fromPromise(this.firestore.collection('news').doc<News>(news.id).set(news, { merge: true }));
+    return from(setDoc(doc(this.firestore, 'news', news.id), news, { merge: true }));
   }
 
   deleteNews(id: string): Observable<void> {
-    return fromPromise(this.firestore.collection('news').doc(id).delete());
+    return from(deleteDoc(doc(this.firestore, 'news', id)));
   }
 }

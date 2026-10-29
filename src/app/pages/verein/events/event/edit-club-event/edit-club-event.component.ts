@@ -1,17 +1,20 @@
 import {Component, Inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import {combineLatest, of} from "rxjs";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ClubEvent} from "../../../../../shared/models/event.model";
 import {EventService} from "../../../../../shared/services/event.service";
 import {FileUploadService} from "../../../../../shared/services/file-upload.service";
+import { MatFormField, MatLabel, MatInput, MatSuffix } from '@angular/material/input';
+import { MatDatepickerInput, MatDatepickerToggle, MatDatepicker } from '@angular/material/datepicker';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'app-edit-club-event',
     templateUrl: './edit-club-event.component.html',
     styleUrls: ['./edit-club-event.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatDatepickerInput, MatDatepickerToggle, MatSuffix, MatDatepicker, MatProgressSpinner]
 })
 export class EditClubEventComponent implements OnInit {
 

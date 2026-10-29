@@ -1,24 +1,23 @@
-import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from "rxjs";
+import { Storage, ref, getDownloadURL, deleteObject } from "@angular/fire/storage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
 
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
+  private readonly storage = inject(Storage);
 
   getImage(fileName: string): Observable<string> {
-    return this.storage.ref('images/' + fileName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'images/' + fileName)));
   }
 
   getFile(fileName: string): Observable<string> {
-    return this.storage.ref('pdf/' + fileName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'pdf/' + fileName)));
   }
 
-  delete(path: string): Observable<any> {
-    return this.storage.ref(path).delete();
+  delete(path: string): Observable<void> {
+    return from(deleteObject(ref(this.storage, path)));
   }
 }

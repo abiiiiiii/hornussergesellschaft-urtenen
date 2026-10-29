@@ -8,8 +8,8 @@ describe('SponsorenComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SponsorenComponent ]
-    })
+    imports: [SponsorenComponent]
+})
     .compileComponents();
   });
 

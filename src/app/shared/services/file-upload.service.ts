@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
-import {Observable, Subject} from "rxjs";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import { Injectable, inject } from '@angular/core';
+import { Observable, Subject, from } from "rxjs";
+import { Storage, ref, uploadBytes } from "@angular/fire/storage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadService {
-  uploadPercentage: Observable<number | undefined> = new Subject();
+  private readonly storage = inject(Storage);
 
-  constructor(private storage: AngularFireStorage) { }
+  readonly uploadPercentage: Observable<number | undefined> = new Subject();
 
   uploadFile(path: string, file: File): Observable<any> {
-      return fromPromise(this.storage.upload(path + file.name, file));
+    return from(uploadBytes(ref(this.storage, path + file.name), file));
   }
 }

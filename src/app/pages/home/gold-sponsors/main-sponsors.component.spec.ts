@@ -8,8 +8,8 @@ describe('GoldSponsorsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainSponsorsComponent ]
-    })
+    imports: [MainSponsorsComponent]
+})
     .compileComponents();
   });
 

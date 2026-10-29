@@ -1,46 +1,63 @@
-import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {Sponsor} from "../models/sponsor.model";
-import {SponsorType} from "../enums/sponsor-type.enum";
-import {map} from "rxjs/operators";
-import {News} from "../models/news.model";
-import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from "rxjs";
+import { Sponsor } from "../models/sponsor.model";
+import { SponsorType } from "../enums/sponsor-type.enum";
+import { map } from "rxjs/operators";
+import {
+  Firestore,
+  collection,
+  doc,
+  getDocs,
+  addDoc,
+  setDoc,
+  deleteDoc,
+  query,
+  where,
+  DocumentReference,
+  CollectionReference
+} from "@angular/fire/firestore";
+import { Storage, ref, getDownloadURL } from "@angular/fire/storage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SponsorService {
 
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
+  private readonly firestore = inject(Firestore);
+  private readonly storage = inject(Storage);
 
   getSponsorImage(fileName: string): Observable<string> {
-    return this.storage.ref('images/sponsors/' + fileName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'images/sponsors/' + fileName)));
   }
 
   getSponsorsByType(type: SponsorType): Observable<Sponsor[]> {
-    return this.firestore.collection<Sponsor>('sponsor', ref => ref.where('type', '==', type)).get().pipe(
+    const q = query(
+      collection(this.firestore, 'sponsor'),
+      where('type', '==', type)
+    );
+    return from(getDocs(q)).pipe(
       map(res => {
-        let sponsors: Sponsor[] = [];
-        res.forEach(doc => {
-          let sponsor = doc.data() as Sponsor;
-          sponsor.id = doc.id;
+        const sponsors: Sponsor[] = [];
+        res.forEach(docSnap => {
+          const sponsor = docSnap.data() as Sponsor;
+          sponsor.id = docSnap.id;
           sponsors.push(sponsor);
-        })
+        });
         return sponsors;
       })
     );
   }
 
   createSponsor(sponsor: Sponsor): Promise<DocumentReference<Sponsor>> {
-    return this.firestore.collection<Sponsor>('sponsor').add(sponsor)
+    const col = collection(this.firestore, 'sponsor') as CollectionReference<Sponsor>;
+    return addDoc(col, sponsor);
   }
 
   updateSponsor(sponsor: Sponsor): Promise<void> {
-    return this.firestore.collection('sponsor').doc<Sponsor>(sponsor.id).set(sponsor, { merge: true});
+    return setDoc(doc(this.firestore, 'sponsor', sponsor.id), sponsor, { merge: true });
   }
 
   deleteSponsor(id: string): Promise<void> {
-    return this.firestore.collection('sponsor').doc(id).delete();
+    return deleteDoc(doc(this.firestore, 'sponsor', id));
   }
 }

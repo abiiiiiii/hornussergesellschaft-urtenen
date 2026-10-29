@@ -6,7 +6,7 @@
     </div>
 
     <div class="news-container">
-      @if (authService.currentUser?.role == 'admin') {
+      @if (authService.currentUser()?.role == 'admin') {
         <div class="add" (click)="addNews()">
           <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
           <p>Neuigkeit hinzufügen</p>

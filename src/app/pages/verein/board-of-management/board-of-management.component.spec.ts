@@ -8,8 +8,8 @@ describe('BoardOfManagementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BoardOfManagementComponent ]
-    })
+    imports: [BoardOfManagementComponent]
+})
     .compileComponents();
   });
 

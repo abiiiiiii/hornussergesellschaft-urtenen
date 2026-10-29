@@ -1,12 +1,13 @@
 import {Component, EventEmitter, HostListener, Input, Output, ChangeDetectionStrategy} from '@angular/core';
 import {MasonryImage} from "../masonry-image";
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'app-photo-lightbox',
     templateUrl: './photo-lightbox.component.html',
     styleUrls: ['./photo-lightbox.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [MatIcon]
 })
 export class PhotoLightboxComponent {
 

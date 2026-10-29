@@ -2,14 +2,14 @@ import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GameService} from "../../../shared/services/game.service";
 import {Observable} from "rxjs";
-import {Location} from "@angular/common";
+import { Location, AsyncPipe } from "@angular/common";
 
 @Component({
     selector: 'app-game-list',
     templateUrl: './game-list.component.html',
     styleUrls: ['./game-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [AsyncPipe]
 })
 export class GameListComponent {
 

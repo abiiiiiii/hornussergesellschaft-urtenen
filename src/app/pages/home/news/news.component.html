@@ -2,10 +2,10 @@
   <div class="news">
     <div class="title">
       <h3>| {{news.title}}</h3>
-      @if (authService.currentUser?.role == 'admin') {
+      @if (authService.currentUser()?.role == 'admin') {
         <mat-icon (click)="edit()">edit</mat-icon>
       }
-      @if (authService.currentUser?.role == 'admin') {
+      @if (authService.currentUser()?.role == 'admin') {
         <mat-icon (click)="delete()">delete</mat-icon>
       }
     </div>

@@ -2,10 +2,10 @@
   <div class="event">
     <div class="title">
       <h3>{{event.date | date:'dd.MM.yyyy'}} | {{event.title}}</h3>
-      @if (authService.currentUser?.role == 'admin') {
+      @if (authService.currentUser()?.role == 'admin') {
         <mat-icon (click)="edit()">edit</mat-icon>
       }
-      @if (authService.currentUser?.role == 'admin') {
+      @if (authService.currentUser()?.role == 'admin') {
         <mat-icon (click)="delete()">delete</mat-icon>
       }
     </div>

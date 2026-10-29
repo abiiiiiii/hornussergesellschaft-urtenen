@@ -1,18 +1,20 @@
 import {Component, Inject, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {InternalDocument} from "../../../shared/models/internal-document.model";
-import {FormBuilder, Validators} from "@angular/forms";
+import { FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import {of} from "rxjs";
 import {InternalDocumentService} from "../../../shared/services/internal-document.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FileUploadService} from "../../../shared/services/file-upload.service";
 import {News} from "../../../shared/models/news.model";
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'app-edit-document',
     templateUrl: './edit-document.component.html',
     styleUrls: ['./edit-document.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatProgressSpinner]
 })
 export class EditDocumentComponent implements OnInit {
   isUpdating = false;

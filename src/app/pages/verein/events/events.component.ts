@@ -1,13 +1,14 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ClubEvent} from "../../../shared/models/event.model";
 import {EventService} from "../../../shared/services/event.service";
+import { EventComponent } from './event/event.component';
 
 @Component({
     selector: 'app-events',
     templateUrl: './events.component.html',
     styleUrls: ['./events.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [EventComponent]
 })
 export class EventsComponent implements OnInit {
 

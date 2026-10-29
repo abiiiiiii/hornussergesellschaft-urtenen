@@ -4,7 +4,7 @@
     <p>Hier findest du beispielsweise Dokumente für zukünftige Sitzungen...</p>
   </div>
 
-  @if (authService.currentUser?.role == 'admin') {
+  @if (authService.currentUser()?.role == 'admin') {
     <div class="add" (click)="addDocument()">
       <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
       <p>Dokument hinzufügen</p>
@@ -16,10 +16,10 @@
       @for (document of internalDocuments; track document) {
         <li>
           <a [href]="document.fileLink$ | async" target="_blank">{{document.name}}</a>
-          @if (authService.currentUser?.role == 'admin') {
+          @if (authService.currentUser()?.role == 'admin') {
             <mat-icon (click)="editDocument(document)">edit</mat-icon>
           }
-          @if (authService.currentUser?.role == 'admin') {
+          @if (authService.currentUser()?.role == 'admin') {
             <mat-icon (click)="deleteDocument(document.id)">delete</mat-icon>
           }
         </li>

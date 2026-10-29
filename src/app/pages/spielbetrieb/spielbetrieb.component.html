@@ -15,7 +15,7 @@
   </div>
 
   <div class="content">
-    @if (authService.currentUser?.role == 'admin') {
+    @if (authService.currentUser()?.role == 'admin') {
       <div class="add" (click)="addResult()">
         <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
         <p>Resultat hinzufügen</p>

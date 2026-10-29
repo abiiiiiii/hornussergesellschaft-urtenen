@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import {Team} from "../../../models/team.model";
 import {GameMode} from "../../../enums/game-mode.enum";
 import {Game} from "../../../models/game.model";
@@ -8,13 +8,16 @@ import {TeamService} from "../../../services/team.service";
 import {FileUploadService} from "../../../services/file-upload.service";
 import {combineLatest, of} from "rxjs";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import { MatFormField, MatLabel, MatInput, MatSuffix } from '@angular/material/input';
+import { MatDatepickerInput, MatDatepickerToggle, MatDatepicker } from '@angular/material/datepicker';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'app-add-result',
     templateUrl: './edit-result.component.html',
     styleUrls: ['./edit-result.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatDatepickerInput, MatDatepickerToggle, MatSuffix, MatDatepicker, MatProgressSpinner]
 })
 export class EditResultComponent implements OnInit {
   homeList: File;

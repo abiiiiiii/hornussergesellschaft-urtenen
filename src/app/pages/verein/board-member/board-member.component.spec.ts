@@ -8,14 +8,15 @@ describe('BoardMemberComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BoardMemberComponent ]
-    })
+    imports: [BoardMemberComponent]
+})
     .compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BoardMemberComponent);
     component = fixture.componentInstance;
+    component.member = { name: 'Aebi', preName: 'Joel', image: 'test.jpg', roles: [] } as any;
     fixture.detectChanges();
   });
 

@@ -24,7 +24,7 @@
   </div>
 
   <div class="events">
-    @if (authService.currentUser) {
+    @if (authService.currentUser()) {
       <div class="add" (click)="addEvent()">
         <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
         <p>Vereinanlass hinzufügen</p>

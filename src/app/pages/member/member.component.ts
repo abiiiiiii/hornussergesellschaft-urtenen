@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, inject} from '@angular/core';
 import {AuthService} from "../../core/services/auth.service";
 import {Router} from "@angular/router";
 import {InternalDocumentService} from "../../shared/services/internal-document.service";
@@ -6,26 +6,27 @@ import {InternalDocument} from "../../shared/models/internal-document.model";
 import {MatDialog} from "@angular/material/dialog";
 import {AddDocumentComponent} from "./add-document/add-document.component";
 import {EditDocumentComponent} from "./edit-document/edit-document.component";
+import { MatIcon } from '@angular/material/icon';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-member',
     templateUrl: './member.component.html',
     styleUrls: ['./member.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [MatIcon, AsyncPipe]
 })
 export class MemberComponent implements OnInit {
 
+  private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
+  public readonly authService = inject(AuthService);
+  public readonly internalDocumentService = inject(InternalDocumentService);
+
   public internalDocuments: InternalDocument[] = [];
 
-  constructor(private router: Router,
-              private dialog: MatDialog,
-              public authService: AuthService,
-              public internalDocumentService: InternalDocumentService) {
-  }
-
   ngOnInit(): void {
-    if (this.authService.currentUser == null) {
+    if (this.authService.currentUser() == null) {
       this.router.navigate(['']);
     } else {
       this.loadDocuments();
@@ -39,7 +40,7 @@ export class MemberComponent implements OnInit {
         internalDocument.fileLink$ = this.internalDocumentService.getInternalDocumentFile(internalDocument.fileName);
         return internalDocument;
       }).sort((a, b) => a.name.localeCompare(b.name, undefined, {numeric: true, sensitivity: 'base'}));
-    })
+    });
   }
 
   addDocument() {

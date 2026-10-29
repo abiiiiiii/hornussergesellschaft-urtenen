@@ -1,17 +1,19 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { NewsService } from "../../../../shared/services/news.service";
 import { News } from "../../../../shared/models/news.model";
 import { FileUploadService } from "../../../../shared/services/file-upload.service";
 import { combineLatest, of } from "rxjs";
 import {MatDialogRef} from "@angular/material/dialog";
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'app-add-news',
     templateUrl: './add-news.component.html',
     styleUrls: ['./add-news.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatProgressSpinner]
 })
 export class AddNewsComponent {
 

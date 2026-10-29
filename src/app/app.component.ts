@@ -1,14 +1,19 @@
-import {AfterViewInit, Component, ElementRef, ViewChild, ChangeDetectionStrategy} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild, ChangeDetectionStrategy, inject} from '@angular/core';
 import {AuthService} from "./core/services/auth.service";
 import {FileService} from "./shared/services/file.service";
 import {fromEvent} from "rxjs";
+import { NavigationComponent } from './core/components/navigation/navigation.component';
+import { HeaderComponent } from './core/components/header/header.component';
+import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from './core/components/footer/footer.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NavigationComponent, HeaderComponent, RouterOutlet, FooterComponent, MatIcon]
 })
 export class AppComponent implements AfterViewInit {
 
@@ -18,10 +23,7 @@ export class AppComponent implements AfterViewInit {
   title = 'Hornussergesellschaft Urtenen';
   showScrollUpButton = false;
 
-
-  constructor(public authService: AuthService) {
-    this.authService.checkIfUserIsLoggedIn();
-  }
+  public readonly authService = inject(AuthService);
 
   ngAfterViewInit() {
     fromEvent(this.content.nativeElement, 'scroll').subscribe(() => {

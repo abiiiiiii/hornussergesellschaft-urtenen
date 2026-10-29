@@ -8,8 +8,8 @@ describe('VereinComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VereinComponent ]
-    })
+    imports: [VereinComponent]
+})
     .compileComponents();
   });
 

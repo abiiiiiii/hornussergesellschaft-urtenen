@@ -1,17 +1,24 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { NewsService } from "../../../shared/services/news.service";
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [MatProgressSpinner, ReactiveFormsModule, MatFormField, MatLabel, MatInput]
 })
 export class LoginComponent implements OnInit {
+
+  private readonly authService = inject(AuthService);
+  private readonly formBuilder = inject(UntypedFormBuilder);
+  private readonly router = inject(Router);
+  private readonly newsService = inject(NewsService);
 
   loginError = false;
   isLoggingIn = false;
@@ -20,8 +27,8 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required]
   });
 
-  constructor(private authService: AuthService, private formBuilder: UntypedFormBuilder, private router: Router, private newsService: NewsService) {
-    this.loginForm.valueChanges.subscribe(() => this.loginError = false)
+  constructor() {
+    this.loginForm.valueChanges.subscribe(() => this.loginError = false);
   }
 
   ngOnInit(): void {
@@ -29,20 +36,15 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.isLoggingIn = true;
-    this.authService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value).subscribe((res) => {
-      this.authService.getUserRole(res.user.uid).subscribe(role => {
-        if (role.exists) {
-          this.authService.currentUser = {
-            userId: res.user.uid,
-            role: role.data().role
-          }
-        }
-      });
-      this.isLoggingIn = false;
-      this.router.navigate(['home']);
-    }, error => {
-      this.isLoggingIn = false;
-      this.loginError = true;
+    this.authService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value).subscribe({
+      next: () => {
+        this.isLoggingIn = false;
+        this.router.navigate(['home']);
+      },
+      error: () => {
+        this.isLoggingIn = false;
+        this.loginError = true;
+      }
     });
   }
 

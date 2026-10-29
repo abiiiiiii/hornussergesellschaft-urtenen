@@ -1,57 +1,58 @@
-import {Injectable} from '@angular/core';
-import {BoardMember} from "../models/board-member.model";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
+import { Injectable, inject } from '@angular/core';
+import { BoardMember } from "../models/board-member.model";
+import { from, Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { Firestore, collection, doc, getDocs, addDoc, setDoc, deleteDoc, DocumentReference, CollectionReference } from "@angular/fire/firestore";
+import { Storage, ref, getDownloadURL } from "@angular/fire/storage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoardService {
 
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) {
-  }
+  private readonly firestore = inject(Firestore);
+  private readonly storage = inject(Storage);
 
   getBoardMemberImage(imageName: string): Observable<string> {
-    return this.storage.ref('images/board/' + imageName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'images/board/' + imageName)));
   }
 
   getAllBoardMembers(): Observable<BoardMember[]> {
-    return this.firestore.collection<BoardMember>('board').get().pipe(
+    return from(getDocs(collection(this.firestore, 'board'))).pipe(
       map(res => {
-        let members: BoardMember[] = [];
-        res.forEach(doc => {
-          let member = doc.data() as BoardMember;
-          member.id = doc.id;
+        const members: BoardMember[] = [];
+        res.forEach(docSnap => {
+          const member = docSnap.data() as BoardMember;
+          member.id = docSnap.id;
           members.push(member);
-        })
+        });
         return members;
       })
     );
   }
 
   getPlaymaker(): Observable<BoardMember> {
-    return this.firestore.collection<BoardMember>('playmaker').get().pipe(
+    return from(getDocs(collection(this.firestore, 'playmaker'))).pipe(
       map(res => {
         let playmaker: BoardMember;
-        res.forEach(doc => {
-          playmaker = doc.data();
-        })
+        res.forEach(docSnap => {
+          playmaker = docSnap.data() as BoardMember;
+        });
         return playmaker;
       })
     );
   }
 
   createBoardMember(boardMember: BoardMember): Promise<DocumentReference<BoardMember>> {
-    return this.firestore.collection<BoardMember>('board').add(boardMember)
+    const boardCollection = collection(this.firestore, 'board') as CollectionReference<BoardMember>;
+    return addDoc(boardCollection, boardMember);
   }
 
   updateBoardMember(boardMember: BoardMember): Promise<void> {
-    return this.firestore.collection('board').doc<BoardMember>(boardMember.id).set(boardMember, {merge: true});
+    return setDoc(doc(this.firestore, 'board', boardMember.id), boardMember, { merge: true });
   }
 
   deleteBoardMember(id: string): Promise<void> {
-    return this.firestore.collection('board').doc(id).delete();
+    return deleteDoc(doc(this.firestore, 'board', id));
   }
 }

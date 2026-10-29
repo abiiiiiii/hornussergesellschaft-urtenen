@@ -20,7 +20,7 @@
       <li>
         <a routerLinkActive="active" routerLink="sponsoren" (click)="navigationService.handleHamburgerMenu()" >Sponsoren</a>
       </li>
-      @if (authService.currentUser != null) {
+      @if (authService.currentUser() != null) {
         <li>
           <a routerLinkActive="active" routerLink="member" (click)="navigationService.handleHamburgerMenu()" >Mitgliederbereich</a>
         </li>
@@ -37,10 +37,10 @@
     <a href="assets/pdf/Nachwuchs_Hornusser_Urtenen_Plan_2026.pdf" target="_blank">Download Jahresprogramm Nachwuchs Urtenen</a>
   </div>
   <div class="login">
-    @if (authService.currentUser == null) {
+    @if (authService.currentUser() == null) {
       <a routerLink="login" (click)="navigationService.handleHamburgerMenu()">Login</a>
     } @else {
-      <p>{{authService.currentUser?.role}} | <a (click)="logout()">Logout</a></p>
+      <p>{{authService.currentUser()?.role}} | <a (click)="logout()">Logout</a></p>
     }
   </div>
 </div>

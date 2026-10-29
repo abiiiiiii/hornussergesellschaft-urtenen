@@ -1,17 +1,19 @@
 import {Component, Inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import {News} from "../../../../shared/models/news.model";
 import {NewsService} from "../../../../shared/services/news.service";
 import {combineLatest, of} from "rxjs";
 import {FileUploadService} from "../../../../shared/services/file-upload.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'app-edit-news',
     templateUrl: './edit-news.component.html',
     styleUrls: ['./edit-news.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatProgressSpinner]
 })
 export class EditNewsComponent implements OnInit {
 

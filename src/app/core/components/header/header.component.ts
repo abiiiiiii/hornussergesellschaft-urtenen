@@ -5,8 +5,7 @@ import {NavigationService} from "../../../shared/services/navigation.service";
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class HeaderComponent {
 

@@ -1,19 +1,19 @@
-import {Component, HostListener, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {fromEvent} from "rxjs";
-import {throttle, throttleTime} from "rxjs/operators";
+import {Component, OnInit, ChangeDetectionStrategy, inject} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {NavigationService} from "../../../shared/services/navigation.service";
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-navigation',
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [RouterLink, RouterLinkActive]
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(public authService: AuthService, public navigationService: NavigationService) { }
+  public readonly authService = inject(AuthService);
+  public readonly navigationService = inject(NavigationService);
 
   ngOnInit(): void {
   }

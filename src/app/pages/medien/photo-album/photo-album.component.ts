@@ -4,13 +4,15 @@ import {PhotoAlbumService} from "../../../shared/services/photo-album.service";
 import {Album} from "../../../shared/models/album.model";
 import {FileService} from "../../../shared/services/file.service";
 import {MasonryImage} from "./masonry-image";
+import { NgxMasonryModule } from 'ngx-masonry';
+import { PhotoLightboxComponent } from './photo-lightbox/photo-lightbox.component';
 
 @Component({
     selector: 'app-photo-album',
     templateUrl: './photo-album.component.html',
     styleUrls: ['./photo-album.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgxMasonryModule, PhotoLightboxComponent]
 })
 export class PhotoAlbumComponent {
 

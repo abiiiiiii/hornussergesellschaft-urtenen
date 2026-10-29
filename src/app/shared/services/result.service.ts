@@ -1,39 +1,50 @@
-import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {Result} from "../models/result.model";
-import {map} from "rxjs/operators";
-import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from "rxjs";
+import { Result } from "../models/result.model";
+import { map } from "rxjs/operators";
+import {
+  Firestore,
+  collection,
+  doc,
+  getDocs,
+  addDoc,
+  setDoc,
+  deleteDoc,
+  DocumentReference,
+  CollectionReference
+} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResultService {
 
-  constructor(private firestore: AngularFirestore) { }
+  private readonly firestore = inject(Firestore);
 
   getAllResults(): Observable<Result[]> {
-    return this.firestore.collection<Result>('result').get().pipe(
+    return from(getDocs(collection(this.firestore, 'result'))).pipe(
       map(res => {
-        let results: Result[] = [];
-        res.forEach(doc => {
-          let result = doc.data() as Result;
-          result.id = doc.id;
+        const results: Result[] = [];
+        res.forEach(docSnap => {
+          const result = docSnap.data() as Result;
+          result.id = docSnap.id;
           results.push(result);
-        })
+        });
         return results;
       })
     );
   }
 
   createResult(result: Result): Promise<DocumentReference<Result>> {
-    return this.firestore.collection<Result>('result').add(result)
+    const col = collection(this.firestore, 'result') as CollectionReference<Result>;
+    return addDoc(col, result);
   }
 
   updateResult(result: Result): Promise<void> {
-    return this.firestore.collection('result').doc<Result>(result.id).set(result, { merge: true});
+    return setDoc(doc(this.firestore, 'result', result.id), result, { merge: true });
   }
 
   deleteResult(id: string): Promise<void> {
-    return this.firestore.collection('result').doc(id).delete();
+    return deleteDoc(doc(this.firestore, 'result', id));
   }
 }

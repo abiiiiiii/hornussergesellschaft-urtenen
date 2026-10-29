@@ -1,44 +1,66 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
-import {ClubEvent} from "../models/event.model";
-import {map} from "rxjs/operators";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, Observable, from } from "rxjs";
+import { ClubEvent } from "../models/event.model";
+import { map } from "rxjs/operators";
+import {
+  Firestore,
+  collection,
+  doc,
+  getDocs,
+  addDoc,
+  setDoc,
+  deleteDoc,
+  query,
+  orderBy,
+  where,
+  limit,
+  DocumentReference,
+  CollectionReference
+} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  load$ = new BehaviorSubject(undefined);
+  private readonly firestore = inject(Firestore);
 
-  constructor(private firestore: AngularFirestore) { }
+  readonly load$ = new BehaviorSubject(undefined);
 
   getAllEvents(): Observable<ClubEvent[]> {
-    return this.firestore.collection<ClubEvent>('event', ref => ref.orderBy('date', 'asc').where('active', '==', true).limit(5)).get().pipe(
+    const q = query(
+      collection(this.firestore, 'event'),
+      orderBy('date', 'asc'),
+      where('active', '==', true),
+      limit(5)
+    );
+    return from(getDocs(q)).pipe(
       map(res => {
-        let events: ClubEvent[] = [];
-        res.forEach(doc => {
-          let event = doc.data() as ClubEvent;
-          event.date = doc.data().date.toDate();
-          event.id = doc.id;
+        const events: ClubEvent[] = [];
+        res.forEach(docSnap => {
+          const data = docSnap.data();
+          const event = data as ClubEvent;
+          if (data['date'] && typeof data['date'].toDate === 'function') {
+            event.date = data['date'].toDate();
+          }
+          event.id = docSnap.id;
           events.push(event);
-        })
+        });
         return events;
       })
     );
   }
 
   createEvent(event: ClubEvent): Observable<DocumentReference<ClubEvent>> {
-    return fromPromise(this.firestore.collection<ClubEvent>('event').add(event));
+    const eventCollection = collection(this.firestore, 'event') as CollectionReference<ClubEvent>;
+    return from(addDoc(eventCollection, event));
   }
 
   updateEvent(event: ClubEvent): Observable<void> {
-    return fromPromise(this.firestore.collection('event').doc<ClubEvent>(event.id).set(event, { merge: true }));
+    return from(setDoc(doc(this.firestore, 'event', event.id), event, { merge: true }));
   }
 
   deleteEvent(id: string): Observable<void> {
-    return fromPromise(this.firestore.collection('event').doc(id).delete());
+    return from(deleteDoc(doc(this.firestore, 'event', id)));
   }
 }

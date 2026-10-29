@@ -1,63 +1,85 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
-import {Team} from "../models/team.model";
-import {map} from "rxjs/operators";
-import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
-import {YOUTH_TEAM_NAME} from "../../core/constants";
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, Observable, from } from "rxjs";
+import { Team } from "../models/team.model";
+import { map } from "rxjs/operators";
+import {
+  Firestore,
+  collection,
+  doc,
+  getDocs,
+  addDoc,
+  setDoc,
+  deleteDoc,
+  query,
+  where,
+  orderBy,
+  DocumentReference,
+  CollectionReference
+} from "@angular/fire/firestore";
+import { Storage, ref, getDownloadURL } from "@angular/fire/storage";
+import { YOUTH_TEAM_NAME } from "../../core/constants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
 
-  load$ = new BehaviorSubject(undefined);
+  private readonly firestore = inject(Firestore);
+  private readonly storage = inject(Storage);
 
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
+  readonly load$ = new BehaviorSubject(undefined);
 
   getTeamImage(fileName: string): Observable<string> {
-    return this.storage.ref('images/team_pictures/' + fileName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'images/team_pictures/' + fileName)));
   }
 
   getSeniorTeams(): Observable<Team[]> {
-    return this.firestore.collection<Team>('team', ref =>
-      ref.where('name', '!=', YOUTH_TEAM_NAME).orderBy('name', 'asc')).get().pipe(
+    const q = query(
+      collection(this.firestore, 'team'),
+      where('name', '!=', YOUTH_TEAM_NAME),
+      orderBy('name', 'asc')
+    );
+    return from(getDocs(q)).pipe(
       map(res => {
-        let teams: Team[] = [];
-        res.forEach(doc => {
-          let team = doc.data() as Team;
-          team.id = doc.id;
+        const teams: Team[] = [];
+        res.forEach(docSnap => {
+          const team = docSnap.data() as Team;
+          team.id = docSnap.id;
           teams.push(team);
-        })
+        });
         return teams;
       })
     );
   }
 
   getTeamByName(name: string): Observable<Team> {
-    return this.firestore.collection<Team>('team', ref => ref.where('name', '==', name)).get().pipe(
+    const q = query(
+      collection(this.firestore, 'team'),
+      where('name', '==', name)
+    );
+    return from(getDocs(q)).pipe(
       map(res => {
-        let teams: Team[] = [];
-        res.forEach(doc => {
-          let team = doc.data() as Team;
-          team.id = doc.id;
-          teams.push(team);
-        })
-        return teams[0];
+        const docSnap = res.docs[0];
+        if (docSnap) {
+          const team = docSnap.data() as Team;
+          team.id = docSnap.id;
+          return team;
+        }
+        return undefined as any;
       })
     );
   }
 
   createTeam(team: Team): Promise<DocumentReference<Team>> {
-    return this.firestore.collection<Team>('team').add(team)
+    const col = collection(this.firestore, 'team') as CollectionReference<Team>;
+    return addDoc(col, team);
   }
 
   updateTeam(team: Team): Observable<void> {
-    return fromPromise(this.firestore.collection('team').doc<Team>(team.id).set(team, { merge: true}));
+    return from(setDoc(doc(this.firestore, 'team', team.id), team, { merge: true }));
   }
 
   deleteTeam(id: string): Promise<void> {
-    return this.firestore.collection('team').doc(id).delete();
+    return deleteDoc(doc(this.firestore, 'team', id));
   }
 }
