@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {PhotoAlbumService} from "../../../shared/services/photo-album.service";
 import {Album} from "../../../shared/models/album.model";
@@ -11,6 +11,7 @@ import {MatDialogRef} from "@angular/material/dialog";
     selector: 'app-add-photo-album',
     templateUrl: './add-photo-album.component.html',
     styleUrls: ['./add-photo-album.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AddPhotoAlbumComponent {

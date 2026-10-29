@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { NewsService } from "../../../../shared/services/news.service";
 import { News } from "../../../../shared/models/news.model";
@@ -10,6 +10,7 @@ import {MatDialogRef} from "@angular/material/dialog";
     selector: 'app-add-news',
     templateUrl: './add-news.component.html',
     styleUrls: ['./add-news.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AddNewsComponent {

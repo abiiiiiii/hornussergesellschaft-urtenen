@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Observable} from "rxjs";
 import {BoardMember} from "../../../shared/models/board-member.model";
 import {BoardService} from "../../../shared/services/board.service";
@@ -7,6 +7,7 @@ import {BoardService} from "../../../shared/services/board.service";
     selector: 'app-board-member',
     templateUrl: './board-member.component.html',
     styleUrls: ['./board-member.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BoardMemberComponent implements OnInit {

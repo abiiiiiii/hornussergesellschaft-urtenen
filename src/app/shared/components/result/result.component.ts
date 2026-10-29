@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Game} from "../../models/game.model";
 import {Observable} from "rxjs";
 import {GameService} from "../../services/game.service";
@@ -11,6 +11,7 @@ import {MatDialog} from "@angular/material/dialog";
     selector: 'app-result',
     templateUrl: './result.component.html',
     styleUrls: ['./result.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ResultComponent implements OnInit{

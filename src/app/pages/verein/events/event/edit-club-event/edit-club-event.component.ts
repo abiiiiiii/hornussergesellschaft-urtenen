@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {combineLatest, of} from "rxjs";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
@@ -10,6 +10,7 @@ import {FileUploadService} from "../../../../../shared/services/file-upload.serv
     selector: 'app-edit-club-event',
     templateUrl: './edit-club-event.component.html',
     styleUrls: ['./edit-club-event.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditClubEventComponent implements OnInit {

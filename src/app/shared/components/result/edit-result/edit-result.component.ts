@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {Team} from "../../../models/team.model";
 import {GameMode} from "../../../enums/game-mode.enum";
@@ -13,6 +13,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
     selector: 'app-add-result',
     templateUrl: './edit-result.component.html',
     styleUrls: ['./edit-result.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditResultComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {Observable} from "rxjs";
 import {FileService} from "../../../shared/services/file.service";
 
@@ -6,6 +6,7 @@ import {FileService} from "../../../shared/services/file.service";
     selector: 'app-inn',
     templateUrl: './inn.component.html',
     styleUrls: ['./inn.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class InnComponent implements OnInit {

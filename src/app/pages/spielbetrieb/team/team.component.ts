@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Team} from "../../../shared/models/team.model";
 import {Game} from "../../../shared/models/game.model";
 import {TeamService} from "../../../shared/services/team.service";
@@ -9,6 +9,7 @@ import {GameMode} from "../../../shared/enums/game-mode.enum";
     selector: 'app-team',
     templateUrl: './team.component.html',
     styleUrls: ['./team.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TeamComponent implements OnInit {

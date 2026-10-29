@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {Team} from "../../../models/team.model";
 import {GameMode} from "../../../enums/game-mode.enum";
@@ -23,6 +23,7 @@ class DialogData {
     selector: 'app-add-result',
     templateUrl: './add-result.component.html',
     styleUrls: ['./add-result.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AddResultComponent implements OnInit {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {SponsorService} from "../../../shared/services/sponsor.service";
 import {SponsorType} from "../../../shared/enums/sponsor-type.enum";
 import {Sponsor} from "../../../shared/models/sponsor.model";
@@ -7,6 +7,7 @@ import {Sponsor} from "../../../shared/models/sponsor.model";
     selector: 'app-main-sponsors',
     templateUrl: './main-sponsors.component.html',
     styleUrls: ['./main-sponsors.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MainSponsorsComponent implements OnInit {

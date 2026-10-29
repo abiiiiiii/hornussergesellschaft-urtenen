@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {PhotoAlbumService} from "../../../shared/services/photo-album.service";
 import {Album} from "../../../shared/models/album.model";
@@ -9,6 +9,7 @@ import {MasonryImage} from "./masonry-image";
     selector: 'app-photo-album',
     templateUrl: './photo-album.component.html',
     styleUrls: ['./photo-album.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PhotoAlbumComponent {

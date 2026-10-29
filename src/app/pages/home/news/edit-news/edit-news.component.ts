@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {News} from "../../../../shared/models/news.model";
 import {NewsService} from "../../../../shared/services/news.service";
@@ -10,6 +10,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
     selector: 'app-edit-news',
     templateUrl: './edit-news.component.html',
     styleUrls: ['./edit-news.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditNewsComponent implements OnInit {

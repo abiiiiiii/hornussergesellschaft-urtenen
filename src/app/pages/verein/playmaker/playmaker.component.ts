@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BoardService } from 'src/app/shared/services/board.service';
 import {BoardMember} from "../../../shared/models/board-member.model";
 
@@ -6,6 +6,7 @@ import {BoardMember} from "../../../shared/models/board-member.model";
     selector: 'app-playmaker',
     templateUrl: './playmaker.component.html',
     styleUrls: ['./playmaker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PlaymakerComponent implements OnInit {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Observable} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {News} from "../../../shared/models/news.model";
@@ -10,6 +10,7 @@ import {EditNewsComponent} from "./edit-news/edit-news.component";
     selector: 'app-news',
     templateUrl: './news.component.html',
     styleUrls: ['./news.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NewsComponent implements OnInit {

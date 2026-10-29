@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {PhotoAlbumService} from "../../shared/services/photo-album.service";
 import {Album} from "../../shared/models/album.model";
 import {FileService} from "../../shared/services/file.service";
@@ -14,6 +14,7 @@ import {EditPhotoAlbumComponent} from "./edit-photo-album/edit-photo-album.compo
     selector: 'app-medien',
     templateUrl: './medien.component.html',
     styleUrls: ['./medien.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MedienComponent implements OnInit {

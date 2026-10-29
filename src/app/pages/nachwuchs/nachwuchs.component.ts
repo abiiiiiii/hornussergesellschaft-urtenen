@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 
 import {AuthService} from "../../core/services/auth.service";
@@ -13,6 +13,7 @@ import {YOUTH_TEAM_NAME} from "../../core/constants";
     selector: 'app-nachwuchs',
     templateUrl: './nachwuchs.component.html',
     styleUrl: './nachwuchs.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NachwuchsComponent {

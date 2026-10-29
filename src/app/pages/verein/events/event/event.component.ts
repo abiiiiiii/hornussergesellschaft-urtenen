@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NewsService} from "../../../../shared/services/news.service";
 import {Observable} from "rxjs";
 import {ClubEvent} from "../../../../shared/models/event.model";
@@ -11,6 +11,7 @@ import {EditClubEventComponent} from "./edit-club-event/edit-club-event.componen
     selector: 'app-event',
     templateUrl: './event.component.html',
     styleUrls: ['./event.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EventComponent implements OnInit {

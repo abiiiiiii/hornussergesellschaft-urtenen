@@ -1,4 +1,4 @@
-@import "src/assets/styles/vars";
+@use "src/assets/styles/vars" as *;
 
 .spielbetrieb {
   padding: 0 10%;

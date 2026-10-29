@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {BoardMember} from "../../../shared/models/board-member.model";
 import {BoardService} from "../../../shared/services/board.service";
 import {BoardRole} from "../../../shared/enums/board-role.enum";
@@ -7,6 +7,7 @@ import {BoardRole} from "../../../shared/enums/board-role.enum";
     selector: 'app-board-of-management',
     templateUrl: './board-of-management.component.html',
     styleUrls: ['./board-of-management.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BoardOfManagementComponent implements OnInit {

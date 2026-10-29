@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Game } from "../../../shared/models/game.model";
 import { GameService } from "../../../shared/services/game.service";
 
@@ -6,6 +6,7 @@ import { GameService } from "../../../shared/services/game.service";
     selector: 'app-latest-games',
     templateUrl: './latest-games.component.html',
     styleUrls: ['./latest-games.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LatestGamesComponent implements OnInit {

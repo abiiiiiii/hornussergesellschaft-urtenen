@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {combineLatest, of} from "rxjs";
 import {MatDialogRef} from "@angular/material/dialog";
@@ -10,6 +10,7 @@ import { ClubEvent } from 'src/app/shared/models/event.model';
     selector: 'app-add-club-event',
     templateUrl: './add-club-event.component.html',
     styleUrls: ['./add-club-event.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AddClubEventComponent {

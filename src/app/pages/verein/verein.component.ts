@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from "../../core/services/auth.service";
 import { Router } from '@angular/router';
 import {MatDialog} from "@angular/material/dialog";
@@ -8,6 +8,7 @@ import {AddClubEventComponent} from "./events/event/add-club-event/add-club-even
     selector: 'app-verein',
     templateUrl: './verein.component.html',
     styleUrls: ['./verein.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class VereinComponent implements AfterViewInit {

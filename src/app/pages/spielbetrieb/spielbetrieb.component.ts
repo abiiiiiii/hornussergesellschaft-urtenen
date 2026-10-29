@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Team } from "../../shared/models/team.model";
 import { TeamService } from "../../shared/services/team.service";
 import { AuthService } from "../../core/services/auth.service";
@@ -9,6 +9,7 @@ import {MatDialog} from "@angular/material/dialog";
     selector: 'app-spielbetrieb',
     templateUrl: './spielbetrieb.component.html',
     styleUrls: ['./spielbetrieb.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SpielbetriebComponent implements OnInit {

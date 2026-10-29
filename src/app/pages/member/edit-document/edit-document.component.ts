@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {InternalDocument} from "../../../shared/models/internal-document.model";
 import {FormBuilder, Validators} from "@angular/forms";
 import {of} from "rxjs";
@@ -11,6 +11,7 @@ import {News} from "../../../shared/models/news.model";
     selector: 'app-edit-document',
     templateUrl: './edit-document.component.html',
     styleUrls: ['./edit-document.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditDocumentComponent implements OnInit {

@@ -1,4 +1,4 @@
-@import "src/assets/styles/vars";
+@use "src/assets/styles/vars" as *;
 
 .latest-games {
   margin-top: 4rem;

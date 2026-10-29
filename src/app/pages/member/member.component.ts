@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {AuthService} from "../../core/services/auth.service";
 import {Router} from "@angular/router";
 import {InternalDocumentService} from "../../shared/services/internal-document.service";
@@ -11,6 +11,7 @@ import {EditDocumentComponent} from "./edit-document/edit-document.component";
     selector: 'app-member',
     templateUrl: './member.component.html',
     styleUrls: ['./member.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MemberComponent implements OnInit {

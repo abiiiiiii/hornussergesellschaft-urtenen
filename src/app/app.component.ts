@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {AuthService} from "./core/services/auth.service";
 import {FileService} from "./shared/services/file.service";
 import {fromEvent} from "rxjs";
@@ -7,6 +7,7 @@ import {fromEvent} from "rxjs";
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent implements AfterViewInit {

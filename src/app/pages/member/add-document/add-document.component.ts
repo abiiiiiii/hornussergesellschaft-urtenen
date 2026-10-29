@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NewsService} from "../../../shared/services/news.service";
@@ -12,6 +12,7 @@ import {InternalDocument} from "../../../shared/models/internal-document.model";
     selector: 'app-add-document',
     templateUrl: './add-document.component.html',
     styleUrls: ['./add-document.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AddDocumentComponent {

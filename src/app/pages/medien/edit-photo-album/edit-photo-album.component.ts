@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {PhotoAlbumService} from "../../../shared/services/photo-album.service";
 import {Album} from "../../../shared/models/album.model";
@@ -11,6 +11,7 @@ import {Game} from "../../../shared/models/game.model";
     selector: 'app-edit-photo-album',
     templateUrl: './edit-photo-album.component.html',
     styleUrls: ['./edit-photo-album.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditPhotoAlbumComponent {

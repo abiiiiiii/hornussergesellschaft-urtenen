@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from "../../core/services/auth.service";
 import { NewsService } from "../../shared/services/news.service";
 import { News } from "../../shared/models/news.model";
@@ -10,6 +10,7 @@ import {MatDialog} from "@angular/material/dialog";
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class HomeComponent {

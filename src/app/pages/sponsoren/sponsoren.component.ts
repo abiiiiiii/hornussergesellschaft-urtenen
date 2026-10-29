@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Sponsor} from "../../shared/models/sponsor.model";
 import {SponsorType} from "../../shared/enums/sponsor-type.enum";
 import {SponsorService} from "../../shared/services/sponsor.service";
@@ -7,6 +7,7 @@ import {SponsorService} from "../../shared/services/sponsor.service";
     selector: 'app-sponsoren',
     templateUrl: './sponsoren.component.html',
     styleUrls: ['./sponsoren.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SponsorenComponent implements AfterViewInit {
