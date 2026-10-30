@@ -1,14 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Team} from "../../../shared/models/team.model";
 import {Game} from "../../../shared/models/game.model";
 import {TeamService} from "../../../shared/services/team.service";
 import {GameService} from "../../../shared/services/game.service";
 import {GameMode} from "../../../shared/enums/game-mode.enum";
+import { NgIf, NgSwitch, NgFor } from '@angular/common';
+import { TeamListComponent } from '../team-list/team-list.component';
+import { ResultComponent } from '../../../shared/components/result/result.component';
 
 @Component({
-  selector: 'app-team',
-  templateUrl: './team.component.html',
-  styleUrls: ['./team.component.scss']
+    selector: 'app-team',
+    templateUrl: './team.component.html',
+    styleUrls: ['./team.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [NgIf, TeamListComponent, NgSwitch, NgFor, ResultComponent]
 })
 export class TeamComponent implements OnInit {
 

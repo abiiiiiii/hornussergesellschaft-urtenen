@@ -1,4 +1,4 @@
-@import "src/assets/styles/vars";
+@use "src/assets/styles/vars" as *;
 
 img {
   width: 100%;

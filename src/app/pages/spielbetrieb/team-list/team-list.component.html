@@ -1,5 +1,7 @@
 <div class="list">
-  <div *ngFor="let player of players" class="player">
-    <p> <b>{{player.name}}</b> {{player.preName}}</p>
-  </div>
+  @for (player of players; track player) {
+    <div class="player">
+      <p> <b>{{player.name}}</b> {{player.preName}}</p>
+    </div>
+  }
 </div>

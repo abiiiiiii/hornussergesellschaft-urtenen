@@ -8,8 +8,8 @@ describe('AddClubEventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddClubEventComponent ]
-    })
+    imports: [AddClubEventComponent]
+})
     .compileComponents();
   });
 

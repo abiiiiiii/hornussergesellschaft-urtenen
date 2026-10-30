@@ -1,17 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { NavigationComponent } from './core/components/navigation/navigation.component';
+import { HeaderComponent } from './core/components/header/header.component';
+import { FooterComponent } from './core/components/footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
+    imports: [
+        RouterTestingModule,
+        NavigationComponent,
+        HeaderComponent,
+        FooterComponent,
         AppComponent
-      ],
-    }).compileComponents();
+    ],
+}).compileComponents();
   });
 
   it('should create the app', () => {
@@ -20,16 +24,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'hornussergesellschaft-urtenen'`, () => {
+  it(`should have as title 'Hornussergesellschaft Urtenen'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('hornussergesellschaft-urtenen');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('hornussergesellschaft-urtenen app is running!');
+    expect(app.title).toEqual('Hornussergesellschaft Urtenen');
   });
 });

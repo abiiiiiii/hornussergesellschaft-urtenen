@@ -1,23 +1,37 @@
 <div class="sponsors">
   <h1>Sponsoren</h1>
-  <div class="gold" *ngIf="mainSponsors.length > 0">
-    <h2>Hauptsponsoren</h2>
-    <div class="sponsor" *ngFor="let sponsor of mainSponsors">
-      <app-sponsor [sponsor]="sponsor"></app-sponsor>
+  @if (mainSponsors.length > 0) {
+    <div class="gold">
+      <h2>Hauptsponsoren</h2>
+      @for (sponsor of mainSponsors; track sponsor) {
+        <div class="sponsor">
+          <app-sponsor [sponsor]="sponsor"></app-sponsor>
+        </div>
+      }
     </div>
-  </div>
-  <div class="silver" *ngIf="sponsors.length > 0">
-    <h2>Sponsoren</h2>
-    <div class="sponsor" *ngFor="let sponsor of sponsors">
-      <app-sponsor [sponsor]="sponsor"></app-sponsor>
+  }
+  @if (sponsors.length > 0) {
+    <div class="silver">
+      <h2>Sponsoren</h2>
+      @for (sponsor of sponsors; track sponsor) {
+        <div class="sponsor">
+          <app-sponsor [sponsor]="sponsor"></app-sponsor>
+        </div>
+      }
     </div>
-  </div>
-  <div class="bronze" *ngIf="donators.length > 0">
-    <h2>Donatoren</h2>
-    <div class="sponsor" *ngFor="let sponsor of donators">
-      <app-sponsor [sponsor]="sponsor"></app-sponsor>
+  }
+  @if (donators.length > 0) {
+    <div class="bronze">
+      <h2>Donatoren</h2>
+      @for (sponsor of donators; track sponsor) {
+        <div class="sponsor">
+          <app-sponsor [sponsor]="sponsor"></app-sponsor>
+        </div>
+      }
+      @for (sponsor of privateDonators; track sponsor) {
+        <div class="sponsor">
+          <app-sponsor [sponsor]="sponsor"></app-sponsor>
+        </div>
+      }
     </div>
-    <div class="sponsor" *ngFor="let sponsor of privateDonators">
-      <app-sponsor [sponsor]="sponsor"></app-sponsor>
-    </div>
-  </div>
+  }

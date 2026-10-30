@@ -8,12 +8,13 @@ describe('PhotoLightboxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PhotoLightboxComponent ]
-    })
+    imports: [PhotoLightboxComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(PhotoLightboxComponent);
     component = fixture.componentInstance;
+    component.image = { url: 'test.jpg' } as any;
     fixture.detectChanges();
   });
 

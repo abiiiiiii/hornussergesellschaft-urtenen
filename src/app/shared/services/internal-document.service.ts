@@ -1,48 +1,56 @@
-import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {Sponsor} from "../models/sponsor.model";
-import {SponsorType} from "../enums/sponsor-type.enum";
-import {map} from "rxjs/operators";
-import {News} from "../models/news.model";
-import {AngularFirestore, DocumentReference} from "@angular/fire/compat/firestore";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {InternalDocument} from "../models/internal-document.model";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from "rxjs";
+import { map } from "rxjs/operators";
+import {
+  Firestore,
+  collection,
+  doc,
+  getDocs,
+  addDoc,
+  setDoc,
+  deleteDoc,
+  DocumentReference,
+  CollectionReference
+} from "@angular/fire/firestore";
+import { Storage, ref, getDownloadURL } from "@angular/fire/storage";
+import { InternalDocument } from "../models/internal-document.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class InternalDocumentService {
 
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
+  private readonly firestore = inject(Firestore);
+  private readonly storage = inject(Storage);
 
   getAllInternalDocuments(): Observable<InternalDocument[]> {
-    return this.firestore.collection<InternalDocument>('internal-document').get().pipe(
+    return from(getDocs(collection(this.firestore, 'internal-document'))).pipe(
       map(res => {
-        let internalDocuments: InternalDocument[] = [];
-        res.forEach(doc => {
-          let internalDocument = doc.data() as InternalDocument;
-          internalDocument.id = doc.id;
+        const internalDocuments: InternalDocument[] = [];
+        res.forEach(docSnap => {
+          const internalDocument = docSnap.data() as InternalDocument;
+          internalDocument.id = docSnap.id;
           internalDocuments.push(internalDocument);
-        })
+        });
         return internalDocuments;
       })
     );
   }
 
   getInternalDocumentFile(fileName: string): Observable<string> {
-    return this.storage.ref('pdf/internal/' + fileName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'pdf/internal/' + fileName)));
   }
 
   createInternalDocument(internalDocument: InternalDocument): Observable<DocumentReference<InternalDocument>> {
-    return fromPromise(this.firestore.collection<InternalDocument>('internal-document').add(internalDocument));
+    const col = collection(this.firestore, 'internal-document') as CollectionReference<InternalDocument>;
+    return from(addDoc(col, internalDocument));
   }
 
   updateInternalDocument(internalDocument: InternalDocument): Observable<void> {
-    return fromPromise(this.firestore.collection('internal-document').doc<InternalDocument>(internalDocument.id).set(internalDocument, { merge: true}));
+    return from(setDoc(doc(this.firestore, 'internal-document', internalDocument.id), internalDocument, { merge: true }));
   }
 
   deleteInternalDocument(id: string): Observable<void> {
-    return fromPromise(this.firestore.collection('internal-document').doc(id).delete());
+    return from(deleteDoc(doc(this.firestore, 'internal-document', id)));
   }
 }

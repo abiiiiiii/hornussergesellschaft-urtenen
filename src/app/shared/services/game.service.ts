@@ -1,75 +1,100 @@
-import {Injectable} from '@angular/core';
-import {flatMap, Observable} from "rxjs";
-import {Game} from "../models/game.model";
-import {filter, map} from "rxjs/operators";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {AngularFirestore, DocumentReference, QueryDocumentSnapshot} from "@angular/fire/compat/firestore";
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from "rxjs";
+import { Game } from "../models/game.model";
+import { filter, map } from "rxjs/operators";
+import { Storage, ref, getDownloadURL } from "@angular/fire/storage";
+import {
+  Firestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  setDoc,
+  deleteDoc,
+  query,
+  orderBy,
+  limit,
+  DocumentReference,
+  CollectionReference,
+  DocumentData
+} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  private CURRENT_YEAR = new Date(new Date().getFullYear(), 0, 1);
+  private readonly firestore = inject(Firestore);
+  private readonly storage = inject(Storage);
 
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) {
-  }
+  private readonly CURRENT_YEAR = new Date(new Date().getFullYear(), 0, 1);
 
   getGameList(fileName: string): Observable<string> {
-    return this.storage.ref('lists/' + fileName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'lists/' + fileName)));
   }
 
   getGameReport(fileName: string): Observable<string> {
-    return this.storage.ref('pdf/report/' + fileName).getDownloadURL();
+    return from(getDownloadURL(ref(this.storage, 'pdf/report/' + fileName)));
   }
 
   getLatestGames(): Observable<Game[]> {
-    return this.firestore.collection<Game>('game', ref => ref.orderBy('createdAt', 'desc').limit(5)).get().pipe(
+    const q = query(
+      collection(this.firestore, 'game'),
+      orderBy('createdAt', 'desc'),
+      limit(5)
+    );
+    return from(getDocs(q)).pipe(
       map(docs => {
-        let games: Game[] = [];
-        docs.forEach(doc => {
-          if (doc.data().createdAt.toDate() > this.CURRENT_YEAR) {
-            let game = this.mapToGame(doc);
-            games.push(game);
+        const games: Game[] = [];
+        docs.forEach(docSnap => {
+          const data = docSnap.data();
+          if (data?.['createdAt'] && typeof data['createdAt'].toDate === 'function') {
+            if (data['createdAt'].toDate() > this.CURRENT_YEAR) {
+              games.push(this.mapToGame(docSnap.id, data));
+            }
           }
-        })
+        });
         return games;
       })
     );
   }
 
   getGame(documentId: string): Observable<Game | undefined> {
-    return this.firestore.collection<Game>('game').doc(documentId).get().pipe(
+    return from(getDoc(doc(this.firestore, 'game', documentId))).pipe(
       filter(res => {
-        var data = res.data();
-        if (data) {
-          return data.createdAt.toDate() > this.CURRENT_YEAR;
+        const data = res.data();
+        if (data?.['createdAt'] && typeof data['createdAt'].toDate === 'function') {
+          return data['createdAt'].toDate() > this.CURRENT_YEAR;
         }
         return false;
       }),
       map(res => {
-        return this.mapToGame(res);
+        const data = res.data();
+        return data ? this.mapToGame(res.id, data) : undefined;
       })
     );
   }
 
   createGame(game: Game): Observable<DocumentReference<Game>> {
-    return fromPromise(this.firestore.collection<Game>('game').add(game));
+    const gameCollection = collection(this.firestore, 'game') as CollectionReference<Game>;
+    return from(addDoc(gameCollection, game));
   }
 
   updateGame(game: Game): Observable<void> {
-    return fromPromise(this.firestore.collection('game').doc<Game>(game.id).set(game, {merge: true}));
+    return from(setDoc(doc(this.firestore, 'game', game.id), game, { merge: true }));
   }
 
   deleteGame(id: string): Observable<void> {
-    return fromPromise(this.firestore.collection('game').doc(id).delete());
+    return from(deleteDoc(doc(this.firestore, 'game', id)));
   }
 
-  private mapToGame(doc: QueryDocumentSnapshot<Game>) {
-    let game = doc.data() as Game;
-    game.id = doc.id;
-    game.createdAt = doc.data().createdAt.toDate();
+  private mapToGame(id: string, data: DocumentData): Game {
+    const game = { ...data } as Game;
+    game.id = id;
+    if (data['createdAt'] && typeof data['createdAt'].toDate === 'function') {
+      game.createdAt = data['createdAt'].toDate();
+    }
     return game;
   }
 }

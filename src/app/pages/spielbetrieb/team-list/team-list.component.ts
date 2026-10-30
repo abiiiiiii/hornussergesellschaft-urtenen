@@ -1,11 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Player} from "../../../shared/models/player.model";
 import {pluck} from "rxjs/operators";
 
 @Component({
-  selector: 'app-team-list',
-  templateUrl: './team-list.component.html',
-  styleUrls: ['./team-list.component.scss']
+    selector: 'app-team-list',
+    templateUrl: './team-list.component.html',
+    styleUrls: ['./team-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class TeamListComponent implements OnInit {
 

@@ -1,4 +1,8 @@
 <div class="events">
-  <app-event *ngFor="let event of events" [event]="event" class="event"></app-event>
-  <p *ngIf="events.length == 0">Aktuell gibt es keine Vereinsanlässe...</p>
+  @for (event of events; track event) {
+    <app-event [event]="event" class="event"></app-event>
+  }
+  @if (events.length == 0) {
+    <p>Aktuell gibt es keine Vereinsanlässe...</p>
+  }
 </div>

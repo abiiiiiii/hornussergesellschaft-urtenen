@@ -1,19 +1,24 @@
-<div class="album" *ngIf="album">
-  <h2>{{album.name}}</h2>
-
-  <ngx-masonry [ordered]="true">
-    <div class="image" ngxMasonryItem *ngFor="let image of masonryImages;" (click)="openLightbox(image)">
-      <img [src]="image.url" width="100%" style="cursor: pointer;">
+@if (album) {
+  <div class="album">
+    <h2>{{album.name}}</h2>
+    <ngx-masonry [ordered]="true">
+      @for (image of masonryImages; track image) {
+        <div class="image" ngxMasonryItem (click)="openLightbox(image)">
+          <img [src]="image.url" width="100%" style="cursor: pointer;">
+        </div>
+      }
+    </ngx-masonry>
+    @if (lightboxImage) {
+      <app-photo-lightbox class="lightbox" [image]="lightboxImage"
+        (previous)="previousImage()"
+        (next)="nextImage()"
+      (close)="closeLightbox()"></app-photo-lightbox>
+    }
+    <div>
+      <div class="break-line"></div>
+      @if (album.author) {
+        <p>Fotos von {{album.author}}</p>
+      }
     </div>
-  </ngx-masonry>
-
-  <app-photo-lightbox class="lightbox" *ngIf="lightboxImage" [image]="lightboxImage"
-                      (previous)="previousImage()"
-                      (next)="nextImage()"
-                      (close)="closeLightbox()"></app-photo-lightbox>
-
-  <div>
-    <div class="break-line"></div>
-    <p *ngIf="album.author">Fotos von {{album.author}}</p>
   </div>
-</div>
+}

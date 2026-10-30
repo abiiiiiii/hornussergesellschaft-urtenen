@@ -1,21 +1,26 @@
 <div class="login">
   <h1>Login</h1>
-  <mat-spinner class="spinner" *ngIf="isLoggingIn"></mat-spinner>
-  <form *ngIf="!isLoggingIn" [formGroup]="loginForm">
-    <mat-form-field class="input">
-      <mat-label>Benutzername</mat-label>
-      <input matInput type="text" formControlName="username">
-    </mat-form-field>
-    <mat-form-field class="input">
-      <mat-label>Passwort</mat-label>
-      <input matInput type="password" formControlName="password">
-    </mat-form-field>
-    <p class="error" *ngIf="loginError">Benutzername oder Passwort ist falsch!</p>
-
-    <div class="login-button">
-      <button (click)="login()">
-        <p>Login</p>
-      </button>
-    </div>
-  </form>
+  @if (isLoggingIn) {
+    <mat-spinner class="spinner"></mat-spinner>
+  }
+  @if (!isLoggingIn) {
+    <form [formGroup]="loginForm">
+      <mat-form-field class="input">
+        <mat-label>Benutzername</mat-label>
+        <input matInput type="text" formControlName="username">
+      </mat-form-field>
+      <mat-form-field class="input">
+        <mat-label>Passwort</mat-label>
+        <input matInput type="password" formControlName="password">
+      </mat-form-field>
+      @if (loginError) {
+        <p class="error">Benutzername oder Passwort ist falsch!</p>
+      }
+      <div class="login-button">
+        <button (click)="login()">
+          <p>Login</p>
+        </button>
+      </div>
+    </form>
+  }
 </div>

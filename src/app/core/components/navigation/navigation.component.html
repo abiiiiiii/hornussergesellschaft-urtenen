@@ -20,9 +20,11 @@
       <li>
         <a routerLinkActive="active" routerLink="sponsoren" (click)="navigationService.handleHamburgerMenu()" >Sponsoren</a>
       </li>
-      <li *ngIf="authService.currentUser != null">
-        <a routerLinkActive="active" routerLink="member" (click)="navigationService.handleHamburgerMenu()" >Mitgliederbereich</a>
-      </li>
+      @if (authService.currentUser() != null) {
+        <li>
+          <a routerLinkActive="active" routerLink="member" (click)="navigationService.handleHamburgerMenu()" >Mitgliederbereich</a>
+        </li>
+      }
       <li>
         <a href="https://arena.asport.tv/club/4908/hg-urtenen" target="_blank" (click)="navigationService.handleHamburgerMenu()" >Liveübertragung Spiele</a>
       </li>
@@ -35,9 +37,10 @@
     <a href="assets/pdf/Nachwuchs_Hornusser_Urtenen_Plan_2026.pdf" target="_blank">Download Jahresprogramm Nachwuchs Urtenen</a>
   </div>
   <div class="login">
-    <a *ngIf="authService.currentUser == null;else loggedIn" routerLink="login" (click)="navigationService.handleHamburgerMenu()">Login</a>
-    <ng-template #loggedIn>
-      <p>{{authService.currentUser?.role}} | <a (click)="logout()">Logout</a></p>
-    </ng-template>
+    @if (authService.currentUser() == null) {
+      <a routerLink="login" (click)="navigationService.handleHamburgerMenu()">Login</a>
+    } @else {
+      <p>{{authService.currentUser()?.role}} | <a (click)="logout()">Logout</a></p>
+    }
   </div>
 </div>

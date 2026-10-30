@@ -1,5 +1,7 @@
 @use "@angular/material" as mat;
-@include mat.core();
+@use "src/assets/styles/vars" as *;
+@include mat.elevation-classes();
+@include mat.app-background();
 
 $my-primary: mat.m2-define-palette(mat.$m2-green-palette);
 $my-accent: mat.m2-define-palette(mat.$m2-grey-palette);
@@ -14,7 +16,6 @@ $my-theme: mat.m2-define-light-theme((
 
 @include mat.all-component-themes($my-theme);
 
-@import "src/assets/styles/vars";
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: Averta Regular;

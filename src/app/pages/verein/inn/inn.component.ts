@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {Observable} from "rxjs";
 import {FileService} from "../../../shared/services/file.service";
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-inn',
-  templateUrl: './inn.component.html',
-  styleUrls: ['./inn.component.scss']
+    selector: 'app-inn',
+    templateUrl: './inn.component.html',
+    styleUrls: ['./inn.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [AsyncPipe]
 })
 export class InnComponent implements OnInit {
 

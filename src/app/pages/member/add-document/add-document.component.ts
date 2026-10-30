@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {Component, ChangeDetectionStrategy} from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NewsService} from "../../../shared/services/news.service";
 import {FileUploadService} from "../../../shared/services/file-upload.service";
@@ -7,11 +7,15 @@ import {InternalDocumentService} from "../../../shared/services/internal-documen
 import {News} from "../../../shared/models/news.model";
 import {combineLatest, of} from "rxjs";
 import {InternalDocument} from "../../../shared/models/internal-document.model";
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-add-document',
-  templateUrl: './add-document.component.html',
-  styleUrls: ['./add-document.component.scss']
+    selector: 'app-add-document',
+    templateUrl: './add-document.component.html',
+    styleUrls: ['./add-document.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatProgressSpinner]
 })
 export class AddDocumentComponent {
 

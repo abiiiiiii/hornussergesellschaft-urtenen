@@ -8,8 +8,8 @@ describe('SpielbetriebComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpielbetriebComponent ]
-    })
+    imports: [SpielbetriebComponent]
+})
     .compileComponents();
   });
 

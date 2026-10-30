@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {Observable} from "rxjs";
 import {FileService} from "../../../shared/services/file.service";
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.scss']
+    selector: 'app-history',
+    templateUrl: './timeline.component.html',
+    styleUrls: ['./timeline.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [AsyncPipe]
 })
 export class TimelineComponent implements OnInit {
 

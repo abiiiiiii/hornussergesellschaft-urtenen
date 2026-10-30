@@ -1,17 +1,16 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from "./pages/home/home.component";
-import {VereinComponent} from "./pages/verein/verein.component";
-import {MedienComponent} from "./pages/medien/medien.component";
-import {SponsorenComponent} from "./pages/sponsoren/sponsoren.component";
-import {SpielbetriebComponent} from "./pages/spielbetrieb/spielbetrieb.component";
-import {LoginComponent} from "./core/components/login/login.component";
-import {GameListComponent} from "./pages/spielbetrieb/game-list/game-list.component";
-import {MemberComponent} from "./pages/member/member.component";
-import {PhotoAlbumComponent} from "./pages/medien/photo-album/photo-album.component";
-import {NachwuchsComponent} from "./pages/nachwuchs/nachwuchs.component";
+import { Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { VereinComponent } from './pages/verein/verein.component';
+import { MedienComponent } from './pages/medien/medien.component';
+import { SponsorenComponent } from './pages/sponsoren/sponsoren.component';
+import { SpielbetriebComponent } from './pages/spielbetrieb/spielbetrieb.component';
+import { LoginComponent } from './core/components/login/login.component';
+import { GameListComponent } from './pages/spielbetrieb/game-list/game-list.component';
+import { MemberComponent } from './pages/member/member.component';
+import { PhotoAlbumComponent } from './pages/medien/photo-album/photo-album.component';
+import { NachwuchsComponent } from './pages/nachwuchs/nachwuchs.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
@@ -74,9 +73,3 @@ const routes: Routes = [
   }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled'})],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-}

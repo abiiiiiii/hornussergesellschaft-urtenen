@@ -8,8 +8,8 @@ describe('LatestGamesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LatestGamesComponent ]
-    })
+    imports: [LatestGamesComponent]
+})
     .compileComponents();
   });
 

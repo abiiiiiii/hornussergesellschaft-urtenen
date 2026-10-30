@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import {combineLatest, of} from "rxjs";
 import {MatDialogRef} from "@angular/material/dialog";
 import {EventService} from "../../../../../shared/services/event.service";
 import {FileUploadService} from "../../../../../shared/services/file-upload.service";
 import { ClubEvent } from 'src/app/shared/models/event.model';
+import { MatFormField, MatLabel, MatInput, MatSuffix } from '@angular/material/input';
+import { MatDatepickerInput, MatDatepickerToggle, MatDatepicker } from '@angular/material/datepicker';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-add-club-event',
-  templateUrl: './add-club-event.component.html',
-  styleUrls: ['./add-club-event.component.scss']
+    selector: 'app-add-club-event',
+    templateUrl: './add-club-event.component.html',
+    styleUrls: ['./add-club-event.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatDatepickerInput, MatDatepickerToggle, MatSuffix, MatDatepicker, MatProgressSpinner]
 })
 export class AddClubEventComponent {
 

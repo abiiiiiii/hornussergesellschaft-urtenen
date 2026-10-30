@@ -1,16 +1,20 @@
-import {Component} from '@angular/core';
-import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {Component, ChangeDetectionStrategy} from '@angular/core';
+import { FormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import {PhotoAlbumService} from "../../../shared/services/photo-album.service";
 import {Album} from "../../../shared/models/album.model";
 import {FileService} from "../../../shared/services/file.service";
 import {FileUploadService} from "../../../shared/services/file-upload.service";
 import {combineLatest, Observable} from "rxjs";
 import {MatDialogRef} from "@angular/material/dialog";
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-add-photo-album',
-  templateUrl: './add-photo-album.component.html',
-  styleUrls: ['./add-photo-album.component.scss']
+    selector: 'app-add-photo-album',
+    templateUrl: './add-photo-album.component.html',
+    styleUrls: ['./add-photo-album.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatProgressSpinner]
 })
 export class AddPhotoAlbumComponent {
 

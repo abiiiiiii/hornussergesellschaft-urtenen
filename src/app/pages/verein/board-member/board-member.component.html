@@ -1,8 +1,12 @@
-<div class="member" *ngIf="member">
-  <img [src]="image$ | async" alt="">
-  <div>
-    <h3 class="roles"><span *ngFor="let role of member.roles">{{role}}<span class="separator">, </span>  </span></h3>
-    <p>{{member.name}}</p>
-    <p>{{member.preName}}</p>
+@if (member) {
+  <div class="member">
+    <img [src]="image$ | async" alt="">
+    <div>
+      <h3 class="roles">@for (role of member.roles; track role) {
+        <span>{{role}}<span class="separator">, </span>  </span>
+      }</h3>
+      <p>{{member.name}}</p>
+      <p>{{member.preName}}</p>
+    </div>
   </div>
-</div>
+}
