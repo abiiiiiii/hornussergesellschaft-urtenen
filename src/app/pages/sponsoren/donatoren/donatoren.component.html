@@ -1,13 +1,12 @@
 <div class="donatoren-section">
-  <div class="section-header">
-    <h2>Donatoren</h2>
-    @if (authService.isAdmin()) {
-      <div class="add" (click)="addDonator()">
-        <mat-icon>add_circle_outline</mat-icon>
-        <p>Donator hinzufügen</p>
-      </div>
-    }
-  </div>
+  @if (authService.isAdmin()) {
+    <div class="add" (click)="addDonator()">
+      <mat-icon>add_circle_outline</mat-icon>
+      <p>Donator hinzufügen</p>
+    </div>
+  }
+
+  <h2>Donatoren</h2>
 
   @if (companyDonators.length > 0) {
     <div class="donators-group company-donators">
