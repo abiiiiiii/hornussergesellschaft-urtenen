@@ -17,9 +17,9 @@
             <div class="overlay">
               <p>{{album.name}}</p>
               @if (authService.currentUser()?.role == 'admin') {
-                <div class="actions">
-                  <mat-icon (click)="edit(album)">edit</mat-icon>
-                  <mat-icon (click)="delete(album)">delete</mat-icon>
+                <div class="actions admin-actions">
+                  <mat-icon class="action-btn edit-btn" (click)="edit(album)" title="Bearbeiten">edit</mat-icon>
+                  <mat-icon class="action-btn delete-btn" (click)="delete(album)" title="Löschen">delete</mat-icon>
                 </div>
               }
             </div>

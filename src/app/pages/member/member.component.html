@@ -17,10 +17,10 @@
         <li>
           <a [href]="document.fileLink$ | async" target="_blank">{{document.name}}</a>
           @if (authService.currentUser()?.role == 'admin') {
-            <mat-icon (click)="editDocument(document)">edit</mat-icon>
-          }
-          @if (authService.currentUser()?.role == 'admin') {
-            <mat-icon (click)="deleteDocument(document.id)">delete</mat-icon>
+            <div class="admin-actions">
+              <mat-icon class="action-btn edit-btn" (click)="editDocument(document)" title="Bearbeiten">edit</mat-icon>
+              <mat-icon class="action-btn delete-btn" (click)="deleteDocument(document.id)" title="Löschen">delete</mat-icon>
+            </div>
           }
         </li>
       }
