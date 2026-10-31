@@ -1,18 +1,31 @@
 @use "src/assets/styles/vars" as *;
 
+:host {
+  display: block;
+}
+
 .edit-donator-dialog {
   max-width: 550px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  box-sizing: border-box;
 
   h2 {
+    flex: 0 0 auto;
     color: $dark-green;
     font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem 0;
   }
 
   mat-dialog-content {
-    max-height: 80vh;
-    padding-top: 0.5rem;
+    flex: 1 1 auto;
+    max-height: calc(85vh - 140px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5rem 0.25rem;
+    margin: 0;
   }
 
   .form-row {
@@ -75,14 +88,21 @@
   }
 
   mat-dialog-actions {
+    flex: 0 0 auto;
     display: flex;
-    gap: 0.5rem;
-    padding: 1rem 0 0 0;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin: 1rem 0 0 0;
+    padding: 0.75rem 0 0.25rem 0;
+    border-top: 1px solid #eee;
 
     .cancel-btn {
       background-color: transparent;
       color: #666;
       border: 1px solid #ccc;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+
       &:hover {
         background-color: #f5f5f5;
       }
@@ -91,7 +111,9 @@
     .save-btn {
       background-color: $light-green;
       color: white;
-      min-width: 100px;
+      min-width: 110px;
+      padding: 0.4rem 1.25rem;
+      border-radius: 4px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
