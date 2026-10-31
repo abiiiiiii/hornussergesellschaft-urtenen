@@ -1,0 +1,97 @@
+<div class="edit-donator-dialog">
+  <h2 mat-dialog-title>{{ isEdit ? 'Donator bearbeiten' : 'Donator hinzufügen' }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="donatorForm" (ngSubmit)="save()">
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name / Firmenname *</mat-label>
+          <input matInput formControlName="name" placeholder="z. B. Beat Aebi AG oder Name Vorname" required>
+          @if (donatorForm.get('name')?.hasError('required') && donatorForm.get('name')?.touched) {
+            <mat-error>Name ist erforderlich.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="form-row two-cols">
+        <mat-form-field appearance="fill">
+          <mat-label>Kategorie *</mat-label>
+          <mat-select formControlName="category" required>
+            @for (cat of categories; track cat.value) {
+              <mat-option [value]="cat.value">{{ cat.label }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Reihenfolge (Sortierung)</mat-label>
+          <input matInput type="number" formControlName="order" placeholder="z. B. 1">
+        </mat-form-field>
+      </div>
+
+      <div class="form-row two-cols">
+        <mat-form-field appearance="fill">
+          <mat-label>Ort</mat-label>
+          <input matInput formControlName="city" placeholder="z. B. Urtenen-Schönbühl">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>E-Mail</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="info@donator.ch">
+          @if (donatorForm.get('email')?.hasError('email') && donatorForm.get('email')?.touched) {
+            <mat-error>Ungültige E-Mail-Adresse.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      @if (isCompany) {
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Webseite URL</mat-label>
+            <input matInput formControlName="url" placeholder="https://example.ch">
+          </mat-form-field>
+        </div>
+
+        <div class="upload-section">
+          <label class="upload-label" for="donator-logo-input">Logo (optional):</label>
+          <div class="upload-controls">
+            <input
+              id="donator-logo-input"
+              type="file"
+              accept="image/jpeg,image/png,image/gif,image/svg+xml,image/webp"
+              (change)="onFileSelected($event)">
+          </div>
+
+          @if (imagePreviewUrl) {
+            <div class="preview-box">
+              <p>Vorschau:</p>
+              <img [src]="imagePreviewUrl" alt="Logo Vorschau" class="logo-preview">
+            </div>
+          }
+        </div>
+      }
+
+      @if (errorMessage) {
+        <p class="errorMessage">{{ errorMessage }}</p>
+      }
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()" [disabled]="isSaving" class="cancel-btn">
+      Abbrechen
+    </button>
+    <button
+      mat-flat-button
+      type="button"
+      (click)="save()"
+      [disabled]="isSaving || donatorForm.invalid"
+      class="save-btn">
+      @if (isSaving) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        {{ isEdit ? 'Speichern' : 'Hinzufügen' }}
+      }
+    </button>
+  </mat-dialog-actions>
+</div>

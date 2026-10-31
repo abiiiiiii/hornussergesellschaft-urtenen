@@ -24,6 +24,7 @@ import { InternalDocumentService } from './app/shared/services/internal-document
 import { PhotoAlbumService } from './app/shared/services/photo-album.service';
 import { ResultService } from './app/shared/services/result.service';
 import { SponsorService } from './app/shared/services/sponsor.service';
+import { DonatorService } from './app/shared/services/donator.service';
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
@@ -163,6 +164,19 @@ beforeEach(() => {
           createSponsor: () => of('id1'),
           updateSponsor: () => of(undefined),
           deleteSponsor: () => of(undefined)
+        }
+      },
+      {
+        provide: DonatorService,
+        useValue: {
+          load$: new BehaviorSubject(undefined),
+          getDonators: () => of([]),
+          getDonatorImage: () => of(''),
+          uploadLogo: () => of('test.png'),
+          deleteLogo: () => of(undefined),
+          createDonator: () => of('id1'),
+          updateDonator: () => of(undefined),
+          deleteDonator: () => of(undefined)
         }
       },
       { provide: MatDialogRef, useValue: { close: () => {}, afterClosed: () => of(undefined) } },

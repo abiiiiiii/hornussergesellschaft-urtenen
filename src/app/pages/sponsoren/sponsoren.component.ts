@@ -5,6 +5,7 @@ import { SponsorService } from '../../shared/services/sponsor.service';
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { SponsorComponent } from '../../shared/components/sponsor/sponsor.component';
+import { DonatorenComponent } from './donatoren/donatoren.component';
 import { EditSponsorComponent } from './edit-sponsor/edit-sponsor.component';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -16,7 +17,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './sponsoren.component.html',
   styleUrls: ['./sponsoren.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [SponsorComponent, MatIconModule, MatDialogModule]
+  imports: [SponsorComponent, DonatorenComponent, MatIconModule, MatDialogModule]
 })
 export class SponsorenComponent implements OnInit, AfterViewInit, OnDestroy {
   public readonly authService = inject(AuthService);
@@ -24,8 +25,6 @@ export class SponsorenComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly notificationService = inject(NotificationService);
   private readonly dialog = inject(MatDialog);
 
-  donators: Sponsor[] = [];
-  privateDonators: Sponsor[] = [];
   sponsors: Sponsor[] = [];
   mainSponsors: Sponsor[] = [];
 
@@ -47,12 +46,6 @@ export class SponsorenComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.sponsorService.getSponsorsByType(SponsorType.SPONSOR).subscribe(sponsors => {
       this.sponsors = sponsors;
-    });
-    this.sponsorService.getSponsorsByType(SponsorType.DONATOR).subscribe(sponsors => {
-      this.donators = sponsors;
-    });
-    this.sponsorService.getSponsorsByType(SponsorType.PRIVATE_DONATOR).subscribe(sponsors => {
-      this.privateDonators = sponsors;
     });
   }
 

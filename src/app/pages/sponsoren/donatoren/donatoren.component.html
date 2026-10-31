@@ -1,0 +1,78 @@
+<div class="donatoren-section">
+  <div class="section-header">
+    <h2>Donatoren</h2>
+    @if (authService.isAdmin()) {
+      <div class="add" (click)="addDonator()">
+        <mat-icon>add_circle_outline</mat-icon>
+        <p>Donator hinzufügen</p>
+      </div>
+    }
+  </div>
+
+  @if (companyDonators.length > 0) {
+    <div class="donators-group company-donators">
+      <h3>Gewerbe-Donatoren</h3>
+      <div class="donators-grid">
+        @for (donator of companyDonators; track donator.id || donator.name) {
+          <div class="donator-card company-card">
+            @if (authService.isAdmin()) {
+              <div class="admin-actions">
+                <mat-icon class="action-btn edit-btn" (click)="editDonator(donator)" title="Bearbeiten">edit</mat-icon>
+                <mat-icon class="action-btn delete-btn" (click)="deleteDonator(donator)" title="Löschen">delete</mat-icon>
+              </div>
+            }
+
+            @if (donator.image) {
+              <div class="donator-logo">
+                @if (donator.url) {
+                  <a [href]="donator.url" target="_blank">
+                    <img [src]="getImageUrl(donator.image) | async" [alt]="donator.name">
+                  </a>
+                } @else {
+                  <img [src]="getImageUrl(donator.image) | async" [alt]="donator.name">
+                }
+              </div>
+            }
+
+            <div class="donator-info">
+              <h4>{{ donator.name }}</h4>
+              @if (donator.city) {
+                <p class="city">{{ donator.city }}</p>
+              }
+              @if (donator.email) {
+                <a class="email" [href]="'mailto:' + donator.email">{{ donator.email }}</a>
+              }
+              @if (donator.url) {
+                <a class="website" [href]="donator.url" target="_blank">...zur Webseite</a>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  @if (privateDonators.length > 0) {
+    <div class="donators-group private-donators">
+      <h3>Gönner & Privat-Donatoren</h3>
+      <div class="private-grid">
+        @for (donator of privateDonators; track donator.id || donator.name) {
+          <div class="private-card">
+            @if (authService.isAdmin()) {
+              <div class="admin-actions">
+                <mat-icon class="action-btn edit-btn" (click)="editDonator(donator)" title="Bearbeiten">edit</mat-icon>
+                <mat-icon class="action-btn delete-btn" (click)="deleteDonator(donator)" title="Löschen">delete</mat-icon>
+              </div>
+            }
+            <div class="private-content">
+              <span class="donator-name">{{ donator.name }}</span>
+              @if (donator.city) {
+                <span class="donator-city">{{ donator.city }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

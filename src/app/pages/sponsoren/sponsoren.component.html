@@ -40,29 +40,8 @@
     </div>
   }
 
-  @if (donators.length > 0 || privateDonators.length > 0) {
-    <div class="bronze">
-      <h2>Donatoren</h2>
-      @for (sponsor of donators; track sponsor.id || sponsor.name) {
-        <div class="sponsor">
-          <app-sponsor
-            [sponsor]="sponsor"
-            [canEdit]="authService.isAdmin()"
-            (edit)="editSponsor($event)"
-            (delete)="deleteSponsor($event)">
-          </app-sponsor>
-        </div>
-      }
-      @for (sponsor of privateDonators; track sponsor.id || sponsor.name) {
-        <div class="sponsor">
-          <app-sponsor
-            [sponsor]="sponsor"
-            [canEdit]="authService.isAdmin()"
-            (edit)="editSponsor($event)"
-            (delete)="deleteSponsor($event)">
-          </app-sponsor>
-        </div>
-      }
-    </div>
-  }
+  <div class="break-line"></div>
+
+  <!-- Sauber getrennte Donatoren-Sektion -->
+  <app-donatoren></app-donatoren>
 </div>
