@@ -1,5 +1,11 @@
 @if (sponsor) {
   <div class="sponsor" [class.column]="column">
+    @if (canEdit) {
+      <div class="admin-actions">
+        <mat-icon class="action-btn edit-btn" (click)="onEdit()" title="Bearbeiten">edit</mat-icon>
+        <mat-icon class="action-btn delete-btn" (click)="onDelete()" title="Löschen">delete</mat-icon>
+      </div>
+    }
     @if (sponsor.type != 'PRIVATE_DONATOR') {
       <a class="image" [href]="sponsor.url" target="_blank">
         <img [src]="imageUrl$ | async" alt="">

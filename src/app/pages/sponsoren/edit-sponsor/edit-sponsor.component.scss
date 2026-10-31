@@ -1,0 +1,122 @@
+@use "src/assets/styles/vars" as *;
+
+.edit-sponsor-dialog {
+  max-width: 600px;
+  width: 100%;
+
+  h2 {
+    color: $dark-green;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  mat-dialog-content {
+    max-height: 80vh;
+    padding-top: 0.5rem;
+  }
+
+  .form-row {
+    margin-bottom: 0.5rem;
+
+    &.two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+
+      @media (max-width: 500px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .plz-ort {
+      display: flex;
+      gap: 0.5rem;
+
+      .plz-field {
+        flex: 1;
+      }
+
+      .ort-field {
+        flex: 2;
+      }
+    }
+  }
+
+  .upload-section {
+    margin: 1rem 0;
+    padding: 0.75rem;
+    background: #f9f9f9;
+    border-radius: 4px;
+    border: 1px dashed #ccc;
+
+    .upload-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #444;
+    }
+
+    .preview-box {
+      margin-top: 0.75rem;
+
+      p {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 0.25rem;
+      }
+
+      .logo-preview {
+        max-width: 180px;
+        max-height: 100px;
+        object-fit: contain;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 4px;
+        background: white;
+      }
+    }
+  }
+
+  .errorMessage {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  mat-dialog-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 0 0 0;
+
+    .cancel-btn {
+      background-color: transparent;
+      color: #666;
+      border: 1px solid #ccc;
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+
+    .save-btn {
+      background-color: $light-green;
+      color: white;
+      min-width: 100px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover:not([disabled]) {
+        background-color: $green;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

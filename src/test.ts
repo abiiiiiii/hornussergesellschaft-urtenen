@@ -41,6 +41,10 @@ beforeEach(() => {
         provide: AuthService,
         useValue: {
           currentUser: signal(null),
+          currentUser$: of(null),
+          isAdmin: signal(false),
+          isAdmin$: of(false),
+          isAuthenticated$: of(false),
           login: () => of({} as any),
           logout: () => of(undefined),
           getUserRole: () => of(undefined)
@@ -85,6 +89,7 @@ beforeEach(() => {
       {
         provide: BoardService,
         useValue: {
+          load$: new BehaviorSubject(undefined),
           getAllBoardMembers: () => of([]),
           getPlaymaker: () => of(undefined),
           getBoardMemberImage: () => of(''),
@@ -150,11 +155,14 @@ beforeEach(() => {
       {
         provide: SponsorService,
         useValue: {
+          load$: new BehaviorSubject(undefined),
           getSponsorImage: () => of(''),
           getSponsorsByType: () => of([]),
-          createSponsor: () => Promise.resolve({} as any),
-          updateSponsor: () => Promise.resolve(),
-          deleteSponsor: () => Promise.resolve()
+          uploadLogo: () => of('test.png'),
+          deleteLogo: () => of(undefined),
+          createSponsor: () => of('id1'),
+          updateSponsor: () => of(undefined),
+          deleteSponsor: () => of(undefined)
         }
       },
       { provide: MatDialogRef, useValue: { close: () => {}, afterClosed: () => of(undefined) } },
@@ -181,7 +189,10 @@ beforeEach(() => {
       {
         provide: ActivatedRoute,
         useValue: {
-          snapshot: { paramMap: { get: () => '1' } },
+          snapshot: {
+            paramMap: { get: () => '1' },
+            params: { id: '1' }
+          },
           params: of({ id: '1' })
         }
       }

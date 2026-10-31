@@ -1,4 +1,4 @@
-import {SponsorType} from "../enums/sponsor-type.enum";
+import { SponsorType } from "../enums/sponsor-type.enum";
 
 export interface Sponsor {
   id?: string;
@@ -8,8 +8,9 @@ export interface Sponsor {
   street?: string;
   email?: string;
   postalCode?: number;
-  phoneNumber?: number;
+  phoneNumber?: number | string;
   city?: string;
   type: SponsorType;
-  description?: string
+  description?: string;
+  order?: number;
 }
