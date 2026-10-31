@@ -1,0 +1,137 @@
+<div class="edit-team-dialog">
+  <h2 mat-dialog-title>Team bearbeiten: {{ data.team.name }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="teamForm" (ngSubmit)="save()">
+      <!-- Team Name -->
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Teamname *</mat-label>
+          <input matInput formControlName="name" required>
+        </mat-form-field>
+      </div>
+
+      <!-- Teambild Section -->
+      <div class="image-section">
+        <h3>Teambild</h3>
+        @if (imagePreviewUrl) {
+          <div class="team-image-preview">
+            <img [src]="imagePreviewUrl" alt="Teambild Vorschau">
+          </div>
+        }
+        <div class="image-upload-controls">
+          <label class="upload-label" for="team-picture-input">Neues Bild auswählen:</label>
+          <input
+            id="team-picture-input"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            (change)="onFileSelected($event)">
+          <small class="hint">Wird automatisch clientseitig optimiert (max. 1920x1080).</small>
+        </div>
+      </div>
+
+      <!-- Spielerliste Section -->
+      <div class="players-section">
+        <div class="players-header">
+          <h3>Spielerliste ({{ players.length }} Spieler)</h3>
+          <button
+            mat-stroked-button
+            type="button"
+            class="sort-btn"
+            (click)="sortAlphabetically()"
+            title="Alphabetisch nach Nachname sortieren">
+            <mat-icon>sort_by_alpha</mat-icon> Alphabetisch sortieren
+          </button>
+        </div>
+
+        <!-- Neuen Spieler hinzufügen -->
+        <div class="add-player-box" [formGroup]="newPlayerForm">
+          <h4>Spieler hinzufügen</h4>
+          <div class="add-player-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Vorname *</mat-label>
+              <input matInput formControlName="preName" placeholder="z. B. Beat">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Nachname *</mat-label>
+              <input matInput formControlName="name" placeholder="z. B. Muster">
+            </mat-form-field>
+
+            <button
+              mat-flat-button
+              type="button"
+              class="add-player-btn"
+              (click)="addPlayer()"
+              [disabled]="newPlayerForm.invalid">
+              <mat-icon>person_add</mat-icon> Hinzufügen
+            </button>
+          </div>
+        </div>
+
+        <!-- Vorhandene Spieler -->
+        <div class="players-list">
+          @for (player of players; track $index) {
+            <div class="player-item" [class.editing]="editingPlayerIndex === $index">
+              @if (editingPlayerIndex === $index) {
+                <div class="inline-edit">
+                  <input type="text" [(ngModel)]="editPlayerPreName" [ngModelOptions]="{standalone: true}" placeholder="Vorname">
+                  <input type="text" [(ngModel)]="editPlayerName" [ngModelOptions]="{standalone: true}" placeholder="Nachname">
+                  <button mat-icon-button type="button" (click)="savePlayerEdit($index)" class="icon-save" title="Übernehmen">
+                    <mat-icon>check</mat-icon>
+                  </button>
+                  <button mat-icon-button type="button" (click)="cancelPlayerEdit()" class="icon-cancel" title="Abbrechen">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              } @else {
+                <span class="player-name">
+                  <b>{{ player.name }}</b> {{ player.preName }}
+                </span>
+
+                <div class="player-actions">
+                  <button mat-icon-button type="button" (click)="movePlayerUp($index)" [disabled]="$index === 0" title="Nach oben">
+                    <mat-icon>arrow_upward</mat-icon>
+                  </button>
+                  <button mat-icon-button type="button" (click)="movePlayerDown($index)" [disabled]="$index === players.length - 1" title="Nach unten">
+                    <mat-icon>arrow_downward</mat-icon>
+                  </button>
+                  <button mat-icon-button type="button" (click)="startEditPlayer($index)" title="Bearbeiten">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button type="button" (click)="removePlayer($index)" class="delete-icon" title="Entfernen">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              }
+            </div>
+          } @empty {
+            <p class="empty-hint">Noch keine Spieler in diesem Team erfasst.</p>
+          }
+        </div>
+      </div>
+
+      @if (errorMessage) {
+        <p class="errorMessage">{{ errorMessage }}</p>
+      }
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()" [disabled]="isSaving" class="cancel-btn">
+      Abbrechen
+    </button>
+    <button
+      mat-flat-button
+      type="button"
+      (click)="save()"
+      [disabled]="isSaving || teamForm.invalid"
+      class="save-btn">
+      @if (isSaving) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        Speichern
+      }
+    </button>
+  </mat-dialog-actions>
+</div>

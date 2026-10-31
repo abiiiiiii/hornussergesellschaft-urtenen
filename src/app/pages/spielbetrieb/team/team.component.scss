@@ -6,6 +6,33 @@
   justify-content: space-between;
   font-size: 0.9rem;
 
+  .team-admin-toolbar {
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: flex-end;
+
+    .edit-team-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: $dark-green;
+      border: 1px solid $light-green;
+      background: white;
+      font-size: 0.9rem;
+      padding: 0.25rem 0.75rem;
+
+      mat-icon {
+        font-size: 1.1rem;
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+
+      &:hover {
+        background-color: #f1f8e9;
+      }
+    }
+  }
+
   img {
     margin-bottom: 2rem;
     width: 100%;
@@ -49,4 +76,3 @@
     }
   }
 }
-

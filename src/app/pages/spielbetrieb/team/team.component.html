@@ -1,5 +1,14 @@
 <div *ngIf="team" class="team">
-  <img [src]="imageUrl" alt="">
+  @if (authService.isAdmin()) {
+    <div class="team-admin-toolbar">
+      <button mat-stroked-button type="button" class="edit-team-trigger" (click)="editTeam()">
+        <mat-icon>edit</mat-icon>
+        <span>Team & Spieler bearbeiten</span>
+      </button>
+    </div>
+  }
+
+  <img [src]="imageUrl" alt="{{ team.name }}">
   <div class="team-info">
     <app-team-list [players]="team.players"></app-team-list>
     <div class="results" [ngSwitch]="team.games">
