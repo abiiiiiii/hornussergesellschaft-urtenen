@@ -1,5 +1,19 @@
-<div class="board">
-  @for (member of boardMembers; track member) {
-    <app-board-member [member]="member"></app-board-member>
+<div class="board-wrapper">
+  @if (authService.isAdmin()) {
+    <div class="add" (click)="addMember()">
+      <mat-icon>person_add</mat-icon>
+      <p>Vorstandsmitglied hinzufügen</p>
+    </div>
   }
+
+  <div class="board">
+    @for (member of boardMembers; track member.id || (member.preName + member.name)) {
+      <app-board-member
+        [member]="member"
+        [canEdit]="authService.isAdmin()"
+        (edit)="editMember($event)"
+        (delete)="deleteMember($event)">
+      </app-board-member>
+    }
+  </div>
 </div>

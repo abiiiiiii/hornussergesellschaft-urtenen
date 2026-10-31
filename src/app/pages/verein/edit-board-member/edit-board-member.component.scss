@@ -1,0 +1,89 @@
+@use "src/assets/styles/vars" as *;
+
+.edit-member-dialog {
+  max-width: 550px;
+  width: 100%;
+
+  h2 {
+    color: $dark-green;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  mat-dialog-content {
+    max-height: 80vh;
+  }
+
+  .form-row.two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+
+    @media (max-width: 500px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .upload-section {
+    margin: 0.75rem 0;
+    padding: 0.75rem;
+    background: #f9f9f9;
+    border-radius: 4px;
+    border: 1px dashed #ccc;
+
+    .upload-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.35rem;
+      color: #444;
+      font-size: 0.9rem;
+    }
+
+    .preview-box {
+      margin-top: 0.5rem;
+
+      p {
+        font-size: 0.8rem;
+        color: #666;
+        margin-bottom: 0.2rem;
+      }
+
+      .photo-preview {
+        max-width: 120px;
+        max-height: 120px;
+        object-fit: cover;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+    }
+  }
+
+  .errorMessage {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  mat-dialog-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+
+    .cancel-btn {
+      background: transparent;
+      color: #666;
+      border: 1px solid #ccc;
+    }
+
+    .save-btn {
+      background-color: $light-green;
+      color: white;
+      min-width: 90px;
+
+      &:hover:not([disabled]) {
+        background-color: $green;
+      }
+    }
+  }
+}

@@ -93,9 +93,17 @@ beforeEach(() => {
         provide: BoardService,
         useValue: {
           load$: new BehaviorSubject(undefined),
+          loadBoard$: new BehaviorSubject(undefined),
+          loadPlaymaker$: new BehaviorSubject(undefined),
           getAllBoardMembers: () => of([]),
+          getAllPlaymakers: () => of([]),
           getPlaymaker: () => of(undefined),
           getBoardMemberImage: () => of(''),
+          uploadMemberImage: () => of('photo.jpg'),
+          deleteMemberImage: () => of(undefined),
+          createMember: () => of('id1'),
+          updateMember: () => of(undefined),
+          deleteMember: () => of(undefined),
           createBoardMember: () => Promise.resolve({} as any),
           updateBoardMember: () => Promise.resolve(),
           deleteBoardMember: () => Promise.resolve()

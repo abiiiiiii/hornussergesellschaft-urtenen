@@ -1,8 +1,23 @@
 <div class="playmaker">
   <p>Zur Organisation eines Spiels, kontaktiere bitte unseren Spielabmacher oder sende uns eine Email.</p>
-  <div>
-    @if (playmaker) {
-      <app-board-member [member]="playmaker"></app-board-member>
+
+  @if (authService.isAdmin()) {
+    <div class="add" (click)="addPlaymaker()">
+      <mat-icon>person_add</mat-icon>
+      <p>Spielabmacher hinzufügen</p>
+    </div>
+  }
+
+  <div class="playmakers-list">
+    @for (pm of playmakers; track pm.id || (pm.preName + pm.name)) {
+      <div class="playmaker-entry">
+        <app-board-member
+          [member]="pm"
+          [canEdit]="authService.isAdmin()"
+          (edit)="editPlaymaker($event)"
+          (delete)="deletePlaymaker($event)">
+        </app-board-member>
+      </div>
     }
   </div>
 </div>

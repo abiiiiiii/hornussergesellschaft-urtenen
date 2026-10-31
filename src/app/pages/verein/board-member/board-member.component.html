@@ -1,12 +1,27 @@
 @if (member) {
   <div class="member">
-    <img [src]="image$ | async" alt="">
+    @if (canEdit) {
+      <div class="admin-actions">
+        <mat-icon class="action-btn edit-btn" (click)="onEdit()" title="Bearbeiten">edit</mat-icon>
+        <mat-icon class="action-btn delete-btn" (click)="onDelete()" title="Löschen">delete</mat-icon>
+      </div>
+    }
+
+    <img [src]="image$ | async" alt="{{ member.preName }} {{ member.name }}">
     <div>
       <h3 class="roles">@for (role of member.roles; track role) {
         <span>{{role}}<span class="separator">, </span>  </span>
       }</h3>
-      <p>{{member.name}}</p>
-      <p>{{member.preName}}</p>
+      <p class="name">{{member.name}}</p>
+      <p class="prename">{{member.preName}}</p>
+      @if (member.email) {
+        <p class="contact-line">
+          <a [href]="'mailto:' + member.email">{{ member.email }}</a>
+        </p>
+      }
+      @if (member.phoneNumber) {
+        <p class="contact-line">{{ member.phoneNumber }}</p>
+      }
     </div>
   </div>
 }
