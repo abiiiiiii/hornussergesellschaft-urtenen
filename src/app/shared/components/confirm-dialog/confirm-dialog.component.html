@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{ data.title || 'Bestätigung erforderlich' }}</h2>
+<mat-dialog-content>
+  <p>{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="onCancel()" class="cancel-btn">
+    {{ data.cancelText || 'Abbrechen' }}
+  </button>
+  <button mat-flat-button type="button" (click)="onConfirm()" [class.delete-btn]="data.isDestructive !== false">
+    {{ data.confirmText || 'Löschen' }}
+  </button>
+</mat-dialog-actions>
+

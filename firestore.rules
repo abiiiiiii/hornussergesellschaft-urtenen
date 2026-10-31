@@ -1,0 +1,136 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: user/{uid}
+    // Document ID: Firebase Auth User UID
+    // Fields:
+    //   - role: string (required) - e.g. 'admin', 'mitglied', 'user', 'guest'
+    //   - userId: string (optional) - Auth UID
+    //
+    // Public Content Collections:
+    //   - sponsor/{id}: Sponsor entity (name, url, image, street, postalCode, city, type, etc.)
+    //   - donator/{id}: Donator entity
+    //   - team/{id}: Team details, rosters, game references
+    //   - board/{id}: Board members (name, preName, roles, image)
+    //   - playmaker/{id}: Game maker contacts (name, firstName, image)
+    //   - news/{id}: News articles (title, description, flyer, image, active, createdAt)
+    //   - event/{id}: Club events (title, description, flyer, image, active, date)
+    //   - game/{id}: Match results and reports (mode, homeResult, awayResult, lists, createdAt)
+    //   - album/{id}: Photo albums (name, year, author, images, cover)
+    //   - result/{id}: Legacy/standalone match results
+    //
+    // Internal Club Documents:
+    //   - internal-document/{id}: Member-only files and minutes (name, fileName)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    // Check if the user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Check if the authenticated user has the 'admin' role in /user/{uid}
+    function isAdmin() {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/user/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/user/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Check if the authenticated user has either 'admin' or 'mitglied' role in /user/{uid}
+    function isMember() {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/user/$(request.auth.uid)) &&
+        (get(/databases/$(database)/documents/user/$(request.auth.uid)).data.role == 'admin' ||
+         get(/databases/$(database)/documents/user/$(request.auth.uid)).data.role == 'mitglied');
+    }
+
+    // ===============================================================
+    // Collection Rules
+    // ===============================================================
+
+    // 1. User Profiles & Roles
+    // Users can read their own profile document; admins can read any profile.
+    // Only admins can create, modify, or delete user documents (preventing self-promotion).
+    match /user/{uid} {
+      allow read: if isAuthenticated() && (request.auth.uid == uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    // 2. Public Content Collections
+    // Publicly readable by all visitors.
+    // Only admins can create, update, or delete.
+    match /sponsor/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /donator/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /team/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /board/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /playmaker/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /news/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /event/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /game/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /album/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /result/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 3. Internal Club Documents
+    // Readable only by members ('admin' or 'mitglied').
+    // Only admins can create, update, or delete.
+    match /internal-document/{id} {
+      allow read: if isMember();
+      allow write: if isAdmin();
+    }
+
+    // 4. Default Deny Catch-all
+    // Deny all reads and writes to any unspecified documents or subcollections.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

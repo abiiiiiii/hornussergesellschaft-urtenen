@@ -9,6 +9,7 @@ import { GameListComponent } from './pages/spielbetrieb/game-list/game-list.comp
 import { MemberComponent } from './pages/member/member.component';
 import { PhotoAlbumComponent } from './pages/medien/photo-album/photo-album.component';
 import { NachwuchsComponent } from './pages/nachwuchs/nachwuchs.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,7 @@ export const routes: Routes = [
   {
     path: 'member',
     component: MemberComponent,
+    canActivate: [authGuard],
     pathMatch: 'full'
   },
   {
@@ -72,4 +74,3 @@ export const routes: Routes = [
     pathMatch: 'full'
   }
 ];
-
