@@ -26,10 +26,10 @@
               <div class="donator-logo">
                 @if (donator.url) {
                   <a [href]="donator.url" target="_blank">
-                    <img [src]="getImageUrl(donator.image) | async" [alt]="donator.name">
+                    <img [src]="donator.imageUrl$ | async" [alt]="donator.name">
                   </a>
                 } @else {
-                  <img [src]="getImageUrl(donator.image) | async" [alt]="donator.name">
+                  <img [src]="donator.imageUrl$ | async" [alt]="donator.name">
                 }
               </div>
             }
@@ -76,3 +76,4 @@
     </div>
   }
 </div>
+

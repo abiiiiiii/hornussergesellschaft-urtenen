@@ -37,13 +37,14 @@ export class DonatorenComponent implements OnInit, OnDestroy {
 
   loadDonators(): void {
     this.donatorService.getDonators().subscribe(donators => {
+      donators.forEach(d => {
+        if (d.image) {
+          d.imageUrl$ = this.donatorService.getDonatorImage(d.image);
+        }
+      });
       this.companyDonators = donators.filter(d => d.category === 'COMPANY');
       this.privateDonators = donators.filter(d => d.category === 'PRIVATE');
     });
-  }
-
-  getImageUrl(fileName?: string): Observable<string> {
-    return this.donatorService.getDonatorImage(fileName || '');
   }
 
   addDonator(category: 'COMPANY' | 'PRIVATE' = 'COMPANY'): void {
@@ -97,3 +98,4 @@ export class DonatorenComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 }
+

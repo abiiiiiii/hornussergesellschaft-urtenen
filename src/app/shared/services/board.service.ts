@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { BoardMember } from "../models/board-member.model";
 import { BoardRole } from "../enums/board-role.enum";
 import { from, of, Observable, BehaviorSubject } from "rxjs";
@@ -21,6 +21,7 @@ import { Storage, ref, getDownloadURL, uploadBytes, deleteObject } from "@angula
 export class BoardService {
   private readonly firestore = inject(Firestore);
   private readonly storage = inject(Storage);
+  private readonly injector = inject(EnvironmentInjector);
 
   readonly loadBoard$ = new BehaviorSubject<void>(undefined);
   readonly loadPlaymaker$ = new BehaviorSubject<void>(undefined);
@@ -29,7 +30,11 @@ export class BoardService {
     if (!imageName) {
       return of('');
     }
-    return from(getDownloadURL(ref(this.storage, 'images/board/' + imageName))).pipe(
+    return from(
+      runInInjectionContext(this.injector, () =>
+        getDownloadURL(ref(this.storage, 'images/board/' + imageName))
+      )
+    ).pipe(
       catchError(() => of(''))
     );
   }

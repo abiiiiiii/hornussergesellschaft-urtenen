@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { BehaviorSubject, Observable, from, of } from 'rxjs';
 import { Team } from '../models/team.model';
 import { map, catchError } from 'rxjs/operators';
@@ -25,6 +25,7 @@ import { YOUTH_TEAM_NAME } from '../../core/constants';
 export class TeamService {
   private readonly firestore = inject(Firestore);
   private readonly storage = inject(Storage);
+  private readonly injector = inject(EnvironmentInjector);
 
   readonly load$ = new BehaviorSubject<void>(undefined);
 
@@ -32,7 +33,11 @@ export class TeamService {
     if (!fileName) {
       return of('');
     }
-    return from(getDownloadURL(ref(this.storage, 'images/team_pictures/' + fileName))).pipe(
+    return from(
+      runInInjectionContext(this.injector, () =>
+        getDownloadURL(ref(this.storage, 'images/team_pictures/' + fileName))
+      )
+    ).pipe(
       catchError(() => of(''))
     );
   }

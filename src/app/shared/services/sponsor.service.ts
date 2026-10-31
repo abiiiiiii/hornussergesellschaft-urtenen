@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { BehaviorSubject, Observable, from, of } from 'rxjs';
 import { Sponsor } from '../models/sponsor.model';
 import { SponsorType } from '../enums/sponsor-type.enum';
@@ -23,6 +23,7 @@ import { Storage, ref, getDownloadURL, uploadBytes, deleteObject } from '@angula
 export class SponsorService {
   private readonly firestore = inject(Firestore);
   private readonly storage = inject(Storage);
+  private readonly injector = inject(EnvironmentInjector);
 
   readonly load$ = new BehaviorSubject<void>(undefined);
 
@@ -30,7 +31,11 @@ export class SponsorService {
     if (!fileName) {
       return of('');
     }
-    return from(getDownloadURL(ref(this.storage, 'images/sponsors/' + fileName))).pipe(
+    return from(
+      runInInjectionContext(this.injector, () =>
+        getDownloadURL(ref(this.storage, 'images/sponsors/' + fileName))
+      )
+    ).pipe(
       catchError(() => of(''))
     );
   }

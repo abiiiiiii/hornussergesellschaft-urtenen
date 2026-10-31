@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+
 export type DonatorCategory = 'COMPANY' | 'PRIVATE';
 
 export interface Donator {
@@ -9,4 +11,6 @@ export interface Donator {
   email?: string;
   image?: string;
   order?: number;
+  imageUrl$?: Observable<string>;
 }
+

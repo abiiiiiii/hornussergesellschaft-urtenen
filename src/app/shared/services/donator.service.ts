@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { BehaviorSubject, Observable, from, of } from 'rxjs';
 import { Donator } from '../models/donator.model';
 import { map, switchMap, catchError } from 'rxjs/operators';
@@ -22,6 +22,7 @@ import { Storage, ref, getDownloadURL, uploadBytes, deleteObject } from '@angula
 export class DonatorService {
   private readonly firestore = inject(Firestore);
   private readonly storage = inject(Storage);
+  private readonly injector = inject(EnvironmentInjector);
 
   readonly load$ = new BehaviorSubject<void>(undefined);
 
@@ -29,7 +30,11 @@ export class DonatorService {
     if (!fileName) {
       return of('');
     }
-    return from(getDownloadURL(ref(this.storage, 'images/sponsors/' + fileName))).pipe(
+    return from(
+      runInInjectionContext(this.injector, () =>
+        getDownloadURL(ref(this.storage, 'images/sponsors/' + fileName))
+      )
+    ).pipe(
       catchError(() => of(''))
     );
   }
@@ -78,7 +83,9 @@ export class DonatorService {
 
   createDonator(donator: Donator): Observable<string> {
     const col = collection(this.firestore, 'donator') as CollectionReference<Donator>;
-    return from(addDoc(col, donator)).pipe(
+    const cleanDonator = { ...donator };
+    delete cleanDonator.imageUrl$;
+    return from(addDoc(col, cleanDonator)).pipe(
       map(ref => ref.id)
     );
   }
@@ -87,7 +94,9 @@ export class DonatorService {
     if (!donator.id) {
       return of(undefined);
     }
-    return from(setDoc(doc(this.firestore, 'donator', donator.id), donator, { merge: true }));
+    const cleanDonator = { ...donator };
+    delete cleanDonator.imageUrl$;
+    return from(setDoc(doc(this.firestore, 'donator', donator.id), cleanDonator, { merge: true }));
   }
 
   deleteDonator(id: string, imageFileName?: string): Observable<void> {
@@ -129,3 +138,4 @@ export class DonatorService {
     });
   }
 }
+
