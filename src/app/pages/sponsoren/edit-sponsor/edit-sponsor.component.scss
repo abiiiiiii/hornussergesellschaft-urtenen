@@ -1,0 +1,144 @@
+@use "src/assets/styles/vars" as *;
+
+:host {
+  display: block;
+}
+
+.edit-sponsor-dialog {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  box-sizing: border-box;
+
+  h2 {
+    flex: 0 0 auto;
+    color: $dark-green;
+    font-size: 1.4rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  mat-dialog-content {
+    flex: 1 1 auto;
+    max-height: calc(85vh - 140px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5rem 0.25rem;
+    margin: 0;
+  }
+
+  .form-row {
+    margin-bottom: 0.5rem;
+
+    &.two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+
+      @media (max-width: 500px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .plz-ort {
+      display: flex;
+      gap: 0.5rem;
+
+      .plz-field {
+        flex: 1;
+      }
+
+      .ort-field {
+        flex: 2;
+      }
+    }
+  }
+
+  .upload-section {
+    margin: 1rem 0;
+    padding: 0.75rem;
+    background: #f9f9f9;
+    border-radius: 4px;
+    border: 1px dashed #ccc;
+
+    .upload-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #444;
+    }
+
+    .preview-box {
+      margin-top: 0.75rem;
+
+      p {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 0.25rem;
+      }
+
+      .logo-preview {
+        max-width: 180px;
+        max-height: 100px;
+        object-fit: contain;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 4px;
+        background: white;
+      }
+    }
+  }
+
+  .errorMessage {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  mat-dialog-actions {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin: 1rem 0 0 0;
+    padding: 0.75rem 0 0.25rem 0;
+    border-top: 1px solid #eee;
+
+    .cancel-btn {
+      background-color: transparent;
+      color: #666;
+      border: 1px solid #ccc;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+
+    .save-btn {
+      background-color: $light-green;
+      color: white;
+      min-width: 110px;
+      padding: 0.4rem 1.25rem;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover:not([disabled]) {
+        background-color: $green;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

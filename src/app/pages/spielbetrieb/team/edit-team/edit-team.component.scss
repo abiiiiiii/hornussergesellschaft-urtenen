@@ -1,0 +1,195 @@
+@use "src/assets/styles/vars" as *;
+
+.edit-team-dialog {
+  max-width: 650px;
+  width: 100%;
+
+  h2 {
+    color: $dark-green;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  mat-dialog-content {
+    max-height: 80vh;
+  }
+
+  .form-row .full-width {
+    width: 100%;
+  }
+
+  .image-section {
+    margin-bottom: 1.25rem;
+    padding: 0.75rem;
+    background: #f9f9f9;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+
+    h3 {
+      font-size: 1.1rem;
+      color: $dark-green;
+      margin-bottom: 0.4rem;
+    }
+
+    .team-image-preview img {
+      max-width: 100%;
+      max-height: 160px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .image-upload-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      font-size: 0.85rem;
+      color: #666;
+    }
+  }
+
+  .players-section {
+    .players-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      h3 {
+        font-size: 1.1rem;
+        color: $dark-green;
+        margin: 0;
+      }
+    }
+
+    .add-player-box {
+      background: #f1f8e9;
+      border: 1px solid #c5e1a5;
+      border-radius: 4px;
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 0.75rem;
+
+      h4 {
+        margin: 0 0 0.35rem;
+        color: $dark-green;
+      }
+
+      .add-player-row {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+
+        @media (max-width: 550px) {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        mat-form-field {
+          flex: 1;
+        }
+
+        .add-player-btn {
+          background-color: $light-green;
+          color: white;
+          margin-bottom: 1.25rem;
+        }
+      }
+    }
+
+    .players-list {
+      max-height: 220px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+
+      .empty-hint {
+        padding: 0.75rem;
+        color: #888;
+        text-align: center;
+      }
+
+      .player-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.35rem 0.6rem;
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &.editing {
+          background: #fff9c4;
+        }
+
+        .player-actions button {
+          width: 30px;
+          height: 30px;
+          padding: 0;
+          background: transparent;
+          color: #666;
+
+          mat-icon {
+            font-size: 1.1rem;
+            width: 1.1rem;
+            height: 1.1rem;
+          }
+
+          &.delete-icon:hover {
+            color: #d32f2f;
+          }
+        }
+
+        .inline-edit {
+          display: flex;
+          gap: 0.4rem;
+          width: 100%;
+          align-items: center;
+
+          input {
+            flex: 1;
+            padding: 0.3rem 0.5rem;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+          }
+
+          button {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  .errorMessage {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  mat-dialog-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+
+    .cancel-btn {
+      background: transparent;
+      color: #666;
+      border: 1px solid #ccc;
+    }
+
+    .save-btn {
+      background-color: $light-green;
+      color: white;
+      min-width: 90px;
+
+      &:hover:not([disabled]) {
+        background-color: $green;
+      }
+    }
+  }
+}

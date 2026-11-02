@@ -1,7 +1,7 @@
-import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, from } from "rxjs";
-import { Team } from "../models/team.model";
-import { map } from "rxjs/operators";
+import { Injectable, inject, EnvironmentInjector, runInInjectionContext } from '@angular/core';
+import { BehaviorSubject, Observable, from, of } from 'rxjs';
+import { Team } from '../models/team.model';
+import { map, catchError } from 'rxjs/operators';
 import {
   Firestore,
   collection,
@@ -15,22 +15,49 @@ import {
   orderBy,
   DocumentReference,
   CollectionReference
-} from "@angular/fire/firestore";
-import { Storage, ref, getDownloadURL } from "@angular/fire/storage";
-import { YOUTH_TEAM_NAME } from "../../core/constants";
+} from '@angular/fire/firestore';
+import { Storage, ref, getDownloadURL, uploadBytes, deleteObject } from '@angular/fire/storage';
+import { YOUTH_TEAM_NAME } from '../../core/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
-
   private readonly firestore = inject(Firestore);
   private readonly storage = inject(Storage);
+  private readonly injector = inject(EnvironmentInjector);
 
-  readonly load$ = new BehaviorSubject(undefined);
+  readonly load$ = new BehaviorSubject<void>(undefined);
 
   getTeamImage(fileName: string): Observable<string> {
-    return from(getDownloadURL(ref(this.storage, 'images/team_pictures/' + fileName)));
+    if (!fileName) {
+      return of('');
+    }
+    return from(
+      runInInjectionContext(this.injector, () =>
+        getDownloadURL(ref(this.storage, 'images/team_pictures/' + fileName))
+      )
+    ).pipe(
+      catchError(() => of(''))
+    );
+  }
+
+  uploadTeamPicture(file: File): Observable<string> {
+    const sanitized = `team_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+    const storageRef = ref(this.storage, 'images/team_pictures/' + sanitized);
+    return from(uploadBytes(storageRef, file)).pipe(
+      map(() => sanitized)
+    );
+  }
+
+  deleteTeamPicture(fileName: string): Observable<void> {
+    if (!fileName || fileName === 'placeholder.jpg') {
+      return of(undefined);
+    }
+    const storageRef = ref(this.storage, 'images/team_pictures/' + fileName);
+    return from(deleteObject(storageRef)).pipe(
+      catchError(() => of(undefined))
+    );
   }
 
   getSeniorTeams(): Observable<Team[]> {

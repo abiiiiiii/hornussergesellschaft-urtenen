@@ -1,6 +1,5 @@
 @use "src/assets/styles/vars" as *;
 
-
 .member {
   padding: 0 10%;
   display: inline-block;
@@ -14,22 +13,23 @@
     }
   }
 
+  .programm-actions {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    margin-bottom: .5rem;
+  }
+
   .documents {
     ul {
       list-style: none;
       li {
         display: flex;
         align-items: center;
+        gap: 0.75rem;
         margin: .5rem 0;
         a {
-          margin-right: .5rem;
-        }
-        mat-icon {
-          color: $green;
-          cursor: pointer;
-          &:hover {
-            color: $dark-green;
-          }
+          margin-right: .25rem;
         }
       }
     }

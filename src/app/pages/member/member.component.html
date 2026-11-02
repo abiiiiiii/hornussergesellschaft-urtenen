@@ -9,6 +9,17 @@
       <mat-icon aria-hidden="false" aria-label="Example home icon">note_add</mat-icon>
       <p>Dokument hinzufügen</p>
     </div>
+
+    <div class="programm-actions">
+      <div class="add" (click)="uploadProgramm('jahresprogramm')">
+        <mat-icon aria-hidden="false" aria-label="Jahresprogramm hochladen">upload_file</mat-icon>
+        <p>Jahresprogramm aktualisieren</p>
+      </div>
+      <div class="add" (click)="uploadProgramm('nachwuchs')">
+        <mat-icon aria-hidden="false" aria-label="Nachwuchs Jahresprogramm hochladen">upload_file</mat-icon>
+        <p>Nachwuchs Jahresprogramm aktualisieren</p>
+      </div>
+    </div>
   }
 
   <div class="documents">
@@ -17,10 +28,10 @@
         <li>
           <a [href]="document.fileLink$ | async" target="_blank">{{document.name}}</a>
           @if (authService.currentUser()?.role == 'admin') {
-            <mat-icon (click)="editDocument(document)">edit</mat-icon>
-          }
-          @if (authService.currentUser()?.role == 'admin') {
-            <mat-icon (click)="deleteDocument(document.id)">delete</mat-icon>
+            <div class="admin-actions">
+              <mat-icon class="action-btn edit-btn" (click)="editDocument(document)" title="Bearbeiten">edit</mat-icon>
+              <mat-icon class="action-btn delete-btn" (click)="deleteDocument(document.id)" title="Löschen">delete</mat-icon>
+            </div>
           }
         </li>
       }

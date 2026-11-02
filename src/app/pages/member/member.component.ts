@@ -6,6 +6,7 @@ import {InternalDocument} from "../../shared/models/internal-document.model";
 import {MatDialog} from "@angular/material/dialog";
 import {AddDocumentComponent} from "./add-document/add-document.component";
 import {EditDocumentComponent} from "./edit-document/edit-document.component";
+import {UploadProgrammComponent, ProgrammType} from "./upload-programm/upload-programm.component";
 import { MatIcon } from '@angular/material/icon';
 import { AsyncPipe } from '@angular/common';
 
@@ -59,5 +60,9 @@ export class MemberComponent implements OnInit {
     this.internalDocumentService.deleteInternalDocument(id).subscribe(() => {
       this.loadDocuments();
     });
+  }
+
+  uploadProgramm(type: ProgrammType) {
+    this.dialog.open(UploadProgrammComponent, { data: { type } });
   }
 }

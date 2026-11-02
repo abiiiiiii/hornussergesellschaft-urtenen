@@ -1,0 +1,96 @@
+<div class="edit-member-dialog">
+  <h2 mat-dialog-title>{{ isEdit ? targetTitle + ' bearbeiten' : targetTitle + ' hinzufügen' }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="memberForm" (ngSubmit)="save()">
+      <div class="form-row two-cols">
+        <mat-form-field appearance="fill">
+          <mat-label>Vorname *</mat-label>
+          <input matInput formControlName="preName" placeholder="z. B. Beat" required>
+          @if (memberForm.get('preName')?.hasError('required') && memberForm.get('preName')?.touched) {
+            <mat-error>Vorname ist erforderlich.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Nachname *</mat-label>
+          <input matInput formControlName="name" placeholder="z. B. Muster" required>
+          @if (memberForm.get('name')?.hasError('required') && memberForm.get('name')?.touched) {
+            <mat-error>Nachname ist erforderlich.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="form-row two-cols">
+        <mat-form-field appearance="fill">
+          <mat-label>Rolle(n) / Funktion(en) *</mat-label>
+          <mat-select formControlName="roles" multiple required>
+            @for (role of availableRoles; track role) {
+              <mat-option [value]="role">{{ role }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Reihenfolge (Sortierung)</mat-label>
+          <input matInput type="number" formControlName="order" placeholder="z. B. 1">
+        </mat-form-field>
+      </div>
+
+      <div class="form-row two-cols">
+        <mat-form-field appearance="fill">
+          <mat-label>E-Mail</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="name@verein.ch">
+          @if (memberForm.get('email')?.hasError('email') && memberForm.get('email')?.touched) {
+            <mat-error>Ungültige E-Mail-Adresse.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Telefon</mat-label>
+          <input matInput formControlName="phoneNumber" placeholder="079 ...">
+        </mat-form-field>
+      </div>
+
+      <div class="upload-section">
+        <label class="upload-label" for="member-photo-input">Foto / Porträt:</label>
+        <div class="upload-controls">
+          <input
+            id="member-photo-input"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            (change)="onFileSelected($event)">
+        </div>
+
+        @if (imagePreviewUrl) {
+          <div class="preview-box">
+            <p>Vorschau:</p>
+            <img [src]="imagePreviewUrl" alt="Porträt Vorschau" class="photo-preview">
+          </div>
+        }
+      </div>
+
+      @if (errorMessage) {
+        <p class="errorMessage">{{ errorMessage }}</p>
+      }
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()" [disabled]="isSaving" class="cancel-btn">
+      Abbrechen
+    </button>
+    <button
+      mat-flat-button
+      type="button"
+      (click)="save()"
+      [disabled]="isSaving || memberForm.invalid"
+      class="save-btn">
+      @if (isSaving) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        {{ isEdit ? 'Speichern' : 'Hinzufügen' }}
+      }
+    </button>
+  </mat-dialog-actions>
+</div>

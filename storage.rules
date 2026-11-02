@@ -1,0 +1,56 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getUserData() {
+      return firestore.get(/databases/(default)/documents/user/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && getUserData().role == 'admin';
+    }
+
+    function isMember() {
+      return isAuthenticated() && (getUserData().role == 'admin' || getUserData().role == 'mitglied');
+    }
+
+    // Public images (sponsors, team pictures, board members, news, albums)
+    match /images/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Public PDFs (flyers, match reports)
+    match /pdf/report/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /pdf/news/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Internal club documents
+    match /pdf/internal/{allPaths=**} {
+      allow read: if isMember();
+      allow write: if isAdmin();
+    }
+
+    // Match lists
+    match /lists/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Default deny
+    match /{allPaths=**} {
+      allow read: if false;
+      allow write: if false;
+    }
+  }
+}
+

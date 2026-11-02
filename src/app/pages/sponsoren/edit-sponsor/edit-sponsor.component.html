@@ -1,0 +1,121 @@
+<div class="edit-sponsor-dialog">
+  <h2 mat-dialog-title>{{ isEdit ? 'Sponsor bearbeiten' : 'Sponsor hinzufügen' }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="sponsorForm" (ngSubmit)="save()">
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name *</mat-label>
+          <input matInput formControlName="name" placeholder="z. B. Raiffeisen Grauholz" required>
+          @if (sponsorForm.get('name')?.hasError('required') && sponsorForm.get('name')?.touched) {
+            <mat-error>Name ist erforderlich.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="form-row two-cols">
+        <mat-form-field appearance="fill">
+          <mat-label>Kategorie / Stufe *</mat-label>
+          <mat-select formControlName="type" required>
+            @for (t of sponsorTypes; track t.value) {
+              <mat-option [value]="t.value">{{ t.label }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Reihenfolge (Sortierung)</mat-label>
+          <input matInput type="number" formControlName="order" placeholder="z. B. 1">
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Webseite URL</mat-label>
+          <input matInput formControlName="url" placeholder="https://example.ch">
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Beschreibung</mat-label>
+          <textarea matInput formControlName="description" rows="2" placeholder="Zusätzliche Infos"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row two-cols">
+        <mat-form-field appearance="fill">
+          <mat-label>Strasse / Nr.</mat-label>
+          <input matInput formControlName="street">
+        </mat-form-field>
+
+        <div class="plz-ort">
+          <mat-form-field appearance="fill" class="plz-field">
+            <mat-label>PLZ</mat-label>
+            <input matInput type="number" formControlName="postalCode">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="ort-field">
+            <mat-label>Ort</mat-label>
+            <input matInput formControlName="city">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-row two-cols">
+        <mat-form-field appearance="fill">
+          <mat-label>E-Mail</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="info@firma.ch">
+          @if (sponsorForm.get('email')?.hasError('email') && sponsorForm.get('email')?.touched) {
+            <mat-error>Ungültige E-Mail-Adresse.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Telefon</mat-label>
+          <input matInput formControlName="phoneNumber" placeholder="031 ...">
+        </mat-form-field>
+      </div>
+
+      <div class="upload-section">
+        <label class="upload-label" for="sponsor-logo-input">Logo (Bilddatei):</label>
+        <div class="upload-controls">
+          <input
+            id="sponsor-logo-input"
+            type="file"
+            accept="image/jpeg,image/png,image/gif,image/svg+xml,image/webp"
+            (change)="onFileSelected($event)">
+        </div>
+
+        @if (imagePreviewUrl) {
+          <div class="preview-box">
+            <p>Vorschau:</p>
+            <img [src]="imagePreviewUrl" alt="Logo Vorschau" class="logo-preview">
+          </div>
+        }
+      </div>
+
+      @if (errorMessage) {
+        <p class="errorMessage">{{ errorMessage }}</p>
+      }
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()" [disabled]="isSaving" class="cancel-btn">
+      Abbrechen
+    </button>
+    <button
+      mat-flat-button
+      type="button"
+      (click)="save()"
+      [disabled]="isSaving || sponsorForm.invalid"
+      class="save-btn">
+      @if (isSaving) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        {{ isEdit ? 'Speichern' : 'Hinzufügen' }}
+      }
+    </button>
+  </mat-dialog-actions>
+</div>

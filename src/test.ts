@@ -24,6 +24,7 @@ import { InternalDocumentService } from './app/shared/services/internal-document
 import { PhotoAlbumService } from './app/shared/services/photo-album.service';
 import { ResultService } from './app/shared/services/result.service';
 import { SponsorService } from './app/shared/services/sponsor.service';
+import { DonatorService } from './app/shared/services/donator.service';
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
@@ -41,6 +42,10 @@ beforeEach(() => {
         provide: AuthService,
         useValue: {
           currentUser: signal(null),
+          currentUser$: of(null),
+          isAdmin: signal(false),
+          isAdmin$: of(false),
+          isAuthenticated$: of(false),
           login: () => of({} as any),
           logout: () => of(undefined),
           getUserRole: () => of(undefined)
@@ -77,6 +82,8 @@ beforeEach(() => {
           getSeniorTeams: () => of([]),
           getTeamByName: () => of({ id: '1', name: 'Urtenen', games: [], players: [], image: 'test.jpg' } as any),
           getTeamImage: () => of(''),
+          uploadTeamPicture: () => of('team_test.jpg'),
+          deleteTeamPicture: () => of(undefined),
           createTeam: () => Promise.resolve({} as any),
           updateTeam: () => of(undefined),
           deleteTeam: () => Promise.resolve()
@@ -85,9 +92,18 @@ beforeEach(() => {
       {
         provide: BoardService,
         useValue: {
+          load$: new BehaviorSubject(undefined),
+          loadBoard$: new BehaviorSubject(undefined),
+          loadPlaymaker$: new BehaviorSubject(undefined),
           getAllBoardMembers: () => of([]),
+          getAllPlaymakers: () => of([]),
           getPlaymaker: () => of(undefined),
           getBoardMemberImage: () => of(''),
+          uploadMemberImage: () => of('photo.jpg'),
+          deleteMemberImage: () => of(undefined),
+          createMember: () => of('id1'),
+          updateMember: () => of(undefined),
+          deleteMember: () => of(undefined),
           createBoardMember: () => Promise.resolve({} as any),
           updateBoardMember: () => Promise.resolve(),
           deleteBoardMember: () => Promise.resolve()
@@ -150,11 +166,27 @@ beforeEach(() => {
       {
         provide: SponsorService,
         useValue: {
+          load$: new BehaviorSubject(undefined),
           getSponsorImage: () => of(''),
           getSponsorsByType: () => of([]),
-          createSponsor: () => Promise.resolve({} as any),
-          updateSponsor: () => Promise.resolve(),
-          deleteSponsor: () => Promise.resolve()
+          uploadLogo: () => of('test.png'),
+          deleteLogo: () => of(undefined),
+          createSponsor: () => of('id1'),
+          updateSponsor: () => of(undefined),
+          deleteSponsor: () => of(undefined)
+        }
+      },
+      {
+        provide: DonatorService,
+        useValue: {
+          load$: new BehaviorSubject(undefined),
+          getDonators: () => of([]),
+          getDonatorImage: () => of(''),
+          uploadLogo: () => of('test.png'),
+          deleteLogo: () => of(undefined),
+          createDonator: () => of('id1'),
+          updateDonator: () => of(undefined),
+          deleteDonator: () => of(undefined)
         }
       },
       { provide: MatDialogRef, useValue: { close: () => {}, afterClosed: () => of(undefined) } },
@@ -181,7 +213,10 @@ beforeEach(() => {
       {
         provide: ActivatedRoute,
         useValue: {
-          snapshot: { paramMap: { get: () => '1' } },
+          snapshot: {
+            paramMap: { get: () => '1' },
+            params: { id: '1' }
+          },
           params: of({ id: '1' })
         }
       }
