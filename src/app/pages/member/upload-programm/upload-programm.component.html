@@ -1,0 +1,23 @@
+<div class="upload-programm">
+  <h2>{{ title }}</h2>
+
+  <div class="upload">
+    <label for="programm-upload">PDF hochladen: </label>
+    <input id="programm-upload" type="file" (change)="onFileChange($event)" accept="application/pdf" />
+  </div>
+
+  @if (!isUploading) {
+    <button (click)="upload()">Hochladen</button>
+  }
+  @if (isUploading) {
+    <mat-spinner class="spinner"></mat-spinner>
+  }
+
+  @if (showValidationError) {
+    <p class="errorMessage">Bitte wähle eine PDF-Datei aus!</p>
+  }
+  @if (showUploadError) {
+    <p class="errorMessage">Upload fehlgeschlagen! Versuche es erneut.</p>
+  }
+</div>
+

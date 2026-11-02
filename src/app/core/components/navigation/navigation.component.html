@@ -31,10 +31,14 @@
     </ul>
   </nav>
   <div class="program">
-    <a href="assets/pdf/2026_Jahresprogramm.pdf" target="_blank">Download Jahresprogramm</a>
+    @if (jahresprogrammUrl$ | async; as url) {
+      <a [href]="url" target="_blank">Download Jahresprogramm</a>
+    }
   </div>
   <div class="program-moosseesharks">
-    <a href="assets/pdf/Nachwuchs_Hornusser_Urtenen_Plan_2026.pdf" target="_blank">Download Jahresprogramm Nachwuchs Urtenen</a>
+    @if (nachwuchsJahresprogrammUrl$ | async; as url) {
+      <a [href]="url" target="_blank">Download Jahresprogramm Nachwuchs Urtenen</a>
+    }
   </div>
   <div class="login">
     @if (authService.currentUser() == null) {

@@ -13,6 +13,13 @@
     }
   }
 
+  .programm-actions {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    margin-bottom: .5rem;
+  }
+
   .documents {
     ul {
       list-style: none;
